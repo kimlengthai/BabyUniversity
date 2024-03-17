@@ -1,0 +1,21 @@
+{
+  "name": "baby-university-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npx expo start"
+  },
+  "type": "module",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "expo": "^50.0.13",
+    "express": "^4.18.3",
+    "firebase": "^10.9.0",
+    "open": "^9.0.0",
+    "react-native": "^0.73.5",
+    "react-native-web": "~0.19.6",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@expo/webpack-config": "^19.0.1"
+  }
+}
