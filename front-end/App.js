@@ -5,7 +5,7 @@ import SignupScreen from './SignUp/signup';
 const App = () => {
   return (
     <View>
-    <Text > <SignupScreen /> {/* Render your signup screen component */} </Text>
+      <Text > <SignupScreen /> {/* Render your signup screen component */} </Text>
     </View>
   );
 };
