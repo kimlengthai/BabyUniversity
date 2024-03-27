@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import SignUpScreen from './SignUp/signup'; // Import your signup screen component
+import SignupScreen from './SignUp/signup';
 
 const App = () => {
   return (
     <View>
-      <Text>Welcome to Baby University</Text>
-      <SignUpScreen /> {/* Render your signup screen component */}
+    <Text > <SignupScreen /> {/* Render your signup screen component */} </Text>
     </View>
   );
 };
