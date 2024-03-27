@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View, Text } from 'react-native';
+import { Button, TextInput, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
@@ -58,43 +58,108 @@ const SignupScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <TextInput
-        placeholder="Email"
-        onChangeText={setEmail}
-        value={email}
-      />
-      <TextInput
-        placeholder="Password"
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry
-      />
-      <TextInput
-        placeholder="Confirm Password"
-        onChangeText={setConfirmPassword}
-        value={confirmPassword}
-        secureTextEntry
-      />
-      <TextInput
-        placeholder="First Name"
-        onChangeText={setFirstName}
-        value={firstName}
-      />
-      <TextInput
-        placeholder="Last Name"
-        onChangeText={setLastName}
-        value={lastName}
-      />
-      <TextInput
-        placeholder="Date of Birth (YYYY-MM-DD)" // Adjust placeholder if needed
-        onChangeText={setDOB}
-        value={DOB}
-      />
-      {error && <Text style={{ color: 'red' }}>{error}</Text>}
-      <Button title="Sign Up" onPress={handleSignup} />
-    </View>
+    
+      <View style={styles.Container}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: 'bold',
+            marginBottom: 30,
+          }}
+        >
+          Baby University
+        </Text>
+        <TextInput
+          placeholder="Email"
+          onChangeText={setEmail}
+          value={email}
+
+          style={styles.TextInput}
+          placeholderTextColor={placeholderTextColor}
+        />
+        
+        <TextInput
+          placeholder="Password"
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry
+
+          style={styles.TextInput}
+          placeholderTextColor={placeholderTextColor}
+        />
+        <TextInput
+          placeholder="Confirm Password"
+          onChangeText={setConfirmPassword}
+          value={confirmPassword}
+          secureTextEntry
+
+          style={styles.TextInput}
+          placeholderTextColor={placeholderTextColor}
+        />
+        <TextInput
+          placeholder="First Name"
+          onChangeText={setFirstName}
+          value={firstName}
+
+          style={styles.TextInput}
+          placeholderTextColor={placeholderTextColor}
+        />
+        <TextInput
+          placeholder="Last Name"
+          onChangeText={setLastName}
+          value={lastName}
+
+          style={styles.TextInput}
+          placeholderTextColor={placeholderTextColor}
+        />
+        <TextInput
+          placeholder="Date of Birth (YYYY-MM-DD)" // Adjust placeholder if needed
+          onChangeText={setDOB}
+          value={DOB}
+
+          style={styles.TextInput}
+          placeholderTextColor={placeholderTextColor}
+        />
+
+        {error && <Text style={{ color: 'red' }}>{error}</Text>}
+
+        <TouchableOpacity style={styles.Button} onPress={handleSignup}>
+          <Text>Sign Up</Text>
+        </TouchableOpacity>
+
+      </View>
+      
+      
   );
 };
+
+const placeholderTextColor = 'white';
+
+const styles = StyleSheet.create({
+  TextInput: {
+    paddingVertical: 3,
+    borderRadius: 5, 
+    marginTop: 5,
+    color: 'green',
+    backgroundColor: 'gray',
+    width: 200,
+    textAlign: 'center',
+  },
+  Button: {
+    backgroundColor: 'white',
+    color: 'white',
+    borderRadius: 10, 
+    paddingVertical: 10, 
+    paddingHorizontal: 35,
+    marginTop: 15,
+    },
+  Container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#add8e6',
+    minWidth: '100%',
+  }
+});
 
 export default SignupScreen;
