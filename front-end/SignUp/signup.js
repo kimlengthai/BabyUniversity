@@ -1,93 +1,100 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { Button, TextInput, View, Text } from 'react-native';
 
-const SignUpScreen = () => {
+const SignupScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [DOB, setDOB] = useState(''); // Assuming DOB is a date string
+  const [error, setError] = useState(null);
 
-  const handleSignUp = () => {
-    // Implement your signup logic here
-    //console.log('Signing up with email:', email, 'and password:', password);
-    console.log("Inside handleSignup");
-    
-    
-    fetch('http://localhost:3000/save', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Response from server:', data);
-      // Handle the response from the server as needed
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle any errors that occur during the request
-    });
-    
-    /*
-    fetch('http://192.168.1.117:3000/save', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+  const handleSignup = async () => {
+    setError(null); // Clear any previous error
+
+    // Client-side validation (example)
+    if (!email.trim()) {
+      setError('Please enter your email address.');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Invalid email format.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
+    // Construct the backend request (replace with your actual API endpoint)
+    const requestUrl = 'http://localhost:3000/save'; // Replace with your API endpoint
+    const requestBody = {
+      email,
+      password,
+      firstName,
+      lastName,
+      DOB, // Assuming DOB is a date string
+    };
+
+    try {
+      //const result = await AuthSession.startAsync({ url: requestUrl, method: 'POST', body: JSON.stringify(requestBody) });
+      if (result.type === 'success') {
+        // Handle successful signup (e.g., navigate to home screen)
+        console.log('Signup successful!');
+      } else {
+        setError('Signup failed: ' + result.params.error);
       }
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Response from server:', data);
-      // Handle the response from the server as needed
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle any errors that occur during the request
-    });
-    */
+    } catch (error) {
+      setError('An error occurred: ' + error.message);
+    }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1 }}>
       <TextInput
-        style={styles.input}
         placeholder="Email"
         onChangeText={setEmail}
         value={email}
-        keyboardType="email-address"
-        autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
         placeholder="Password"
         onChangeText={setPassword}
         value={password}
         secureTextEntry
       />
-      <Button title="Sign Up" onPress={handleSignUp} />
+      <TextInput
+        placeholder="Confirm Password"
+        onChangeText={setConfirmPassword}
+        value={confirmPassword}
+        secureTextEntry
+      />
+      <TextInput
+        placeholder="First Name"
+        onChangeText={setFirstName}
+        value={firstName}
+      />
+      <TextInput
+        placeholder="Last Name"
+        onChangeText={setLastName}
+        value={lastName}
+      />
+      <TextInput
+        placeholder="Date of Birth (YYYY-MM-DD)" // Adjust placeholder if needed
+        onChangeText={setDOB}
+        value={DOB}
+      />
+      {error && <Text style={{ color: 'red' }}>{error}</Text>}
+      <Button title="Sign Up" onPress={handleSignup} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-  input: {
-    width: '100%',
-    height: 50,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-  },
-});
-
-export default SignUpScreen;
+export default SignupScreen;

@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // Create an Express application
 const app = express();
+app.use(express.json());
 
 // Enable CORS
 app.use(cors());
