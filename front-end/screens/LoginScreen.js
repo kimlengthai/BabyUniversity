@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { Text,View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
+import UIBallAnimation from '../ballAnimation/ballAnimation'
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
@@ -45,6 +46,7 @@ const LoginScreen = () => {
     style = {styles.container}
     behavior='padding'
     >
+        <UIBallAnimation />
         <Text style = {styles.loginTitle}>Baby University</Text>
         <View style = {styles.inputContainer}>
             
@@ -102,6 +104,12 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
 
 
+  },
+  animationContainer: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
   },
   loginTitle: {
     fontWeight: '700',
