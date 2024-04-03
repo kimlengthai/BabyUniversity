@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { Text,View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
 import UIBallAnimation from '../ballAnimation/ballAnimation'
 
 const LoginScreen = () => {
@@ -113,10 +114,11 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   loginTitle: {
-    fontWeight: '700',
-    fontSize: '80px',
+    fontFamily: 'Itim',
+    fontSize: 80,
     marginBottom: 30,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'darkblue',
   },
   inputContainer: {
     width: '50%'
