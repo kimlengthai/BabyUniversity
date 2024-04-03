@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Animated, Dimensions, Easing } from 'react-native';
 import { useFonts } from 'expo-font';
  
 const { width } = Dimensions.get("window");
@@ -11,14 +11,14 @@ const UIAnimation = () => {
  
   useEffect(() => {
     Animated.sequence([
-      Animated.spring(translation.y, { toValue: 100, useNativeDriver: true }),
-      Animated.spring(translation.y, { toValue: 170, useNativeDriver: true }),
-      Animated.spring(translation.x, { toValue: 150, useNativeDriver: true }),
-      Animated.spring(translation.y, { toValue: 270, useNativeDriver: true }),
-      Animated.spring(translation.x, { toValue: 300, useNativeDriver: true }),
-      Animated.spring(translation.y, { toValue: 370, useNativeDriver: true }),
-      Animated.spring(translation.x, { toValue: 413, useNativeDriver: true }),
-      Animated.spring(translation.y, { toValue: 458, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 100, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 170, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.x, { toValue: 150, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 270, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.x, { toValue: 300, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 370, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.x, { toValue: 413, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 458, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
     ]).start();
   }, []);
  
@@ -61,7 +61,6 @@ const UIAnimation = () => {
           style={[
             styles.ballYellowTop,
             { top: -30 },
-        //    { opacity: 0.2 },
             { transform: [{ scale: scale }] },
           ]}
         />
@@ -69,28 +68,24 @@ const UIAnimation = () => {
       <Animated.View
         style={[
           styles.ballYellowBottom,
-        //  { opacity: 0.2 },
           { transform: [{ scale: scale }] },
         ]}
       />
       <Animated.View
         style={[
           styles.ballRed,
-        //  { opacity: 0.2 },
           { transform: [{ scale: scale }] },
         ]}
       />
       <Animated.View
         style={[
           styles.ballGreenRight,
-        //  { opacity: 0.2 },
           { transform: [{ scale: scale }] },
         ]}
       />
       <Animated.View
         style={[
           styles.ballGreenBottom,
-        //  { opacity: 0.2 },
           { transform: [{ scale: scale }] },
         ]}
       />
