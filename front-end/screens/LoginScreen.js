@@ -46,7 +46,8 @@ const LoginScreen = () => {
     style = {styles.container}
     behavior='padding'
     >
-        <UIBallAnimation />
+        <View style = {styles.ballAnimationContainer}><UIBallAnimation /></View>
+        
         <Text style = {styles.loginTitle}>Baby University</Text>
         <View style = {styles.inputContainer}>
             
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
 
 
   },
-  animationContainer: {
+  ballAnimationContainer: {
     position: 'absolute',
     width: '100%',
     height: '100%',

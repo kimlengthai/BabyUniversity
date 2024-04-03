@@ -43,7 +43,7 @@ const UIAnimation = () => {
  
   return (
     <View style={styles.container}>
-      <Text style={styles.babyUniversity}>Baby University</Text>
+      
       <Animated.View
         style={[
           styles.ball,
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
   babyUniversity: {
     color: 'darkblue',
