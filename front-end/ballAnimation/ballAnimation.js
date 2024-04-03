@@ -12,13 +12,13 @@ const UIAnimation = () => {
   useEffect(() => {
     Animated.sequence([
       Animated.timing(translation.y, { toValue: 100, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
-      Animated.timing(translation.y, { toValue: 170, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 175, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
       Animated.timing(translation.x, { toValue: 150, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
-      Animated.timing(translation.y, { toValue: 270, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 275, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
       Animated.timing(translation.x, { toValue: 300, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
-      Animated.timing(translation.y, { toValue: 370, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
-      Animated.timing(translation.x, { toValue: 413, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
-      Animated.timing(translation.y, { toValue: 458, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 375, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation.x, { toValue: 355, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
+      Animated.timing(translation.y, { toValue: 445, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
     ]).start();
   }, []);
  
@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     position: 'absolute',
     left: 235,
-    top: -100,
-    zIndex: 1,
+    top: -105,
+    zIndex: 3,
   },
   shadow: {
     width: 100,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     position: 'absolute',
     top: 300,
-    left: 500,
+    left: 490,
     boxShadow: '0 0 10px black',
     zIndex: -1,
   },
