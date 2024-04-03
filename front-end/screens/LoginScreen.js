@@ -2,10 +2,10 @@ import React, { useEffect,useState } from 'react';
 import { Text,View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import UIBallAnimation from '../ballAnimation/ballAnimation'
 
 const LoginScreen = () => {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   loginTitle: {
-    fontFamily: 'Itim',
+    fontFamily: 'Itim-Regular',
     fontSize: 80,
     marginBottom: 30,
     textAlign: 'center',
