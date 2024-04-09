@@ -48,8 +48,6 @@ const LoginScreen = () => {
     behavior='padding'
     >
         <View style = {styles.ballAnimationContainer}><UIBallAnimation /></View>
-        <View style={styles.coveringI} />
-        <Text style = {styles.loginTitle}>Baby University</Text>
         <View style = {styles.inputContainer}>
             
             <View style={styles.inputRow}>
@@ -112,24 +110,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    zIndex: -1,
-  },
-  coveringI: {
-    width: 9,
-    height: 9,
-    backgroundColor: 'lightblue',
-    top: 29,
-    left: 189,
-    zIndex: 2,
-    borderRadius: 50,
-  },
-  loginTitle: {
-    fontFamily: 'Itim-Regular',
-    fontSize: 80,
-    marginBottom: 30,
-    textAlign: 'center',
-    color: 'darkblue',
-    zIndex: -1,
+    zIndex: 0,
   },
   inputContainer: {
     width: '50%'
@@ -180,13 +161,6 @@ const styles = StyleSheet.create({
    
 
   },
-
-
-  
-
-  
-
-  
 });
 
 export default LoginScreen;

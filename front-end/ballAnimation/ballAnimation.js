@@ -1,16 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Dimensions, Easing } from 'react-native';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
  
 const { width } = Dimensions.get("window");
 const circleWidth = width / 2;
- 
+/*
+const getFonts = () => Font.loadAsync({
+  'Itim-Regular': require('./assets/fonts/Itim-Regular.ttf')
+});*/
+
 const UIAnimation = () => {
  
   const translation = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
  
   useEffect(() => {
+    
     Animated.sequence([
+      
       Animated.timing(translation.y, { toValue: 100, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
       Animated.timing(translation.y, { toValue: 175, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
       Animated.timing(translation.x, { toValue: 150, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
@@ -19,7 +25,14 @@ const UIAnimation = () => {
       Animated.timing(translation.y, { toValue: 375, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
       Animated.timing(translation.x, { toValue: 355, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
       Animated.timing(translation.y, { toValue: 445, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      
+     /*
+      Animated.timing(translation, { toValue: { x: 150, y: 100 }, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation, { toValue: { x: 300, y: 175 }, duration: 1000, easing: Easing.easeIn, useNativeDriver: true }),
+      Animated.timing(translation, { toValue: { x: 450, y: 275 }, duration: 1000, easing: Easing.linear, useNativeDriver: true }),
+      */
     ]).start();
+   
   }, []);
  
   const move = useRef(new Animated.Value(0)).current;
@@ -43,11 +56,13 @@ const UIAnimation = () => {
  
   return (
     <View style={styles.container}>
-      
+      <Text style={styles.babyUniversity}>Baby University</Text>
+      <View style={styles.coveringI} />
       <Animated.View
         style={[
           styles.ball,
           {
+            
             transform: [{ translateY: translation.y }, { translateX: translation.x }],
           },
         ]}
@@ -103,11 +118,21 @@ const styles = StyleSheet.create({
   },
   babyUniversity: {
     color: 'darkblue',
-    position: 'absolute',
-    top: '45%',
-    left: '35%',
-    fontFamily: 'Itim',
-    fontSize: 50,
+    fontSize: 80,
+    marginBottom: 30,
+    textAlign: 'center',
+    fontFamily: 'Itim-Regular',
+    bottom: 190,
+    zIndex: -3,
+  },
+  coveringI: {
+    backgroundColor: 'lightblue',
+    width: 13,
+    height: 13,
+    top: -298,
+    left: 188,
+    zIndex: -1,
+    borderRadius: 50,
   },
   ball: {
     backgroundColor: '#dd3434',
@@ -117,7 +142,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 235,
     top: -105,
-    zIndex: 3,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

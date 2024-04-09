@@ -30,7 +30,7 @@
       [
       "expo-font",
       {
-        "fonts": ["./assets/fonts/Itim/Itim-Regular.ttf"]
+        "fonts": ["./assets/fonts/Itim-Regular.ttf"]
       }
       ]
     ]
