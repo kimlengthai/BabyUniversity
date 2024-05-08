@@ -18,7 +18,9 @@
     "react-dom": "18.2.0",
     "react-native": "^0.73.5",
     "react-native-web": "~0.19.6",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "@expo-google-fonts/itim": "^0.2.3",
+    "expo-av": "~13.10.6"
   },
   "devDependencies": {
     "@expo/webpack-config": "^19.0.1"
