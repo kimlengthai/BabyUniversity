@@ -17,9 +17,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
-import BedRoomScreen from './Bedroom/BedRoomScreen';
-import page6 from './page6-17/Page6'
-import page7 from './page6-17/Page7'
+
+import page6 from './page6-17/Page6';
+import page7 from './page6-17/Page6'
+import page0 from './page0-5/page0';
+import page1 from './page0-5/page1';
 import page8 from './page6-17/Page8'
 import page9 from './page6-17/Page9'
 import page10 from './page6-17/Page10'
@@ -38,12 +40,12 @@ export default function App() {
 
         {/* book pages 6-17 */}
 
-        {/* <Stack.Screen options= {{headerShown: false}} name="page6" component={page6} />  */}
-        {/* <Stack.Screen options= {{headerShown: false}} name="page7" component={page7} />  */}
-        {/* <Stack.Screen options= {{headerShown: false}} name="page8" component={page8} />  */}
-        {/* <Stack.Screen options={{headerShown: false}} name="page9" component={page9} /> */}
-        {/* <Stack.Screen options= {{headerShown: false}} name="page10" component={page10} />  */}
-        {/* <Stack.Screen options= {{headerShown: false}} name="page11" component={page11} /> */}
+        { <Stack.Screen options= {{headerShown: false}} name="page0" component={page1} /> }
+        { <Stack.Screen options= {{headerShown: false}} name="page7" component={page7} /> }
+        { <Stack.Screen options= {{headerShown: false}} name="page8" component={page8} /> }
+        { <Stack.Screen options={{headerShown: false}} name="page9" component={page9} />}
+        { <Stack.Screen options= {{headerShown: false}} name="page10" component={page10} /> }
+        { <Stack.Screen options= {{headerShown: false}} name="page11" component={page11} />}
         <Stack.Screen options= {{headerShown: false}} name="page12" component={page12} />
 
 
@@ -61,5 +63,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-
