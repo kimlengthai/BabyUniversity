@@ -6,6 +6,11 @@ const page18 = () => {
   const [animation] = useState(new Animated.Value(0));
   const [showPage19, setShowPage19 ] = useState(false);
 
+  /*const handleGoBack = () =>
+    {
+      setShowpage18(true); // Set showpage18 state to true
+    };*/
+
   const goToPage19 = () => 
     {
       setShowPage19(true);
@@ -133,6 +138,9 @@ const page18 = () => {
       </View>
       
       <Text style={styles.text}>There are no <Text style={styles.electronText}>electron</Text> with zero energy.</Text>
+      <TouchableOpacity style={styles.goBackIcon} /*onPress={handleGoBack}*/>
+      <Text style={styles.buttonText}>Back</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.nextButton} onPress={goToPage19}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
@@ -244,6 +252,24 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 15,
     paddingHorizontal: 35,
+  },
+  goBackIcon:
+  {
+    color: '#292D32',
+    borderRadius: '20%',
+    /*backgroundColor: 'transparent',*/
+    backgroundColor: 'green',
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.5, // Shadow opacity
+    bottom: -170,
+    right: 190,
+    zIndex: 220,
+  },
+  goBack:
+  {
+    width: 77,
+    height: 77,
   },
 });
 
