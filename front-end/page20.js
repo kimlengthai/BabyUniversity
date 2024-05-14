@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Easing, TouchableOpacity } from 'react-native';
 import Page19 from './page19';
+import Page21 from './page21';
 
 const Page20 = () => {
   const [animated1] = useState(new Animated.Value(0));
+  const [showpage21, setShowpage21 ] = useState(false);
   const [showpage19, setShowpage19] = useState(false); // State to toggle ParentUI
 
   const handleGoBack = () =>
     {
       setShowpage19(true); // Set showpage18 state to true
     };
+    const goToPage21 = () => 
+      {
+        setShowpage21(true);
+      };
 
   useEffect(() => {
     animate();
@@ -39,16 +45,24 @@ const Page20 = () => {
 
   const rotate1 = animated1.interpolate({ inputRange, outputRange });
 
-  if (showpage19) {
+  if (showpage19) 
+    {
     // passing a handleGoBack function to toggle the showParentUI state
     return <Page19 handleGoBack={() => setShowpage19(false)} />;
   }
+  if (showpage21) 
+    {
+      return <Page21 goToPage21={() => setShowpage21(false)} />;
+    }
 
   return (
     <View style={styles.container}>
       <View style={styles.first}>
         <Animated.View style={[styles.outerBorderContainer, { transform: [{ rotate: rotate1 }] }]}>
           <View style={styles.outerCircle} />
+          <View style = {[styles.glowing, styles.glowing1]}></View>
+            <View style = {[styles.glowing, styles.glowing2]}></View>
+            <View style = {[styles.glowing, styles.glowing3]}></View>
         </Animated.View>
       </View>
       <View style={styles.cover}></View>
@@ -71,6 +85,9 @@ const Page20 = () => {
         </View>
       </View>
       <Text style={styles.text}>To jump up.</Text>
+      <TouchableOpacity style={styles.nextButton} onPress={goToPage21}>
+      <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
       <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
@@ -86,10 +103,33 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     position: 'relative',
   },
+  glowing: {
+    width: 70,
+    height: 70,
+    backgroundColor: 'yellow',    
+    position: 'absolute',
+    top: 240,
+    left: -40,
+    zIndex: 4,
+    shadowColor: 'rgba(252, 291, 82, 0.8)', // Shadow color
+    shadowOffset: { width: 0, height: 0 }, // Shadow offset
+    shadowOpacity: 3, // Increase shadow opacity
+    shadowRadius: 40, // Increase shadow radius for more glow
+    borderColor: 'null',
+},
+glowing1: {
+  transform: [{ rotate: '30deg' }], 
+},
+glowing2: {
+   transform: [{ rotate: '60deg' }], 
+},
+glowing3: { 
+   transform: [{ rotate: '90deg' }],
+},
   text:
   {
     fontSize: 40,
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
     bottom: -150,
     zIndex: 201,
@@ -112,7 +152,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: 'white',
     zIndex: 100,
-    top: 39,
+    top: 79,
   },
   protonAndNeutron:{
     justifyContent: 'center',
@@ -138,6 +178,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 250,
     left: -30,
+    zIndex: 5,
   },
   secondBorderContainer: {
     width: 450,
@@ -186,15 +227,6 @@ const styles = StyleSheet.create({
     right: 25,
     top: -30,
   },
-  buttonText: 
-  {
-    color: '#000000',
-    fontSize: 40,
-    /*fontFamily: 'Itim_400Regular',*/
-    textAlign: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
-  },
   goBackIcon:
   {
     color: '#292D32',
@@ -211,11 +243,31 @@ const styles = StyleSheet.create({
   cover:
   {
     height: 280,
-    width: 600,
+    width: 800,
     backgroundColor: 'grey',
-    zIndex: 200,
+    zIndex: 5,
     position: 'absolute',
     top: 453,
+  },
+  nextButton:
+  {
+    backgroundColor: '#A2C13C',
+    borderRadius: '20%',
+    zIndex: 1,
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.5, // Shadow opacity
+    bottom: -250,
+    zIndex: 202,
+  },
+  buttonText: 
+  {
+    color: '#000000',
+    fontSize: 40,
+    /*fontFamily: 'Itim_400Regular',*/
+    textAlign: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 35,
   },
 });
 export default Page20;

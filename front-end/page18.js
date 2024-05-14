@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderWidth: 2,
     right: 20,
-    top: 380,
+    top: 330,
     zIndex: -3, // Bottom left
   },
   blueBall: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     borderWidth: 2,
     left: 20,
-    top: 300, // Bottom right
+    top: 250, // Bottom right
   },
   greenBall: {
     width: 50,
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: '50%',
     backgroundColor: 'green',
     borderWidth: 2,
-    top: 130,
+    top: 80,
     left: 10,
     zIndex: 1,
   },
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     borderWidth: 15,
     borderColor: 'red',
     zIndex: 2,
-    bottom: 150,
+    bottom: 200,
   },
   line:
   {
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     width: '28%',
     height: 15,
     backgroundColor: 'red',
-    top: '50%',
+    top: '35%',
     transform: [{ translateY: -155 }, { rotate: '145deg' }],
   },
   text:
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'black',
     fontWeight: 'bold',
-    bottom: 80,
+    bottom: 180,
     /*fontFamily: 'Itim_400Regular',*/
   },
   redBall2: {
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     borderRadius: '50%',
     backgroundColor: 'red',
     borderWidth: 2,
-    top: 120,
+    top: 90,
     left: 30, // Top right
   },
   blueBall2: {
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     borderWidth: 2,
     right: 10,
-    top: 40,
+    top: 10,
     zIndex: -2, // Top left
   },
   nextButton:
@@ -234,6 +234,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.5, // Shadow opacity
+    bottom: 140,
   },
   buttonText: 
   {
