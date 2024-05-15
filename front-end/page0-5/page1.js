@@ -1,7 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import { View, StyleSheet, Animated, Easing, TouchableOpacity, Text } from 'react-native';
 
-    const BouncingBall = () => {
+    const page1 = () => {
     const [bounceValue] = useState(new Animated.Value(0));
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -86,4 +86,4 @@
         },
       });
       
-    export default BouncingBall;
+    export default page1;
