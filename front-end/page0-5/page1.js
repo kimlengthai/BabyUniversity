@@ -47,11 +47,14 @@
         height: 50,
         borderRadius: 25,
         backgroundColor: 'red',
+        position: 'absolute',
+        top: -120,
+        left: -30,
         transform: [
           {
             translateY: bounceValue.interpolate({
               inputRange: [0, 0.5], // Updated inputRange
-              outputRange: [-100,0], // Adjusted to 50 to limit bouncing to the top half
+              outputRange: [-70,0], // Adjusted to 50 to limit bouncing to the top half
             }),
           },
         ],
@@ -75,6 +78,7 @@
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: 'white',
+          position: 'relative'
         },
       
         text: {
@@ -84,6 +88,7 @@
           bottom: 0,
           fontWeight: '700',
         },
+   
       });
       
     export default page1;
