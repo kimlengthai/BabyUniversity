@@ -116,23 +116,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 3, // Increase shadow opacity
     shadowRadius: 40, // Increase shadow radius for more glow
     borderColor: 'null',
-},
-glowing1: {
-  transform: [{ rotate: '30deg' }], 
-},
-glowing2: {
-   transform: [{ rotate: '60deg' }], 
-},
-glowing3: { 
-   transform: [{ rotate: '90deg' }],
-},
+  },
+  glowing1: {
+    transform: [{ rotate: '30deg' }], 
+  },
+  glowing2: {
+    transform: [{ rotate: '60deg' }], 
+  },
+  glowing3: { 
+    transform: [{ rotate: '90deg' }],
+  },
   text:
   {
     fontSize: 40,
     color: 'black',
     fontWeight: 'bold',
-    bottom: -150,
-    zIndex: 201,
+    bottom: -200,
+    zIndex: 200,
   },
   first: {
     position: 'absolute',
@@ -151,8 +151,8 @@ glowing3: {
     height: 30,
     position: 'relative',
     backgroundColor: 'white',
-    zIndex: 100,
-    top: 79,
+    zIndex: 200,
+    top: 125,
   },
   protonAndNeutron:{
     justifyContent: 'center',
@@ -183,8 +183,6 @@ glowing3: {
   secondBorderContainer: {
     width: 450,
     height: 450,
-    /*borderRadius: 450,
-    borderWidth: 3,*/
     borderTopLeftRadius: 230, 
     borderTopRightRadius: 230,
     borderBottomWidth: 0,
@@ -198,8 +196,6 @@ glowing3: {
   thirdBorderContainer: {
     width: 300,
     height: 300,
-    /*borderRadius: 350,
-    borderWidth: 3,*/
     borderTopLeftRadius: 150, 
     borderTopRightRadius: 150,
     borderBottomWidth: 0,
@@ -231,7 +227,6 @@ glowing3: {
   {
     color: '#292D32',
     borderRadius: '20%',
-    /*backgroundColor: 'transparent',*/
     backgroundColor: 'green',
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
@@ -247,7 +242,7 @@ glowing3: {
     backgroundColor: 'grey',
     zIndex: 5,
     position: 'absolute',
-    top: 453,
+    top: 423.23,
   },
   nextButton:
   {

@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'black',
     fontWeight: 'bold',
-    bottom: -150,
-    zIndex: 201,
+    bottom: -200,
+    zIndex: 200,
   },
   energy:
   {
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: 'white',
     zIndex: 100,
-    top: 79,
+    top: 125,
   },
   protonAndNeutron:{
     justifyContent: 'center',
@@ -162,8 +162,6 @@ const styles = StyleSheet.create({
   secondBorderContainer: {
     width: 450,
     height: 450,
-    /*borderRadius: 450,
-    borderWidth: 3,*/
     borderTopLeftRadius: 230, 
     borderTopRightRadius: 230,
     borderBottomWidth: 0,
@@ -177,8 +175,6 @@ const styles = StyleSheet.create({
   thirdBorderContainer: {
     width: 300,
     height: 300,
-    /*borderRadius: 350,
-    borderWidth: 3,*/
     borderTopLeftRadius: 150, 
     borderTopRightRadius: 150,
     borderBottomWidth: 0,
@@ -210,7 +206,6 @@ const styles = StyleSheet.create({
   {
     color: '#292D32',
     borderRadius: '20%',
-    /*backgroundColor: 'transparent',*/
     backgroundColor: 'green',
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
@@ -226,7 +221,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     zIndex: 5,
     position: 'absolute',
-    top: 453,
+    top: 423.23,
   },
   nextButton:
   {
