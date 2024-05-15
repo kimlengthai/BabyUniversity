@@ -7,7 +7,7 @@ import Page22 from './page22';
 const Page21 = () => {
   const [animated1] = useState(new Animated.Value(0));
   const [showpage20, setShowpage20 ] = useState(false);
-  const [showpage22, setShowpage22] = useState(false); // State to toggle ParentUI
+  const [showpage22, setShowpage22] = useState(false);
 
   const handleGoBack = () =>
     {
@@ -48,11 +48,14 @@ const Page21 = () => {
 
   if (showpage20) 
     {
-    // passing a handleGoBack function to toggle the showParentUI state
+      /* If showPage20 is true, render Page20 */
+      /* If false, nothing is rendered. */
     return <Page20 handleGoBack={() => setShowpage20(false)} />;
   }
   if (showpage22) 
     {
+      /* If showPag22 is true, render Pag22 */
+      /* If false, nothing is rendered. */
       return <Page22 goToPage22={() => setShowpage22(false)} />;
     }
 
@@ -63,6 +66,7 @@ const Page21 = () => {
           <View style={styles.outerCircle} />
         </Animated.View>
       </View>
+
       <View style={styles.cover}></View>
 
       <View style={styles.second}>
@@ -82,11 +86,14 @@ const Page21 = () => {
           <View style={styles.redBall}></View>
         </View>
       </View>
+
       <Text style={styles.text}>And must give <Text style={styles.energy}>energy</Text>.</Text>
+
       <TouchableOpacity style={styles.nextButton} onPress={goToPage22}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
+
+      <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
       <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
     </View>
@@ -100,18 +107,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'grey',
     position: 'relative',
-  },
-  text:
-  {
-    fontSize: 40,
-    color: 'black',
-    fontWeight: 'bold',
-    bottom: -200,
-    zIndex: 200,
-  },
-  energy:
-  {
-    color: 'yellow',
   },
   first: {
     position: 'absolute',
@@ -130,7 +125,7 @@ const styles = StyleSheet.create({
     height: 30,
     position: 'relative',
     backgroundColor: 'white',
-    zIndex: 100,
+    zIndex: 5,
     top: 125,
   },
   protonAndNeutron:{
@@ -170,7 +165,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 3,
     borderColor: 'black',
     position: 'relative',
-    zIndex: 99,
+    zIndex: 5,
   },
   thirdBorderContainer: {
     width: 300,
@@ -202,18 +197,6 @@ const styles = StyleSheet.create({
     right: 25,
     top: -30,
   },
-  goBackIcon:
-  {
-    color: '#292D32',
-    borderRadius: '20%',
-    backgroundColor: 'green',
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: -170,
-    right: 190,
-    zIndex: 220,
-  },
   cover:
   {
     height: 280,
@@ -223,11 +206,35 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 423.23,
   },
+  text:
+  {
+    fontSize: 40,
+    color: 'black',
+    fontWeight: 'bold',
+    bottom: -200,
+    zIndex: 200,
+  },
+  energy:
+  {
+    color: 'yellow',
+  },
+  goBackButton:
+  {
+    color: '#292D32',
+    borderRadius: '20%',
+    backgroundColor: 'green',
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.5, // Shadow opacity
+    bottom: -170,
+    right: 190,
+    zIndex: 6,
+  },
   nextButton:
   {
     backgroundColor: '#A2C13C',
     borderRadius: '20%',
-    zIndex: 1,
+    zIndex: 6,
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.5, // Shadow opacity

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text, TouchableOpacity } from 'react-native';
 import Page18 from './page18';
-import Page20 from './page20'; // Import the Page20 component
+import Page20 from './page20';
 
 const Page19 = () => {
   const [animated2] = useState(new Animated.Value(0));
-  const [showpage20, setShowpage20 ] = useState(false);
-  const [showpage18, setShowpage18] = useState(false); // State to toggle ParentUI
+  const [showpage20, setShowpage20 ] = useState(false); //Create a variable for going to page 20
+  const [showpage18, setShowpage18] = useState(false); //Create a variable for going to page 18
 
+  /* A handler of navigating to page 18 */
   const handleGoBack = () =>
     {
-      setShowpage18(true); // Set showpage18 state to true
+      setShowpage18(true);
     };
 
+  /* A handler of navigating to page 20 */  
   const goToPage20 = () => 
     {
       setShowpage20(true);
@@ -23,7 +25,9 @@ const Page19 = () => {
   }, []);
 
   const animate = () => {
+    /*Sets up a continuous loop of animation */
     Animated.loop(
+      /* Do animation in a sequence */
       Animated.sequence([
         Animated.timing(animated2, {
         toValue: 1,
@@ -42,18 +46,21 @@ const Page19 = () => {
   };
 
   const inputRange = [0, 1];
-  const outputRange = ['0deg', '180deg'];
+  const outputRange = ['0deg', '170deg'];
 
+  /* A variable to rotate the green ball */
   const rotate2 = animated2.interpolate({ inputRange, outputRange });
-  
-  //if showParentUI is true
-  //return handlGoeBack
+
+  /* A conditional rendering based on the showPage19 */
   if (showpage18) {
-    // passing a handleGoBack function to toggle the showParentUI state
+    /* If showPage18 is true, render Page18 */
+      /* If false, nothing is rendered. */
     return <Page18 handleGoBack={() => setShowpage18(false)} />;
   }
   if (showpage20) 
     {
+      /* If showPage20 is true, render Page20 */
+      /* If false, nothing is rendered. */
       return <Page20 goToPage20={() => setShowpage20(false)} />;
     }
 
@@ -63,6 +70,7 @@ const Page19 = () => {
         <View style={[styles.outerBorderContainer]}>
         </View>
       </View>
+
       <View style={styles.cover}></View>
 
       <View style={styles.second}>
@@ -71,6 +79,7 @@ const Page19 = () => {
           </View>
         </Animated.View>
       </View>
+
       <View style={styles.third}>
         <View style={[styles.thirdBorderContainer]}>
         </View>
@@ -83,11 +92,14 @@ const Page19 = () => {
           <View style={styles.redBall}></View>
         </View>
       </View>
+
       <Text style={styles.text}>An <Text style={styles.textElectron}>electron</Text> can take <Text style={styles.textEnergy}>energy</Text>.</Text>
+
       <TouchableOpacity style={styles.nextButton} onPress={goToPage20}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
+
+      <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
       <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
     </View>
@@ -101,24 +113,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'grey',
     position: 'relative',
-  },
-  text:
-  {
-    fontSize: 40,
-    color: 'black',
-    fontWeight: 'bold',
-    bottom: -200,
-    zIndex: 200,
-  },
-  textElectron:
-  {
-    color: 'green',
-    fontWeight: 'bold',
-  },
-  textEnergy:
-  {
-    color: 'yellow',
-    fontWeight: 'bold',
   },
   first: {
     position: 'absolute',
@@ -167,7 +161,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'black',
     position: 'relative',
-    zIndex: 99,
+    zIndex: 4,
   },
   secondCircle: {
     width: 50,
@@ -213,31 +207,29 @@ const styles = StyleSheet.create({
     height: 280,
     width: 600,
     backgroundColor: 'grey',
-    zIndex: 200,
+    zIndex: 5,
     position: 'absolute',
     top: 423.23,
   },
-  nextButton:
+  text:
   {
-    backgroundColor: '#A2C13C',
-    borderRadius: '20%',
-    zIndex: 1,
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: -250,
-    zIndex: 202,
-  },
-  buttonText: 
-  {
-    color: '#000000',
     fontSize: 40,
-    /*fontFamily: 'Itim_400Regular',*/
-    textAlign: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
+    color: 'black',
+    fontWeight: 'bold',
+    bottom: -200,
+    zIndex: 6,
   },
-  goBackIcon:
+  textElectron:
+  {
+    color: 'green',
+    fontWeight: 'bold',
+  },
+  textEnergy:
+  {
+    color: 'yellow',
+    fontWeight: 'bold',
+  },
+  goBackButton:
   {
     color: '#292D32',
     borderRadius: '20%',
@@ -247,12 +239,31 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5, // Shadow opacity
     bottom: -170,
     right: 190,
-    zIndex: 220,
+    zIndex: 6,
   },
   goBack:
   {
     width: 77,
     height: 77,
+  },
+  nextButton:
+  {
+    backgroundColor: '#A2C13C',
+    borderRadius: '20%',
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.5, // Shadow opacity
+    bottom: -250,
+    zIndex: 6,
+  },
+  buttonText: 
+  {
+    color: '#000000',
+    fontSize: 40,
+    /*fontFamily: 'Itim_400Regular',*/
+    textAlign: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 35,
   },
 });
 

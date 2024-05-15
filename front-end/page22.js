@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text, TouchableOpacity } from 'react-native';
 import Page21 from './page21';
-import Page23 from './page23'; // Import the Page20 component
+import Page23 from './page23';
 
 const Page22 = () => {
   const [animated2] = useState(new Animated.Value(0));
   const [showpage23, setShowpage23 ] = useState(false);
-  const [showpage21, setShowpage21] = useState(false); // State to toggle ParentUI
+  const [showpage21, setShowpage21] = useState(false);
 
   const handleGoBack = () =>
     {
-      setShowpage21(true); // Set showpage21 state to true
+      setShowpage21(true);
     };
 
   const goToPage23 = () => 
@@ -46,10 +46,7 @@ const Page22 = () => {
 
   const rotate2 = animated2.interpolate({ inputRange, outputRange });
   
-  //if showParentUI is true
-  //return handlGoeBack
   if (showpage21) {
-    // passing a handleGoBack function to toggle the showParentUI state
     return <Page21 handleGoBack={() => setShowpage21(false)} />;
   }
   if (showpage23) 
@@ -87,7 +84,7 @@ const Page22 = () => {
       <TouchableOpacity style={styles.nextButton} onPress={goToPage23}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
+      <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
       <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
     </View>
@@ -101,24 +98,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'grey',
     position: 'relative',
-  },
-  text:
-  {
-    fontSize: 40,
-    color: 'black',
-    fontWeight: 'bold',
-    bottom: -200,
-    zIndex: 200,
-  },
-  textElectron:
-  {
-    color: 'green',
-    fontWeight: 'bold',
-  },
-  textEnergy:
-  {
-    color: 'yellow',
-    fontWeight: 'bold',
   },
   first: {
     position: 'absolute',
@@ -137,7 +116,7 @@ const styles = StyleSheet.create({
     height: 30,
     position: 'relative',
     backgroundColor: 'white',
-    zIndex: 200,
+    zIndex: 5,
     top: 125,
   },
   protonAndNeutron:{
@@ -167,7 +146,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'black',
     position: 'relative',
-    zIndex: 99,
+    zIndex: 5,
   },
   secondCircle: {
     width: 50,
@@ -213,9 +192,17 @@ const styles = StyleSheet.create({
     height: 280,
     width: 600,
     backgroundColor: 'grey',
-    zIndex: 200,
+    zIndex: 5,
     position: 'absolute',
     top: 423.23,
+  },
+  text:
+  {
+    fontSize: 40,
+    color: 'black',
+    fontWeight: 'bold',
+    bottom: -200,
+    zIndex: 6,
   },
   nextButton:
   {
@@ -226,7 +213,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.5, // Shadow opacity
     bottom: -250,
-    zIndex: 202,
+    zIndex: 6,
   },
   buttonText: 
   {
@@ -237,7 +224,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 35,
   },
-  goBackIcon:
+  goBackButton:
   {
     color: '#292D32',
     borderRadius: '20%',
@@ -247,7 +234,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5, // Shadow opacity
     bottom: -170,
     right: 190,
-    zIndex: 220,
+    zIndex: 6,
   },
   goBack:
   {

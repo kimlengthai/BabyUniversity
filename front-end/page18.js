@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, StyleSheet, Easing, TouchableOpacity } from 'react-native';
-import Page19 from './page19'; // Import the Page19 component
+import Page19 from './page19'; 
 
 const page18 = () => {
   const [animation] = useState(new Animated.Value(0));
-  const [showPage19, setShowPage19 ] = useState(false);
+  const [showPage19, setShowPage19 ] = useState(false); //Create a variable for going to page 19
 
+  /* A handler of navigating to page 19 */
   const goToPage19 = () => 
     {
       setShowPage19(true);
     };
 
   useEffect(() => {
+    /*Sets up a continuous loop of animation */
     Animated.loop(
       Animated.sequence([
         Animated.timing(animation, {
@@ -102,7 +104,7 @@ const page18 = () => {
     ],
   };
 
-  // In the top
+  // At the top
   const greenBallStyle = {
     transform: [
       {
@@ -114,8 +116,11 @@ const page18 = () => {
     ],
   };
 
+  /* A conditional rendering based on the showPage19 */
   if (showPage19) 
     {
+      /* If showPage19 is true, render Page19 */
+      /* If false, nothing is rendered. */
       return <Page19 goToPage19={() => setShowPage19(false)} />;
     }
 
@@ -133,6 +138,11 @@ const page18 = () => {
       </View>
       
       <Text style={styles.text}>There are no <Text style={styles.electronText}>electron</Text> with zero energy.</Text>
+
+      <TouchableOpacity style={styles.goBackButton} /*onPress={handleGoBack}*/>
+      <Text style={styles.buttonText}>Back</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.nextButton} onPress={goToPage19}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
@@ -147,10 +157,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'gray',
-  },
-  electronText: {
-    color: 'green',
-    fontWeight: 'bold',
   },
   redBall: {
     width: 80,
@@ -181,6 +187,25 @@ const styles = StyleSheet.create({
     left: 10,
     zIndex: 1,
   },
+  redBall2: {
+    width: 80,
+    height: 80,
+    borderRadius: '50%',
+    backgroundColor: 'red',
+    borderWidth: 2,
+    top: 90,
+    left: 30, // Top right
+  },
+  blueBall2: {
+    width: 80,
+    height: 80,
+    borderRadius: '50%',
+    backgroundColor: 'blue',
+    borderWidth: 2,
+    right: 10,
+    top: 10,
+    zIndex: -2, // Top left
+  },
   skip: {
     width: 350,
     height: 350,
@@ -207,24 +232,26 @@ const styles = StyleSheet.create({
     bottom: 180,
     /*fontFamily: 'Itim_400Regular',*/
   },
-  redBall2: {
-    width: 80,
-    height: 80,
-    borderRadius: '50%',
-    backgroundColor: 'red',
-    borderWidth: 2,
-    top: 90,
-    left: 30, // Top right
+  electronText: {
+    color: 'green',
+    fontWeight: 'bold',
   },
-  blueBall2: {
-    width: 80,
-    height: 80,
-    borderRadius: '50%',
-    backgroundColor: 'blue',
-    borderWidth: 2,
-    right: 10,
-    top: 10,
-    zIndex: -2, // Top left
+  goBackButton:
+  {
+    color: '#292D32',
+    borderRadius: '20%',
+    backgroundColor: 'green',
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.5, // Shadow opacity
+    bottom: 60,
+    right: 190,
+    zIndex: 220,
+  },
+  goBack:
+  {
+    width: 77,
+    height: 77,
   },
   nextButton:
   {
@@ -240,7 +267,6 @@ const styles = StyleSheet.create({
   {
     color: '#000000',
     fontSize: 40,
-    /*fontFamily: 'Itim_400Regular',*/
     textAlign: 'center',
     paddingVertical: 15,
     paddingHorizontal: 35,

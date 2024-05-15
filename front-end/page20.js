@@ -6,11 +6,11 @@ import Page21 from './page21';
 const Page20 = () => {
   const [animated1] = useState(new Animated.Value(0));
   const [showpage21, setShowpage21 ] = useState(false);
-  const [showpage19, setShowpage19] = useState(false); // State to toggle ParentUI
+  const [showpage19, setShowpage19] = useState(false);
 
   const handleGoBack = () =>
     {
-      setShowpage19(true); // Set showpage18 state to true
+      setShowpage19(true);
     };
     const goToPage21 = () => 
       {
@@ -47,11 +47,14 @@ const Page20 = () => {
 
   if (showpage19) 
     {
-    // passing a handleGoBack function to toggle the showParentUI state
+      /* If showPage19 is true, render Page19 */
+      /* If false, nothing is rendered. */
     return <Page19 handleGoBack={() => setShowpage19(false)} />;
   }
   if (showpage21) 
     {
+      /* If showPage21 is true, render Page21 */
+      /* If false, nothing is rendered. */
       return <Page21 goToPage21={() => setShowpage21(false)} />;
     }
 
@@ -65,6 +68,7 @@ const Page20 = () => {
             <View style = {[styles.glowing, styles.glowing3]}></View>
         </Animated.View>
       </View>
+
       <View style={styles.cover}></View>
 
       <View style={styles.second}>
@@ -84,11 +88,14 @@ const Page20 = () => {
           <View style={styles.redBall}></View>
         </View>
       </View>
+
       <Text style={styles.text}>To jump up.</Text>
+
       <TouchableOpacity style={styles.nextButton} onPress={goToPage21}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
+
+      <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
       <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
     </View>
@@ -102,6 +109,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'grey',
     position: 'relative',
+  },
+  first: {
+    position: 'absolute',
+    zIndex: 1,
+  },
+  second: {
+    position: 'absolute',
+    zIndex: 2,
+  },
+  third: {
+    position: 'absolute',
+    zIndex: 3,
+  },
+  outerBorderContainer: {
+    width: 550,
+    height: 550,
+    borderRadius: 550,
+    borderWidth: 3,
+    borderColor: 'black',
+    position: 'relative',
+  },
+  outerCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: 'green',
+    position: 'absolute',
+    top: 250,
+    left: -30,
+    zIndex: 5,
   },
   glowing: {
     width: 70,
@@ -126,32 +163,12 @@ const styles = StyleSheet.create({
   glowing3: { 
     transform: [{ rotate: '90deg' }],
   },
-  text:
-  {
-    fontSize: 40,
-    color: 'black',
-    fontWeight: 'bold',
-    bottom: -200,
-    zIndex: 200,
-  },
-  first: {
-    position: 'absolute',
-    zIndex: 1,
-  },
-  second: {
-    position: 'absolute',
-    zIndex: 2,
-  },
-  third: {
-    position: 'absolute',
-    zIndex: 3,
-  },
   insideTheCircle:{
     width: 350,
     height: 30,
     position: 'relative',
     backgroundColor: 'white',
-    zIndex: 200,
+    zIndex: 5,
     top: 125,
   },
   protonAndNeutron:{
@@ -161,24 +178,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: 'auto',
     height: 'auto',
-  },
-  outerBorderContainer: {
-    width: 550,
-    height: 550,
-    borderRadius: 550,
-    borderWidth: 3,
-    borderColor: 'black',
-    position: 'relative',
-  },
-  outerCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    backgroundColor: 'green',
-    position: 'absolute',
-    top: 250,
-    left: -30,
-    zIndex: 5,
   },
   secondBorderContainer: {
     width: 450,
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 3,
     borderColor: 'black',
     position: 'relative',
-    zIndex: 99,
+    zIndex: 6,
   },
   thirdBorderContainer: {
     width: 300,
@@ -223,7 +222,24 @@ const styles = StyleSheet.create({
     right: 25,
     top: -30,
   },
-  goBackIcon:
+  cover:
+  {
+    height: 280,
+    width: 800,
+    backgroundColor: 'grey',
+    zIndex: 5,
+    position: 'absolute',
+    top: 423.23,
+  },
+  text:
+  {
+    fontSize: 40,
+    color: 'black',
+    fontWeight: 'bold',
+    bottom: -200,
+    zIndex: 6,
+  },
+  goBackButton:
   {
     color: '#292D32',
     borderRadius: '20%',
@@ -233,16 +249,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5, // Shadow opacity
     bottom: -170,
     right: 190,
-    zIndex: 220,
-  },
-  cover:
-  {
-    height: 280,
-    width: 800,
-    backgroundColor: 'grey',
-    zIndex: 5,
-    position: 'absolute',
-    top: 423.23,
+    zIndex: 6,
   },
   nextButton:
   {
@@ -253,7 +260,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.5, // Shadow opacity
     bottom: -250,
-    zIndex: 202,
+    zIndex: 6,
   },
   buttonText: 
   {
