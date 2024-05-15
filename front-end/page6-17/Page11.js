@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Animated, Easing } from 'react-native'
 import React, {useState, useEffect} from 'react'
 
-const Page9 = () => {
+const Page11 = () => {
     const [animated1] = useState(new Animated.Value(0));
     const [animated2] = useState(new Animated.Value(0));
     const [animated3] = useState(new Animated.Value(0));
@@ -120,7 +120,7 @@ const Page9 = () => {
   )
 }
 
-export default Page9
+export default Page11
 
 const styles = StyleSheet.create({
     container: {

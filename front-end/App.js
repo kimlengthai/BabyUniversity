@@ -25,6 +25,7 @@ import page9 from './page6-17/Page9'
 import page10 from './page6-17/Page10'
 import page11 from './page6-17/Page11'
 import page12 from './page6-17/Page12'
+import page6v2 from './page6-17/Page6V2'
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -42,10 +43,11 @@ export default function App() {
         {/* <Stack.Screen options= {{headerShown: false}} name="page7" component={page7} />  */}
         {/* <Stack.Screen options= {{headerShown: false}} name="page8" component={page8} />  */}
         {/* <Stack.Screen options={{headerShown: false}} name="page9" component={page9} /> */}
-        {/* <Stack.Screen options= {{headerShown: false}} name="page10" component={page10} />  */}
+        <Stack.Screen options= {{headerShown: false}} name="page10" component={page10} /> 
         {/* <Stack.Screen options= {{headerShown: false}} name="page11" component={page11} /> */}
-        <Stack.Screen options= {{headerShown: false}} name="page12" component={page12} />
+        {/* <Stack.Screen options= {{headerShown: false}} name="page12" component={page12} /> */}
 
+        {/* <Stack.Screen options= {{headerShown: false}} name="page6v2" component={page6v2} /> */}
 
 
       </Stack.Navigator>

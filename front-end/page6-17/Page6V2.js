@@ -1,82 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { View, Animated, StyleSheet, Easing, Text, TouchableOpacity } from 'react-native';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Animated, StyleSheet, Easing, Text,TouchableOpacity } from 'react-native';
 
-const CircleAnimation = () => {
-  const [animated1] = useState(new Animated.Value(0));
-  const [animated2] = useState(new Animated.Value(0));
-  const [animated3] = useState(new Animated.Value(0));
+const Page6V2 = () => {
+    const [neutronScale] = useState(new Animated.Value(1));
+    // console.log("hello")
+    const animateNeutron = () => {
+        // console.log('Animating');
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(neutronScale, {
+            toValue: 1.2,
+            duration: 1000,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }),
+          Animated.timing(neutronScale, {
+            toValue: 1,
+            duration: 1000,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }),
+        ]),
+      ).start();
+    };
 
-
-  const animateFirstCircle = () => {
-    console.log("animting first circle")
-    Animated.loop(
-      Animated.timing(animated1, {
-        toValue: 1,
-        duration: 3500,
-        useNativeDriver: true,
-        easing: Easing.linear,
-      }),
-    ).start();
-  };
-  const animateSecondCircle = () => {
-    Animated.loop(
-      Animated.timing(animated2, {
-        toValue: 1,
-        duration: 4500,
-        useNativeDriver: true,
-        easing: Easing.linear,
-      }),
-    ).start();
-  };
-  const animateThirdCircle = () => {
-    Animated.loop(
-      Animated.timing(animated3, {
-        toValue: 1,
-        duration: 5000,
-        useNativeDriver: true,
-        easing: Easing.linear,
-      }),
-    ).start();
-  };
   
-
-  const inputRange = [0, 1];
-  const outputRange = ['0deg', '360deg'];
-
-  const rotate1 = animated1.interpolate({ inputRange, outputRange });
-  const rotate2 = animated2.interpolate({ inputRange, outputRange });
-  const rotate3 = animated3.interpolate({ inputRange, outputRange });
 
   return (
     <View style={styles.container}>
       <View style={styles.first}>
-        <Animated.View style={[styles.outerBorderContainer, { transform: [{ rotate: rotate1 }] }]}>
-          <TouchableOpacity onPress={animateFirstCircle}> 
-            <View style={styles.outerCircle} />
-          </TouchableOpacity>
-        </Animated.View>
+        <View style={styles.outerBorderContainer}>
+          <View style={styles.outerCircle} />
+        </View>
       </View>
 
       <View style={styles.second}>
-        <Animated.View style={[styles.secondBorderContainer, { transform: [{ rotate: rotate2 }] }]}>
-          <TouchableOpacity onPress={animateSecondCircle}>
-            <View style={styles.secondCircle} />
-          </TouchableOpacity>
-          
-        </Animated.View>
+        <View style={styles.secondBorderContainer}>
+          <View style={styles.secondCircle} />
+        </View>
       </View>
 
       <View style={styles.third}>
-        <Animated.View style={[styles.thirdBorderContainer, { transform: [{ rotate: rotate3 }] }]}>
-          <TouchableOpacity onPress={animateThirdCircle}>
-            <View style={styles.thirdCircle} />
-          </TouchableOpacity>
-        </Animated.View>
+        <View style={styles.thirdBorderContainer}>
+          <View style={styles.thirdCircle} />
+        </View>
       </View>
 
       {/* Inside the circle */}
-      <View style={styles.insideTheCircle}>
+      {/* <View style={styles.insideTheCircle}>
         <View style = {styles.protonAndNeutron}>
           <View style = {styles.firstRow}>
             <View style={[styles.proton, styles.proton1,{ backgroundColor: 'blue' }]}></View>
@@ -87,6 +58,37 @@ const CircleAnimation = () => {
             <View style={[styles.proton, styles.proton2, { backgroundColor: 'blue' }]}></View>
           </View>
         </View>
+      </View> */}
+      
+        <View style={styles.insideTheCircle}>
+        <TouchableOpacity onPress={animateNeutron}>
+          <View style={styles.protonAndNeutron}>
+            <View style={styles.firstRow}>
+              <View style={[styles.proton, styles.proton1, { backgroundColor: 'red' }]} />
+              <Animated.View
+                style={[
+                  styles.neutron,
+                  styles.neutron1,
+                  { backgroundColor: 'blue', transform: [{ scale: neutronScale }] },
+                ]}
+              />
+            </View>
+            <View style={styles.secondRow}>
+              <Animated.View
+                style={[
+                  styles.neutron,
+                  styles.neutron2,
+                  { backgroundColor: 'blue', transform: [{ scale: neutronScale }] },
+                ]}
+              />
+              <View style={[styles.proton, styles.proton2, { backgroundColor: 'red' }]} />
+            </View>
+          </View>
+          </TouchableOpacity>
+        </View>
+      
+        <View style = {styles.text}>
+            <Text style = {{color: 'white', fontSize: 50}}>Here are <Text style ={{color: 'blue'}}>neutrons.</Text></Text>
       </View>
       
     </View>
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
+    backgroundColor: 'black'
   },
   first: {
     position: 'absolute',
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
   protonAndNeutron:{
     // justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -228,7 +231,14 @@ const styles = StyleSheet.create({
     top: 170,
     left: -20,
   },
+  text:{
+    position: 'absolute',
+    zIndex: 100,
+    bottom: 70,
+    fontWeight: '700',
+  
+  }
   
 });
 
-export default CircleAnimation;
+export default Page6V2;

@@ -1,66 +1,82 @@
 import { StyleSheet, Text, View, Animated, Easing } from 'react-native'
 import React, {useState, useEffect} from 'react'
 
-const Page9 = () => {
+const Page10 = () => {
     const [animated1] = useState(new Animated.Value(0));
     const [animated2] = useState(new Animated.Value(0));
     const [animated3] = useState(new Animated.Value(0));
-  
-    useEffect(() => {
-      animate();
-    }, []);
-  
-    const animate = () => {
-        Animated.loop(
-          Animated.sequence([
-            Animated.timing(animated1, {
-              toValue: 1,
-              duration: 2000, // Rotate to 180 degrees
-              useNativeDriver: true,
-              easing: Easing.linear,
-            }),
-            Animated.timing(animated1, {
-              toValue: 0,
-              duration: 2000, // Rotate back to 0 degrees
-              useNativeDriver: true,
-              easing: Easing.linear,
-            }),
-          ])
-        ).start();
 
-        Animated.loop(
-            Animated.sequence([
-              Animated.timing(animated2, {
-                toValue: 1,
-                duration: 3000, // Rotate to 180 degrees
-                useNativeDriver: true,
-                easing: Easing.linear,
-              }),
-              Animated.timing(animated2, {
-                toValue: 0,
-                duration: 3000, // Rotate back to 0 degrees
-                useNativeDriver: true,
-                easing: Easing.linear,
-              }),
-            ])
-          ).start();
+    const [electronScale] = useState(new Animated.Value(1));
+    // console.log("hello")
+    const animateFirstElectron = () => {
+        // console.log('Animating');
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(electronScale, {
+            toValue: 1.2,
+            duration: 1000,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }),
+          Animated.timing(electronScale, {
+            toValue: 1,
+            duration: 1000,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }),
+        ]),
+      ).start();
+    // const animate = () => {
+    //     Animated.loop(
+    //       Animated.sequence([
+    //         Animated.timing(animated1, {
+    //           toValue: 1,
+    //           duration: 2000, // Rotate to 180 degrees
+    //           useNativeDriver: true,
+    //           easing: Easing.linear,
+    //         }),
+    //         Animated.timing(animated1, {
+    //           toValue: 0,
+    //           duration: 2000, // Rotate back to 0 degrees
+    //           useNativeDriver: true,
+    //           easing: Easing.linear,
+    //         }),
+    //       ])
+    //     ).start();
 
-          Animated.loop(
-            Animated.sequence([
-              Animated.timing(animated3, {
-                toValue: 1,
-                duration: 4000, // Rotate to 180 degrees
-                useNativeDriver: true,
-                easing: Easing.linear,
-              }),
-              Animated.timing(animated3, {
-                toValue: 0,
-                duration: 4000, // Rotate back to 0 degrees
-                useNativeDriver: true,
-                easing: Easing.linear,
-              }),
-            ])
-          ).start();
+    //     Animated.loop(
+    //         Animated.sequence([
+    //           Animated.timing(animated2, {
+    //             toValue: 1,
+    //             duration: 3000, // Rotate to 180 degrees
+    //             useNativeDriver: true,
+    //             easing: Easing.linear,
+    //           }),
+    //           Animated.timing(animated2, {
+    //             toValue: 0,
+    //             duration: 3000, // Rotate back to 0 degrees
+    //             useNativeDriver: true,
+    //             easing: Easing.linear,
+    //           }),
+    //         ])
+    //       ).start();
+
+    //       Animated.loop(
+    //         Animated.sequence([
+    //           Animated.timing(animated3, {
+    //             toValue: 1,
+    //             duration: 4000, // Rotate to 180 degrees
+    //             useNativeDriver: true,
+    //             easing: Easing.linear,
+    //           }),
+    //           Animated.timing(animated3, {
+    //             toValue: 0,
+    //             duration: 4000, // Rotate back to 0 degrees
+    //             useNativeDriver: true,
+    //             easing: Easing.linear,
+    //           }),
+    //         ])
+    //       ).start();
     };
   
     const inputRange = [0, 1];
@@ -76,6 +92,7 @@ const Page9 = () => {
       <View style = {styles.circleContainer}>
         <Animated.View style={[styles.circle, { transform: [{ rotate: rotate1 }] }]}>
             {/* <View style={styles.innerCircle} /> */}
+            
             <View style={styles.innerCircle}>
                 
             </View>
@@ -120,7 +137,7 @@ const Page9 = () => {
   )
 }
 
-export default Page9
+export default Page10
 
 const styles = StyleSheet.create({
     container: {
@@ -161,8 +178,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         borderRadius: 50,
         position: 'absolute',
-        top: 222,
-        left: -10,
+        top: -25,
+        left: 330,
         zIndex:4,
         
         
@@ -172,13 +189,13 @@ const styles = StyleSheet.create({
         height: 70,
         backgroundColor: 'yellow',    
         position: 'absolute',
-        top: 215,
-        left: -20,
+        top: -35,
+        left: 318,
         zIndex: 2,
         shadowColor: 'rgba(252, 291, 82, 0.8)', // Shadow color
         shadowOffset: { width: 0, height: 0 }, // Shadow offset
-        shadowOpacity: 3, // Increase shadow opacity
-        shadowRadius: 40, // Increase shadow radius for more glow
+        shadowOpacity: 4, // Increase shadow opacity
+        shadowRadius: 30, // Increase shadow radius for more glow
         borderColor: 'null',
     },
     secondGlowing: {
@@ -186,8 +203,8 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: 'yellow',    
         position: 'absolute',
-        top: 160,
-        left: -10,
+        top: -10,
+        left: 150,
         zIndex: 2,
         shadowColor: 'rgba(252, 291, 82, 0.8)', // Shadow color
         shadowOffset: { width: 0, height: 0 }, // Shadow offset
@@ -235,8 +252,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         borderRadius: 25,
         position: 'absolute',
-        top: 160,
-        left: -2,
+        top: -10,
+        left: 150,
         zIndex: 4
       },
       circle3: {
