@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Page23 from './page23';
 import ParentUI from './ParentUI';
+import picture from '../front-end/assets/picture.png';
 
 const Page24 = () => {
   const [showParentUI, setShowParentUI] = useState(false);
@@ -26,6 +27,7 @@ const Page24 = () => {
     }
   return (
     <View style={styles.container}>
+    <Image source={picture} style={[styles.pictureImg]} />
       <Text style={styles.text}>Now you are a quantum physicist.</Text>
       <TouchableOpacity style={styles.nextButton} onPress={goToParentUI}>
       <Text style={styles.buttonText}>Next</Text>
@@ -42,12 +44,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: 'grey',
+    position: 'relative',
+  },
+  pictureImg:
+  {
+    left: 0,
+    bottom: 0,
+    width: 270,
+    height: 250,
+    backgroundColor: 'transparent',
   },
   text: {
-    fontSize: 24,
-    color: 'white',
+    fontSize: 40,
+    color: 'black',
     fontWeight: 'bold',
+    top: 50,
   },
   nextButton:
   {
@@ -57,7 +69,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.5, // Shadow opacity
-    bottom: -250,
+    bottom: -100,
     zIndex: 6,
   },
   buttonText: 
@@ -77,7 +89,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.5, // Shadow opacity
-    bottom: -170,
+    bottom: -22,
     right: 190,
     zIndex: 6,
   },
