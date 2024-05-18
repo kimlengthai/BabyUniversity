@@ -7,10 +7,12 @@ import goBackButton from '../assets/menuImages/gobackIcon.png';
 import ParentUI from '../ParentUI/ParentUI'; // Import the ParentUI component
 import AiBook from '../assets/booksImages/AIBook.png'; // Import AI for Babies Book
 import ConfirmPurchaseButton from '../assets/buyButtons/ConfirmPurchaseButton.png';
+import PurchaseSuccessful from '../purchaseSuccessful';
 
 const Payment = () => {
   //Have to place showParentUI before fontsLoaded for some Hook reasons
   const [showParentUI, setShowParentUI] = useState(false); // State to toggle ParentUI
+  const [purchaseComplete, setPurchaseComplete] = useState(false);
   const [fontsLoaded] = useFonts({
     Itim_400Regular,
   });
@@ -25,12 +27,21 @@ const Payment = () => {
     setShowParentUI(true); // Set showParentUI state to true
   };
 
+  const handleConfirmPurchase = () => {
+    setPurchaseComplete(true); // Set purchaseComplete state to true
+  };
+
   //if showParentUI is true
   //return handlGoeBack
   if (showParentUI) {
     // passing a handleGoBack function to toggle the showParentUI state
     return <ParentUI handleGoBack={() => setShowParentUI(false)} />;
   }
+
+  if (purchaseComplete)
+    {
+      return <PurchaseSuccessful/>
+    }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
@@ -73,7 +84,7 @@ const Payment = () => {
       <Image source={AiBook} style={[styles.AiBookImg]} />
       <Text style={styles.pricetag}>$12.99</Text>
 
-      <TouchableOpacity style={styles.buyButtonIcon}>
+      <TouchableOpacity style={styles.buyButtonIcon} onPress={handleConfirmPurchase}>
       <Image source={ConfirmPurchaseButton} style={[styles.ConfirmPurchaseButton]} />
       </TouchableOpacity>
       </View>
