@@ -21,7 +21,6 @@ const Page23 = () => {
 
   // Start arrow animations
   useEffect(() => {
-    Animated.loop(
       Animated.sequence([
         Animated.timing(animation, {
           toValue: 1,
@@ -29,20 +28,19 @@ const Page23 = () => {
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        Animated.timing(animation, {
+        /*Animated.timing(animation, {
           toValue: 0,
           duration: 1000,
           easing: Easing.linear,
           useNativeDriver: true,
-        }),
-      ])
-    ).start();
+        }),*/
+      ]).start();
   }, []);
 
   // Interpolate animated values for arrow position
   const arrowPosition = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [-100, 400], // Start from left (-100px) to right (400px)
+    outputRange: [-250, 400], // Start from left (-100px) to right (400px)
   });
 
   if (showpage22) {
@@ -57,7 +55,10 @@ const Page23 = () => {
     <View style={styles.container}>
       {/* Arrows */}
       <Animated.View style={[styles.arrow, { transform: [{ translateX: arrowPosition }] }]} />
-      <Animated.View style={[styles.arrow, { transform: [{ translateX: arrowPosition }] }]} />
+      <Animated.View style={[styles.triangle, { transform: [{ translateX: arrowPosition }, { rotate: '90deg' }] }]} />
+
+      <Animated.View style={[styles.arrow2, { transform: [{ translateX: arrowPosition }] }]} />
+      <Animated.View style={[styles.triangle2, { transform: [{ translateX: arrowPosition }, { rotate: '90deg' }] }]} />
 
       {/* Text */}
       <Text style={styles.text}>This amount of <Text style={styles.energy}>energy</Text> is a quantum.</Text>
@@ -89,12 +90,54 @@ const styles = StyleSheet.create({
     color: 'yellow',
   },
   arrow: {
-    width: 100,
+    width: 150,
     height: 20,
     backgroundColor: 'yellow',
     position: 'absolute',
     top: '50%',
     transform: [{ translateY: -10 }, { rotate: '45deg' }], // Adjust arrow position
+  },
+  triangle:
+  {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    top: 130,
+    left: 72,
+    borderLeftWidth: 27,
+    borderRightWidth: 27,
+    borderBottomWidth: 43,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor:"yellow",
+    borderWidth: 0,
+    borderColor:"black",
+  },
+  arrow2: {
+    width: 150,
+    height: 20,
+    backgroundColor: 'yellow',
+    position: 'absolute',
+    top: '42%',
+    transform: [{ translateY: -10 }, { rotate: '45deg' }], // Adjust arrow position
+  },
+  triangle2:
+  {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    top: 25,
+    left: 72,
+    borderLeftWidth: 27,
+    borderRightWidth: 27,
+    borderBottomWidth: 43,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor:"yellow",
+    borderWidth: 0,
+    borderColor:"black",
   },
   nextButton:
   {
