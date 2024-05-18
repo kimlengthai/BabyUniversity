@@ -4,16 +4,16 @@ import { Itim_400Regular } from '@expo-google-fonts/itim'; // Import custom font
 import { useFonts } from "expo-font";
 import phyDoodleShapes from '../front-end/assets/BgImage/doodle.png'; // Import background image
 import goBackButton from '../front-end/assets/menuImages/gobackIcon.png'; //
-import ParentUI from '../front-end/ParentUI/ParentUI'; // Import the ParentUI component
+import PurchaseHistory from '../front-end/purchaseHistory'; // Import the Purchase History component
 import horiLine from '../front-end/assets/img/Line.png';
 import tickButton from '../front-end/assets/paymentButtons/Tick.png';
 import actualTickButton from '../front-end/assets/paymentButtons/actualTick.png';
 import BackToBookStoreButton from '../front-end/assets/paymentButtons/BackToBookStoreButton.png';
 import Payment from '../front-end/BookStore/Payment';
 
-const purchaseSuccessful = () => {
+const PurchaseSuccessful = () => {
   //Have to place showParentUI before fontsLoaded for issues relating to using the Hook
-  const [showParentUI, setShowParentUI] = useState(false); // It should go back to Purchase History
+  const [showBoughtHistory, setShowboughtHistory] = useState(false); // It should go back to Purchase History
   const [showPayment, setShowPayment] = useState(false); // State to toggle Payment page
 
   const [fontsLoaded] = useFonts({
@@ -27,14 +27,14 @@ const purchaseSuccessful = () => {
   const handleGoBack = () => {
     // Handle onPress event for goBackIcon
     // navigate back to the Purchase History
-    setShowParentUI(true); // Set showParentUI state to true
+    setShowboughtHistory(true); // Set showBoughtHistory state to true
   };
 
-  //if showParentUI is true
+  //if showBoughtHistory is true
   //return handlGoeBack
-  if (showParentUI) {
-    // passing a handleGoBack function to toggle the showParentUI state
-    return <ParentUI handleGoBack={() => setShowParentUI(false)} />;
+  if (showBoughtHistory) {
+    // passing a handleGoBack function to toggle the showBoughtHistory state
+    return <PurchaseHistory/>;
   }
 
   // show Payment page when clicking buy button on Bookstore page
@@ -158,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default purchaseSuccessful;
+export default PurchaseSuccessful;
