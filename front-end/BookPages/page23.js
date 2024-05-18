@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Easing, TouchableOpacity } from 'react-native';
-import Page22 from './page22';
+import Page22 from '../BookPages/page22';
 import Page24 from './page24';
 
 const Page23 = () => {

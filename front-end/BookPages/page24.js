@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Page23 from './page23';
-import ParentUI from './ParentUI';
-import picture from '../front-end/assets/picture.png';
+import ParentUI from '../ParentUI/ParentUI';
+import picture from '../assets/picture.png';
 
 const Page24 = () => {
   const [showParentUI, setShowParentUI] = useState(false);

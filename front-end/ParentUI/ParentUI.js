@@ -1,12 +1,12 @@
 import React, { useState } from 'react'; //Add useState is crucial for PurchaseHistoryGreen
 import { View, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import phyDoodleShapes from '../front-end/assets/BgImage/doodle.png'; // Import background image
-import BrowseBookRed from '../front-end/assets/parentsUIImages/BrowseBook.png';
-import PurchaseHistoryGreen from '../front-end/assets/parentsUIImages/PurchaseHistoryButton.png';
-import TrackingYellow from '../front-end/assets/parentsUIImages/TrackingActivities.png';
-import PurchaseHistory from './MenuButton';
-import PurchaseHistoryText from './PurchaseHistoryText'; // Import the PurchaseHistoryText component in App.js or PurchaseHistoryText.js
-import BookStore from './BookStore'; // Import the BookStore component
+import phyDoodleShapes from '../assets/BgImage/doodle.png'; // Import background image
+import BrowseBookRed from '../assets/parentsUIImages/BrowseBook.png';
+import PurchaseHistoryGreen from '../assets/parentsUIImages/PurchaseHistoryButton.png';
+import TrackingYellow from '../assets/parentsUIImages/TrackingActivities.png';
+import PurchaseHistory from '../MenuButton';
+import PurchaseHistoryText from '../PurchaseHistory/PurchaseHistoryText'; // Import the PurchaseHistoryText component in App.js or PurchaseHistoryText.js
+import BookStore from '../BookStore/BookStore'; // Import the BookStore component
 
 const ParentUI = () => {
     // Add this one that makes Purchase History button functional

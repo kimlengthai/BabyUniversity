@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { Itim_400Regular } from '@expo-google-fonts/itim'; // Import custom font
 import { useFonts } from "expo-font";
-import phyDoodleShapes from '../front-end/assets/BgImage/doodle.png'; // Import background image
-import goBackButton from '../front-end/assets/menuImages/gobackIcon.png'; //
-import ParentUI from './ParentUI'; // Import the ParentUI component
-import AiBook from '../front-end/assets/booksImages/AIBook.png'; // Import AI for Babies Book
-import NucPhysics from '../front-end/assets/booksImages/nuclearPhysicsBook.png'; // Import Nuclear Physics for Babies Book
-import AiBookDesc from '../front-end/assets/booksDesc/AIBookDesc.png'; // Import AI Book description
-import nucPhyDesc from '../front-end/assets/booksDesc/NuclearPhysicsBookDesc.png'; // Import Nuclear Physics Book description
-import horiLine from '../front-end/assets/img/Line.png';
-import buyButton from '../front-end/assets/buyButtons/BuyButton.png';
+import phyDoodleShapes from '../assets/BgImage/doodle.png'; // Import background image
+import goBackButton from '../assets/menuImages/gobackIcon.png'; //
+import ParentUI from '../ParentUI/ParentUI'; // Import the ParentUI component
+import AiBook from '../assets/booksImages/AIBook.png'; // Import AI for Babies Book
+import NucPhysics from '../assets/booksImages/nuclearPhysicsBook.png'; // Import Nuclear Physics for Babies Book
+import AiBookDesc from '../assets/booksDesc/AIBookDesc.png'; // Import AI Book description
+import nucPhyDesc from '../assets/booksDesc/NuclearPhysicsBookDesc.png'; // Import Nuclear Physics Book description
+import horiLine from '../assets/img/Line.png';
+import buyButton from '../assets/buyButtons/BuyButton.png';
 import Payment from './Payment';
 
 const BookStore = () => {

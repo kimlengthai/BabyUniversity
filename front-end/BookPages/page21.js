@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Easing, TouchableOpacity } from 'react-native';
-import Page19 from './page19';
-import Page21 from './page21';
+import Page20 from '../BookPages/page20';
+import Page22 from './page22';
 
-const Page20 = () => {
+
+const Page21 = () => {
   const [animated1] = useState(new Animated.Value(0));
-  const [showpage21, setShowpage21 ] = useState(false);
-  const [showpage19, setShowpage19] = useState(false);
+  const [showpage20, setShowpage20 ] = useState(false);
+  const [showpage22, setShowpage22] = useState(false);
 
   const handleGoBack = () =>
     {
-      setShowpage19(true);
+      setShowpage20(true);
     };
-    const goToPage21 = () => 
+    const goToPage22 = () => 
       {
-        setShowpage21(true);
+        setShowpage22(true);
       };
 
   useEffect(() => {
@@ -45,17 +46,17 @@ const Page20 = () => {
 
   const rotate1 = animated1.interpolate({ inputRange, outputRange });
 
-  if (showpage19) 
+  if (showpage20) 
     {
-      /* If showPage19 is true, render Page19 */
+      /* If showPage20 is true, render Page20 */
       /* If false, nothing is rendered. */
-    return <Page19 handleGoBack={() => setShowpage19(false)} />;
+    return <Page20 handleGoBack={() => setShowpage20(false)} />;
   }
-  if (showpage21) 
+  if (showpage22) 
     {
-      /* If showPage21 is true, render Page21 */
+      /* If showPag22 is true, render Pag22 */
       /* If false, nothing is rendered. */
-      return <Page21 goToPage21={() => setShowpage21(false)} />;
+      return <Page22 goToPage22={() => setShowpage22(false)} />;
     }
 
   return (
@@ -63,9 +64,6 @@ const Page20 = () => {
       <View style={styles.first}>
         <Animated.View style={[styles.outerBorderContainer, { transform: [{ rotate: rotate1 }] }]}>
           <View style={styles.outerCircle} />
-          <View style = {[styles.glowing, styles.glowing1]}></View>
-            <View style = {[styles.glowing, styles.glowing2]}></View>
-            <View style = {[styles.glowing, styles.glowing3]}></View>
         </Animated.View>
       </View>
 
@@ -89,9 +87,9 @@ const Page20 = () => {
         </View>
       </View>
 
-      <Text style={styles.text}>To jump up.</Text>
+      <Text style={styles.text}>And must give <Text style={styles.energy}>energy</Text>.</Text>
 
-      <TouchableOpacity style={styles.nextButton} onPress={goToPage21}>
+      <TouchableOpacity style={styles.nextButton} onPress={goToPage22}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
 
@@ -122,6 +120,22 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 3,
   },
+  insideTheCircle:{
+    width: 350,
+    height: 30,
+    position: 'relative',
+    backgroundColor: 'white',
+    zIndex: 5,
+    top: 125,
+  },
+  protonAndNeutron:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    position: 'relative',
+    width: 'auto',
+    height: 'auto',
+  },
   outerBorderContainer: {
     width: 550,
     height: 550,
@@ -140,45 +154,6 @@ const styles = StyleSheet.create({
     left: -30,
     zIndex: 5,
   },
-  glowing: {
-    width: 70,
-    height: 70,
-    backgroundColor: 'yellow',    
-    position: 'absolute',
-    top: 240,
-    left: -40,
-    zIndex: 4,
-    shadowColor: 'rgba(252, 291, 82, 0.8)', // Shadow color
-    shadowOffset: { width: 0, height: 0 }, // Shadow offset
-    shadowOpacity: 3, // Increase shadow opacity
-    shadowRadius: 40, // Increase shadow radius for more glow
-    borderColor: 'null',
-  },
-  glowing1: {
-    transform: [{ rotate: '30deg' }], 
-  },
-  glowing2: {
-    transform: [{ rotate: '60deg' }], 
-  },
-  glowing3: { 
-    transform: [{ rotate: '90deg' }],
-  },
-  insideTheCircle:{
-    width: 350,
-    height: 30,
-    position: 'relative',
-    backgroundColor: 'white',
-    zIndex: 5,
-    top: 125,
-  },
-  protonAndNeutron:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    position: 'relative',
-    width: 'auto',
-    height: 'auto',
-  },
   secondBorderContainer: {
     width: 450,
     height: 450,
@@ -190,7 +165,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 3,
     borderColor: 'black',
     position: 'relative',
-    zIndex: 6,
+    zIndex: 5,
   },
   thirdBorderContainer: {
     width: 300,
@@ -237,7 +212,11 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     bottom: -200,
-    zIndex: 6,
+    zIndex: 200,
+  },
+  energy:
+  {
+    color: 'yellow',
   },
   goBackButton:
   {
@@ -255,12 +234,12 @@ const styles = StyleSheet.create({
   {
     backgroundColor: '#A2C13C',
     borderRadius: '20%',
-    zIndex: 1,
+    zIndex: 6,
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.5, // Shadow opacity
     bottom: -250,
-    zIndex: 6,
+    zIndex: 202,
   },
   buttonText: 
   {
@@ -272,4 +251,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35,
   },
 });
-export default Page20;
+export default Page21;

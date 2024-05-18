@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { Itim_400Regular } from '@expo-google-fonts/itim'; // Import custom font
 import { useFonts } from "expo-font";
-import phyDoodleShapes from '../front-end/assets/BgImage/doodle.png'; // Import background image
-import goBackButton from '../front-end/assets/menuImages/gobackIcon.png';
-import PurchaseHistory from './MenuButton'; // Import the MenuButton component
-import ParentUI from './ParentUI'; // Import the ParentUI component
-import BookStore from './BookStore'; // Import the BookStore component
+import phyDoodleShapes from '../assets/BgImage/doodle.png'; // Import background image
+import goBackButton from '../assets/menuImages/gobackIcon.png';
+import PurchaseHistory from '../MenuButton'; // Import the MenuButton component
+import ParentUI from '../ParentUI/ParentUI'; // Import the ParentUI component
+import BookStore from '../BookStore/BookStore'; // Import the BookStore component
 
 const PurchaseHistoryText = () => {
   //Have to place showParentUI before fontsLoaded for Hooks

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text,TextInput, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
 import { Itim_400Regular } from '@expo-google-fonts/itim';
 import { useFonts } from "expo-font";
-import phyDoodleShapes from '../front-end/assets/BgImage/doodle.png'; // Import background image
-import goBackButton from '../front-end/assets/menuImages/gobackIcon.png';
-import ParentUI from './ParentUI'; // Import the ParentUI component
-import AiBook from '../front-end/assets/booksImages/AIBook.png'; // Import AI for Babies Book
-import ConfirmPurchaseButton from '../front-end/assets/buyButtons/ConfirmPurchaseButton.png';
+import phyDoodleShapes from '../assets/BgImage/doodle.png'; // Import background image
+import goBackButton from '../assets/menuImages/gobackIcon.png';
+import ParentUI from '../ParentUI/ParentUI'; // Import the ParentUI component
+import AiBook from '../assets/booksImages/AIBook.png'; // Import AI for Babies Book
+import ConfirmPurchaseButton from '../assets/buyButtons/ConfirmPurchaseButton.png';
 
 const Payment = () => {
   //Have to place showParentUI before fontsLoaded for some Hook reasons

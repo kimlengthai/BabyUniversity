@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Page18 from '../page18';
+import Page18 from '../BookPages/page18';
 
 
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';

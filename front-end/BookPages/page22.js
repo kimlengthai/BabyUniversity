@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Animated, Easing, TouchableOpacity } from 'react-native';
-import Page20 from './page20';
-import Page22 from './page22';
+import { View, Animated, StyleSheet, Easing, Text, TouchableOpacity } from 'react-native';
+import Page21 from '../BookPages/page21';
+import Page23 from '../BookPages/page23';
 
-
-const Page21 = () => {
-  const [animated1] = useState(new Animated.Value(0));
-  const [showpage20, setShowpage20 ] = useState(false);
-  const [showpage22, setShowpage22] = useState(false);
+const Page22 = () => {
+  const [animated2] = useState(new Animated.Value(0));
+  const [showpage23, setShowpage23 ] = useState(false);
+  const [showpage21, setShowpage21] = useState(false);
 
   const handleGoBack = () =>
     {
-      setShowpage20(true);
+      setShowpage21(true);
     };
-    const goToPage22 = () => 
-      {
-        setShowpage22(true);
-      };
+
+  const goToPage23 = () => 
+    {
+      setShowpage23(true);
+    };
 
   useEffect(() => {
     animate();
@@ -25,55 +25,49 @@ const Page21 = () => {
   const animate = () => {
     Animated.loop(
       Animated.sequence([
-      Animated.timing(animated1, {
+        Animated.timing(animated2, {
         toValue: 1,
-        duration: 1750,
+        duration: 2250,
         useNativeDriver: true,
         easing: Easing.linear,
-      }),
-      Animated.timing(animated1, {
+        }),
+        Animated.timing(animated2, {
         toValue: 0,
-        duration: 1750,
+        duration: 2250, // Half of the total duration (4500ms / 2)
         useNativeDriver: true,
         easing: Easing.linear,
-      }),
-    ]),
+        }),
+      ]),
     ).start();
   };
 
   const inputRange = [0, 1];
   const outputRange = ['0deg', '180deg'];
 
-  const rotate1 = animated1.interpolate({ inputRange, outputRange });
-
-  if (showpage20) 
-    {
-      /* If showPage20 is true, render Page20 */
-      /* If false, nothing is rendered. */
-    return <Page20 handleGoBack={() => setShowpage20(false)} />;
+  const rotate2 = animated2.interpolate({ inputRange, outputRange });
+  
+  if (showpage21) {
+    return <Page21 handleGoBack={() => setShowpage21(false)} />;
   }
-  if (showpage22) 
+  if (showpage23) 
     {
-      /* If showPag22 is true, render Pag22 */
-      /* If false, nothing is rendered. */
-      return <Page22 goToPage22={() => setShowpage22(false)} />;
+      return <Page23 goToPage23={() => setShowpage23(false)} />;
     }
 
   return (
     <View style={styles.container}>
       <View style={styles.first}>
-        <Animated.View style={[styles.outerBorderContainer, { transform: [{ rotate: rotate1 }] }]}>
-          <View style={styles.outerCircle} />
-        </Animated.View>
+        <View style={[styles.outerBorderContainer]}>
+        </View>
       </View>
-
       <View style={styles.cover}></View>
 
       <View style={styles.second}>
-        <View style={[styles.secondBorderContainer]}>   
-        </View>
+        <Animated.View style={[styles.secondBorderContainer, { transform: [{ rotate: rotate2 }] }]}>
+          <View style={[styles.secondCircle]}>
+          </View>
+        </Animated.View>
       </View>
-
       <View style={styles.third}>
         <View style={[styles.thirdBorderContainer]}>
         </View>
@@ -86,13 +80,10 @@ const Page21 = () => {
           <View style={styles.redBall}></View>
         </View>
       </View>
-
-      <Text style={styles.text}>And must give <Text style={styles.energy}>energy</Text>.</Text>
-
-      <TouchableOpacity style={styles.nextButton} onPress={goToPage22}>
+      <Text style={styles.text}>To fall down.</Text>
+      <TouchableOpacity style={styles.nextButton} onPress={goToPage23}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
-
       <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
       <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
@@ -139,33 +130,32 @@ const styles = StyleSheet.create({
   outerBorderContainer: {
     width: 550,
     height: 550,
-    borderRadius: 550,
-    borderWidth: 3,
-    borderColor: 'black',
-    position: 'relative',
-  },
-  outerCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    backgroundColor: 'green',
-    position: 'absolute',
-    top: 250,
-    left: -30,
-    zIndex: 5,
-  },
-  secondBorderContainer: {
-    width: 450,
-    height: 450,
-    borderTopLeftRadius: 230, 
-    borderTopRightRadius: 230,
-    borderBottomWidth: 0,
+    borderTopLeftRadius: 275, 
+    borderTopRightRadius: 275,
+    borderBottomWidth: 0, 
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
     borderColor: 'black',
     position: 'relative',
+  },
+  secondBorderContainer: {
+    width: 450,
+    height: 450,
+    borderRadius: 450,
+    borderWidth: 3,
+    borderColor: 'black',
+    position: 'relative',
     zIndex: 5,
+  },
+  secondCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: 'green',
+    position: 'absolute',
+    top: 180,
+    left: -30,
   },
   thirdBorderContainer: {
     width: 300,
@@ -200,7 +190,7 @@ const styles = StyleSheet.create({
   cover:
   {
     height: 280,
-    width: 800,
+    width: 600,
     backgroundColor: 'grey',
     zIndex: 5,
     position: 'absolute',
@@ -212,11 +202,27 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     bottom: -200,
-    zIndex: 200,
+    zIndex: 6,
   },
-  energy:
+  nextButton:
   {
-    color: 'yellow',
+    backgroundColor: '#A2C13C',
+    borderRadius: '20%',
+    zIndex: 1,
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.5, // Shadow opacity
+    bottom: -250,
+    zIndex: 6,
+  },
+  buttonText: 
+  {
+    color: '#000000',
+    fontSize: 40,
+    /*fontFamily: 'Itim_400Regular',*/
+    textAlign: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 35,
   },
   goBackButton:
   {
@@ -230,25 +236,11 @@ const styles = StyleSheet.create({
     right: 190,
     zIndex: 6,
   },
-  nextButton:
+  goBack:
   {
-    backgroundColor: '#A2C13C',
-    borderRadius: '20%',
-    zIndex: 6,
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: -250,
-    zIndex: 202,
-  },
-  buttonText: 
-  {
-    color: '#000000',
-    fontSize: 40,
-    /*fontFamily: 'Itim_400Regular',*/
-    textAlign: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
+    width: 77,
+    height: 77,
   },
 });
-export default Page21;
+
+export default Page22;

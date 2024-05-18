@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text, TouchableOpacity } from 'react-native';
-import Page21 from './page21';
-import Page23 from './page23';
+import Page18 from '../BookPages/page18';
+import Page20 from './page20';
 
-const Page22 = () => {
+const Page19 = () => {
   const [animated2] = useState(new Animated.Value(0));
-  const [showpage23, setShowpage23 ] = useState(false);
-  const [showpage21, setShowpage21] = useState(false);
+  const [showpage20, setShowpage20 ] = useState(false); //Create a variable for going to page 20
+  const [showpage18, setShowpage18] = useState(false); //Create a variable for going to page 18
 
+  /* A handler of navigating to page 18 */
   const handleGoBack = () =>
     {
-      setShowpage21(true);
+      setShowpage18(true);
     };
 
-  const goToPage23 = () => 
+  /* A handler of navigating to page 20 */  
+  const goToPage20 = () => 
     {
-      setShowpage23(true);
+      setShowpage20(true);
     };
 
   useEffect(() => {
@@ -23,7 +25,9 @@ const Page22 = () => {
   }, []);
 
   const animate = () => {
+    /*Sets up a continuous loop of animation */
     Animated.loop(
+      /* Do animation in a sequence */
       Animated.sequence([
         Animated.timing(animated2, {
         toValue: 1,
@@ -42,16 +46,22 @@ const Page22 = () => {
   };
 
   const inputRange = [0, 1];
-  const outputRange = ['0deg', '180deg'];
+  const outputRange = ['0deg', '170deg'];
 
+  /* A variable to rotate the green ball */
   const rotate2 = animated2.interpolate({ inputRange, outputRange });
-  
-  if (showpage21) {
-    return <Page21 handleGoBack={() => setShowpage21(false)} />;
+
+  /* A conditional rendering based on the showPage19 */
+  if (showpage18) {
+    /* If showPage18 is true, render Page18 */
+      /* If false, nothing is rendered. */
+    return <Page18 handleGoBack={() => setShowpage18(false)} />;
   }
-  if (showpage23) 
+  if (showpage20) 
     {
-      return <Page23 goToPage23={() => setShowpage23(false)} />;
+      /* If showPage20 is true, render Page20 */
+      /* If false, nothing is rendered. */
+      return <Page20 goToPage20={() => setShowpage20(false)} />;
     }
 
   return (
@@ -60,6 +70,7 @@ const Page22 = () => {
         <View style={[styles.outerBorderContainer]}>
         </View>
       </View>
+
       <View style={styles.cover}></View>
 
       <View style={styles.second}>
@@ -68,6 +79,7 @@ const Page22 = () => {
           </View>
         </Animated.View>
       </View>
+
       <View style={styles.third}>
         <View style={[styles.thirdBorderContainer]}>
         </View>
@@ -80,10 +92,13 @@ const Page22 = () => {
           <View style={styles.redBall}></View>
         </View>
       </View>
-      <Text style={styles.text}>To fall down.</Text>
-      <TouchableOpacity style={styles.nextButton} onPress={goToPage23}>
+
+      <Text style={styles.text}>An <Text style={styles.textElectron}>electron</Text> can take <Text style={styles.textEnergy}>energy</Text>.</Text>
+
+      <TouchableOpacity style={styles.nextButton} onPress={goToPage20}>
       <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
+
       <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
       <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
@@ -116,7 +131,7 @@ const styles = StyleSheet.create({
     height: 30,
     position: 'relative',
     backgroundColor: 'white',
-    zIndex: 5,
+    zIndex: 200,
     top: 125,
   },
   protonAndNeutron:{
@@ -146,7 +161,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'black',
     position: 'relative',
-    zIndex: 5,
+    zIndex: 4,
   },
   secondCircle: {
     width: 50,
@@ -154,7 +169,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: 'green',
     position: 'absolute',
-    top: 180,
+    top: 170,
     left: -30,
   },
   thirdBorderContainer: {
@@ -204,25 +219,15 @@ const styles = StyleSheet.create({
     bottom: -200,
     zIndex: 6,
   },
-  nextButton:
+  textElectron:
   {
-    backgroundColor: '#A2C13C',
-    borderRadius: '20%',
-    zIndex: 1,
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: -250,
-    zIndex: 6,
+    color: 'green',
+    fontWeight: 'bold',
   },
-  buttonText: 
+  textEnergy:
   {
-    color: '#000000',
-    fontSize: 40,
-    /*fontFamily: 'Itim_400Regular',*/
-    textAlign: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
+    color: 'yellow',
+    fontWeight: 'bold',
   },
   goBackButton:
   {
@@ -241,6 +246,25 @@ const styles = StyleSheet.create({
     width: 77,
     height: 77,
   },
+  nextButton:
+  {
+    backgroundColor: '#A2C13C',
+    borderRadius: '20%',
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.5, // Shadow opacity
+    bottom: -250,
+    zIndex: 6,
+  },
+  buttonText: 
+  {
+    color: '#000000',
+    fontSize: 40,
+    /*fontFamily: 'Itim_400Regular',*/
+    textAlign: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 35,
+  },
 });
 
-export default Page22;
+export default Page19;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, StyleSheet, Easing, TouchableOpacity } from 'react-native';
-import Page19 from './page19'; 
+import Page19 from '../BookPages/page19'; 
 
 const page18 = () => {
   const [animation] = useState(new Animated.Value(0));
