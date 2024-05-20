@@ -1,11 +1,14 @@
     import React, { useState, useEffect } from 'react';
     import { View, StyleSheet, Animated, Easing, TouchableOpacity, Text } from 'react-native';
-    import Page0 from './page0';
-    import Page2 from './page2';  
+
 
     const page1 = () => {
     const [bounceValue] = useState(new Animated.Value(0));
     const [isAnimating, setIsAnimating] = useState(false);
+ 
+
+  
+
 
     const startAnimation = () => {
         setIsAnimating(true);
@@ -62,17 +65,18 @@
         ],
       };
       
-    
-
-    return (
+ 
+      return (
         <View style={styles.container}>
-        <TouchableOpacity onPress={isAnimating ? stopAnimation : startAnimation}>
+          <TouchableOpacity onPress={isAnimating ? stopAnimation : startAnimation}>
             <Animated.View style={ballStyle} />
-        </TouchableOpacity>
-        <Text style={{ color: 'black', fontSize: 50 }}>This is a ball</Text>
+          </TouchableOpacity>
+          <Text style={{ color: 'black', fontSize: 50 }}>This is a ball</Text>
+          <Button title="Next" onPress={() => navigation.navigate('Page2')} />
+          <Button title="Back" onPress={() => navigation.goBack()} />
         </View>
-    );
-    };
+      );
+    }
 
     const styles = StyleSheet.create({
         container: {

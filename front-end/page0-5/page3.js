@@ -12,50 +12,14 @@ const Page3 = () => {
     const bounce = () => {
       Animated.sequence([
         Animated.timing(bounceValue, {
-          toValue: 0.25,
-          duration: 250,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        Animated.timing(bounceValue, {
-          toValue: 0.5,
-          duration: 250,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        Animated.timing(bounceValue, {
-          toValue: 0.75,
-          duration: 250,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        Animated.timing(bounceValue, {
-          toValue: 1,
-          duration: 250,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        Animated.timing(bounceValue, {
-          toValue: 0.75,
-          duration: 250,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        Animated.timing(bounceValue, {
-          toValue: 0.5,
-          duration: 250,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        Animated.timing(bounceValue, {
-          toValue: 0.25,
-          duration: 250,
+          toValue: -50,
+          duration: 500,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
         Animated.timing(bounceValue, {
           toValue: 0,
-          duration: 250,
+          duration: 500,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
@@ -80,16 +44,7 @@ const Page3 = () => {
     backgroundColor: 'blue',
     transform: [
       {
-        translateY: bounceValue.interpolate({
-          inputRange: [0, 0.25, 0.5, 0.75, 1],
-          outputRange: [0, -25, 0, -50, 0], // Adjusted outputRange for vertical movement
-        }),
-      },
-      {
-        translateX: bounceValue.interpolate({
-          inputRange: [0, 0.25, 0.5, 0.75, 1],
-          outputRange: [0, -25, -50, -25, 0], // Adjusted outputRange for sideways movement
-        }),
+        translateY: bounceValue,
       },
     ],
   };
@@ -97,13 +52,17 @@ const Page3 = () => {
   
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={isAnimating ? null : startAnimation}>
-        <Animated.View style={ballStyle} />
+      <TouchableOpacity onPress={startAnimation}>
+        <Animated.View style={[styles.circle, circleStyle]} />
       </TouchableOpacity>
-      <Text style={{ color: 'black', fontSize: 50 }}>This is a ball</Text>
+      <Text style={{ color: 'white', fontSize: 50 }}>
+        Circles can expand and contract
+      </Text>
+      <Button title="Next" onPress={() => navigation.navigate('Page4')} />
+      <Button title="Back" onPress={() => navigation.goBack()} />
     </View>
   );
-};
+} 
 
 const styles = StyleSheet.create({
   container: {
@@ -112,6 +71,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  bodyText: {
+    position: 'absolute',
+    zIndex: 100,
+    bottom: 50,
+    fontWeight: '700',
+    color: 'white',
+    
+
+  }
 });
 
 export default Page3;
