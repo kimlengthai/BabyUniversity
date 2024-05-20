@@ -1,108 +1,97 @@
-import React, { useEffect,useState } from 'react';
-import { Text,View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import { auth } from '../firebase';
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import UIBallAnimation from '../ballAnimation/ballAnimation'
+import { auth } from '../firebase';
+import UIBallAnimation from '../ballAnimation/ballAnimation';
 
 const LoginScreen = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoginClicked, setIsLoginClicked] = useState(false);
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+    const navigation = useNavigation();
+/*
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                navigation.navigate("Bedroom");
+            }
+        });
+        return unsubscribe;
+    }, []);
+    */
 
-   const navigation = useNavigation()
+    const handleSignup = () => {
+        navigation.navigate('Sign-Up');
+    };
 
-   useEffect(()=>{
-    const unsubscribe = auth.onAuthStateChanged(user =>{
-        if(user){
-            navigation.replace("Bedroom")
-        }
-    })
-    return unsubscribe
-   }, [])
+    const handleLogin = () => {
+        setIsLoginClicked(true);
+        auth.signInWithEmailAndPassword(username, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log("logged in with user", user.email);
+                navigation.navigate("Bedroom");
+            })
+            .catch(error => {
+                setIsLoginClicked(false);
+                alert(error.message);
+            });
+    };
 
-  const handleSignup = () => {
-    // Handle login logic here
-    // console.log('Logging in with:', { username, password });
-    auth
-        .createUserWithEmailAndPassword(username, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log(user.email);
-        })
-        .catch(error => alert(error.message))
-  }
-  const handleLogin = () => {
-    // Handle login logic here
-    // console.log('Logging in with:', { username, password });
-    auth
-        .signInWithEmailAndPassword(username, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log("logged in with user", user.email);
-        })
-        .catch(error => alert(error.message))
-  }
-  return (
-    <KeyboardAvoidingView 
-    style = {styles.container}
-    behavior='padding'
-    >
-        <View style = {styles.ballAnimationContainer}><UIBallAnimation /></View>
-        <View style = {styles.inputContainer}>
-            
-            <View style={styles.inputRow}>
-                <Text style={styles.label}>Username:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter your username"
-                    value={username}
-                    onChangeText = {text =>setUsername(text)}
-                    // onChangeText={setUsername}
-                />
-            </View>
-            <View style={styles.inputRow}>
-                <Text style={styles.label}>Password:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter your password"
-                    secureTextEntry
-                    value={password}
-                    // onChangeText={setPassword}
-                    onChangeText = {text =>setPassword(text)}
-
-                />
-            </View>
-            
-            
-      </View>
-      <View style = {styles.buttonContainer}>
-         <TouchableOpacity
-        onPress={handleLogin}
-        style= {styles.button}
+    return (
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior='padding'
         >
-            <Text style= {styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-        onPress={handleSignup}
-        style= {styles.button}
-        >
-            <Text style= {styles.buttonText}>Create Account</Text>
-        </TouchableOpacity> 
-        
-        
-      </View>
-    </KeyboardAvoidingView>
-
-    
-    
-  );
+            <View style={styles.ballAnimationContainer}>
+                <UIBallAnimation />
+            </View>
+            <View style={styles.inputContainer}>
+                <View style={styles.inputRow}>
+                    <Text style={styles.label}>Username:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter your username"
+                        value={username}
+                        onChangeText={text => setUsername(text)}
+                    />
+                </View>
+                <View style={styles.inputRow}>
+                    <Text style={styles.label}>Password:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter your password"
+                        secureTextEntry
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                    />
+                </View>
+            </View>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                    onPress={handleLogin}
+                    style={styles.button}
+                    disabled={isLoginClicked} // Disable button when login is clicked
+                >
+                    <Text style={styles.buttonText}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={handleSignup}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Create Account</Text>
+                </TouchableOpacity>
+            </View>
+        </KeyboardAvoidingView>
+    );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
 
 
   },
@@ -113,7 +102,8 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   inputContainer: {
-    width: '50%'
+    width: '50%',
+    marginTop: 200,
   },
   inputRow: {
     width: '100%',

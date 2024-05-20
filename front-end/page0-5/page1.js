@@ -1,5 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import { View, StyleSheet, Animated, Easing, TouchableOpacity, Text } from 'react-native';
+    import Page0 from './page0';
+    import Page2 from './page2';  
 
     const page1 = () => {
     const [bounceValue] = useState(new Animated.Value(0));

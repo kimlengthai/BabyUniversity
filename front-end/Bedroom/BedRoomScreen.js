@@ -1,69 +1,176 @@
-
-// import React from 'react';
-// import { View, Text } from 'react-native';
-// import SignupScreen from './SignUp/signup';
-// import LoginScreen from './screens/LoginScreen';
-// const App = () => {
-//   return (
-//     <View>
-//       <Text > <SignupScreen /> {/* Render your signup screen component */} </Text>
-//     </View>
-//   );
-// };
-
-// export default App;
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import BedRoomScreen from './Bedroom/BedRoomScreen';
-//import page6 from './page6-17/Page6'
-import page0 from './'
-import page7 from './page6-17/Page7'
-import page8 from './page6-17/Page8'
-import page9 from './page6-17/Page9'
-import page10 from './page6-17/Page10'
-import page11 from './page6-17/Page11'
-import page12 from './page6-17/Page12'
+import React, { useState } from 'react';
 import Page0 from '../page0-5/page0';
-const Stack = createNativeStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-
-        {/* <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
-        <Stack.Screen options= {{headerShown: false}} name="Home" component={HomeScreen} />
-        <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} /> */}
-
-        {/* book pages 6-17 */}
-
-        {<Stack.Screen options= {{headerShown: false}} name="page0" component={Page0} />}
-        {<Stack.Screen options= {{headerShown: false}} name="page7" component={page7} />}
-        {<Stack.Screen options= {{headerShown: false}} name="page8" component={page8} />}
-        { <Stack.Screen options={{headerShown: false}} name="page9" component={page9} />}
-        {<Stack.Screen options= {{headerShown: false}} name="page10" component={page10} /> }
-        { <Stack.Screen options= {{headerShown: false}} name="page11" component={page11} /> }
-        <Stack.Screen options= {{headerShown: false}} name="page12" component={page12} />
 
 
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+import { auth } from '../firebase';
+/*import { useNavigation } from '@react-navigation/native';*/
+
+// const image = <Image source={require('./bedroombackground.png')} />
+
+const BedRoomScreen = () => {
+  /* click book's image will go to page 18 */
+const [showPage0, setShowPage0] = useState(false);
+const goToPage0 = () =>
+  {
+    setShowPage0(true);
+  };
+  if (showPage0)
+    {
+      return <Page0 goToPage0 = {() => setShowPage0(false)} />;
+    }
+  return(
+    <View style = {styles.container}>
+     {/* Background */}  
+      <Image 
+        source={require('../assets/bedRoomImages/background_doodle.png')} 
+        style={styles.background} 
+      />
+       {/* header text title */}  
+      <View style = {styles.headerTextContainer}>
+        <Text style = {styles.bedroomTitle}>Bedroom</Text>
+      </View>
+      
+      {/* Clock */}  
+      <Image 
+        source={require('../assets/bedRoomImages/clock.png')} 
+        style={styles.clock} 
+      />
+      {/* books */}
+      <TouchableOpacity onPress={goToPage18} style={styles.booksContainer}>
+      <Image 
+        source={require('../assets/bedRoomImages/books.png')} 
+        style={styles.books}
+      />
+      </TouchableOpacity>  
+      
+     
+      
+      {/* rectangle */} 
+      <View style = {styles.rectangle}></View>
+
+       {/* canvas */}  
+       <Image 
+        source={require('../assets/bedRoomImages/Canvas.png')} 
+        style={styles.canvas} 
+      />
+
+      {/* group 9 */}  
+      <Image 
+        source={require('../assets/bedRoomImages/Group9.png')} 
+        style={styles.group9} 
+      />
+
+      {/* group 8 */}  
+      <Image 
+        source={require('../assets/bedRoomImages/Group8.png')} 
+        style={styles.group8} 
+      />
+
+      {/* car */}  
+      <Image 
+        source={require('../assets/bedRoomImages/car.png')} 
+        style={styles.car} 
+      />
+
+      {/* ball */}  
+      <Image 
+        source={require('../assets/bedRoomImages/basketball.png')} 
+        style={styles.ball} 
+      />
+      {/* books capinet */}
+      <Image 
+        source={require('../assets/bedRoomImages/booksCapinet.png')} 
+        style={styles.booksCapinet} 
+      />
+
+
+    </View>
+    
+  )
+};
+export default BedRoomScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    container: {
+      flex: 1,     
+      position: 'relative',
+      justifyContent: 'center',
+      alignItems: 'center'
 
+    },
+    background: {
+      position: 'absolute',
+      top: 0,
+      resizeMode: 'contain',
+      backgroundColor: '#D8EEF7' /*add bg colour*/
+    },
+    headerTextContainer: {
+      position: 'absolute',
+      top: '8%'
+      
+    },
+    bedroomTitle: {
+     fontSize: 45,
+     fontWeight: '700'
 
+    },
+    rectangle: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      backgroundColor: '#F7D553',
+      height: "28%",
 
+    },
+    booksCapinet: {
+      position: 'absolute',
+      right: 0,
+      top: '20'
+
+    },
+    clock: {
+      position: 'absolute',
+      top: 70,
+      left: 70
+    },
+    books: {
+      position: 'absolute',
+      top: '25%'
+    },
+    canvas: {
+      position: 'absolute',
+      left: '2%',
+      top: '38%'
+    },
+    group9: {
+      position: 'absolute',
+      top: '80%',
+      left: '25%'
+    },
+    group8: {
+      position: 'absolute',
+      top: '90%',
+      left: '50%'
+    },
+    car: {
+      position: 'absolute',
+      top: '75%',
+      left: '40%'
+    },
+    ball: {
+      position: 'absolute',
+      right: '20%',
+      top: '70%'
+    },
+    /* Add a touching screen for book's image */
+    booksContainer:
+    {
+      position: 'absolute',
+      top: '26%',
+      right: '72%'
+    }
+   
+  });
