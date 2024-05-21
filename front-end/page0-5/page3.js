@@ -56,10 +56,8 @@ const Page3 = () => {
         <Animated.View style={[styles.circle, circleStyle]} />
       </TouchableOpacity>
       <Text style={{ color: 'white', fontSize: 50 }}>
-        Circles can expand and contract
+       
       </Text>
-      <Button title="Next" onPress={() => navigation.navigate('Page4')} />
-      <Button title="Back" onPress={() => navigation.goBack()} />
     </View>
   );
 } 

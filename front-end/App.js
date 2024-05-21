@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import BedRoomScreen from './Bedroom/BedRoomScreen';
+import SignupScreen from './SignUp/signup';
 import page0 from './page0-5/page0'
 import page1 from './page0-5/page1'
 import page2 from './page0-5/page2'
@@ -29,7 +30,8 @@ export default function App() {
         {/* <Stack.Screen options= {{headerShown: false}} name="page1" component={page1} />  */}
         {/* <Stack.Screen options= {{headerShown: false}} name="page2" component={page2} />  */}
         {/* <Stack.Screen options={{headerShown: false}} name="page3" component={page3} /> */}
-        <Stack.Screen options= {{headerShown: false}} name="page4" component={page4} /> 
+        <Stack.Screen options= {{headerShown: false}} name="signup" component={SignupScreen} /> 
+      <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} /> 
         
        
 
