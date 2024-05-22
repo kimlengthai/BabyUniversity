@@ -31,6 +31,8 @@ import page14 from './page6-17/Page14'
 import page15 from './page6-17/Page15'
 import page16 from './page6-17/Page16'
 import page17 from './page6-17/Page17'
+
+import SwipeBook from './page6-17/SwipeBook';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -57,7 +59,8 @@ export default function App() {
         {/* <Stack.Screen options= {{headerShown: false}} name="page14" component={page14} /> */}
         {/* <Stack.Screen options= {{headerShown: false}} name="page15" component={page15} /> */}
         {/* <Stack.Screen options= {{headerShown: false}} name="page16" component={page16} /> */}
-        <Stack.Screen options= {{headerShown: false}} name="page17" component={page17} />
+        {/* <Stack.Screen options= {{headerShown: false}} name="page17" component={page17} /> */}
+        <Stack.Screen options= {{headerShown: false}} name="SwipeBook" component={SwipeBook} />
       </Stack.Navigator>
     </NavigationContainer>
   );
