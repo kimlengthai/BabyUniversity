@@ -11,14 +11,8 @@ const LoginScreen = () => {
 
    const navigation = useNavigation()
 
-   useEffect(()=>{
-    const unsubscribe = auth.onAuthStateChanged(user =>{
-        if(user){
-            navigation.replace("Bedroom")
-        }
-    })
-    return unsubscribe
-   }, [])
+   
+   
 
   const handleSignup = () => {
     // Handle login logic here
@@ -32,16 +26,15 @@ const LoginScreen = () => {
         .catch(error => alert(error.message))
   }
   const handleLogin = () => {
-    // Handle login logic here
-    // console.log('Logging in with:', { username, password });
     auth
-        .signInWithEmailAndPassword(username, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log("logged in with user", user.email);
-        })
-        .catch(error => alert(error.message))
-  }
+      .signInWithEmailAndPassword(username, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log("logged in with user", user.email);
+        navigation.navigate('Bedroom');
+      })
+      .catch(error => alert(error.message))
+  };
   return (
     <KeyboardAvoidingView 
     style = {styles.container}

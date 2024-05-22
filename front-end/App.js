@@ -15,9 +15,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
+//import HomeScreen from './screens/HomeScreen';
 import BedRoomScreen from './Bedroom/BedRoomScreen';
+import PinEntryScreen from './PinPage'
+import LoginScreen from './screens/LoginScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -25,9 +26,9 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-        <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
-        <Stack.Screen options= {{headerShown: false}} name="Home" component={HomeScreen} />
+      <Stack.Screen options= {{headerShown: false}} name="Login" component={LoginScreen} />
         <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} />
+        <Stack.Screen name="PinEntry" component={PinEntryScreen} />
 
 
       </Stack.Navigator>
