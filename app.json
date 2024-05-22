@@ -3,7 +3,7 @@
     "name": "BabyUniversity",
     "slug": "BabyUniversity",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "portrait, orientation",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -12,7 +12,7 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ],
     "ios": {
       "supportsTablet": true
@@ -28,10 +28,7 @@
     },
     "plugins": [
       [
-      "expo-font",
-      {
-        "fonts": ["./assets/fonts/Itim-Regular.ttf"]
-      }
+      "expo-font"
       ]
     ]
   }
