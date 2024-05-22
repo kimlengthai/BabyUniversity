@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
 import React, { useState } from 'react';
 
-const Page11 = () => {
+const Page16 = () => {
   const [electronScale] = useState(() => {
     const scale = new Animated.Value(1);
     Animated.loop(
       Animated.sequence([
         Animated.timing(scale, {
-          toValue: 1.2,
+          toValue: 1.1,  // Reduced scaling range
           duration: 1000,
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
@@ -24,17 +24,17 @@ const Page11 = () => {
   });
 
   const [glowOpacity] = useState(() => {
-    const opacity = new Animated.Value(0.8);
+    const opacity = new Animated.Value(0.6); // Increased starting opacity
     Animated.loop(
       Animated.sequence([
         Animated.timing(opacity, {
-          toValue: 1,
+          toValue: 1,  // Increased opacity range
           duration: 1000,
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
         Animated.timing(opacity, {
-          toValue: 0.8,
+          toValue: 0.6,
           duration: 1000,
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
@@ -48,33 +48,23 @@ const Page11 = () => {
     <View style={styles.container}>
       <View style={styles.circleContainer}>
         <View style={styles.circle}>
-          <View style={styles.innerCircle} />
-          <View style={[styles.glowing, styles.glowing1]} />
-          <View style={[styles.glowing, styles.glowing2]} />
-          <View style={[styles.glowing, styles.glowing3]} />
+        <Animated.View
+            style={[styles.innerCircle, { transform: [{ scale: electronScale }] }]}
+          />
+          <Animated.View
+            style={[styles.glowing, styles.glowing1, { opacity: glowOpacity }]}
+          />
+          <Animated.View
+            style={[styles.glowing, styles.glowing2, { opacity: glowOpacity }]}
+          />
+          <Animated.View
+            style={[styles.glowing, styles.glowing3, { opacity: glowOpacity }]}
+          />
         </View>
 
-        <View style={styles.circle2}>
-          <View style={styles.innerCircle2} />
-          <View style={[styles.secondGlowing, styles.glowing1]} />
-          <View style={[styles.secondGlowing, styles.glowing2]} />
-          <View style={[styles.secondGlowing, styles.glowing3]} />
-        </View>
+        <View style={styles.circle2}></View>
 
-        <View style={styles.circle3}>
-          <Animated.View
-            style={[styles.innerCircle3, { transform: [{ scale: electronScale }] }]}
-          />
-          <Animated.View
-            style={[styles.thirdGlowing, styles.glowing1, { opacity: glowOpacity }]}
-          />
-          <Animated.View
-            style={[styles.thirdGlowing, styles.glowing2, { opacity: glowOpacity }]}
-          />
-          <Animated.View
-            style={[styles.thirdGlowing, styles.glowing3, { opacity: glowOpacity }]}
-          />
-        </View>
+        <View style={styles.circle3}></View>
 
         <View style={styles.protonAndNeutron}>
           <View style={styles.proton} />
@@ -84,15 +74,14 @@ const Page11 = () => {
 
       <View style={styles.bodyText}>
         <Text style={{ color: 'white', fontSize: 70, textAlign: 'center' }}>
-          This <Text style={{ color: 'green' }}>electron</Text> has the least{' '}
-          <Text style={{ color: 'yellow' }}>energy.</Text>
+          But not here.
         </Text>
       </View>
     </View>
   );
 };
 
-export default Page11;
+export default Page16;
 
 const styles = StyleSheet.create({
   container: {
@@ -119,7 +108,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -400,
     zIndex: 2,
-    opacity: 0.5,
+    opacity: 1,
   },
   innerCircle: {
     width: 60,
@@ -127,7 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     borderRadius: 50,
     position: 'absolute',
-    top: -30,
+    top: 0,
     left: 325,
      zIndex: 4,
   },
@@ -136,7 +125,7 @@ const styles = StyleSheet.create({
     height: 80,
     backgroundColor: 'yellow',
     position: 'absolute',
-    top: -40,
+    top: -10,
     left: 315,
     zIndex: 2,
     shadowColor: 'rgba(252, 291, 82, 1)',
@@ -145,34 +134,8 @@ const styles = StyleSheet.create({
     shadowRadius: 40,
     borderColor: 'null',
   },
-  secondGlowing: {
-    width: 55,
-    height: 55,
-    backgroundColor: 'yellow',
-    position: 'absolute',
-    top: -12,
-    left: 147,
-    zIndex: 2,
-    shadowColor: 'rgba(252, 291, 82, 0.8)',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 12,
-    borderColor: 'null',
-  },
-  thirdGlowing: {
-    width: 40, // Reduced size
-    height: 40, // Reduced size
-    backgroundColor: 'yellow',
-    position: 'absolute',
-    top: 90,
-    left: 0, // Adjusted position
-    zIndex: 2,
-    shadowColor: 'rgba(252, 291, 82, 0.8)',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 12,
-    borderColor: 'null',
-  },
+ 
+
   glowing1: {
     transform: [{ rotate: '30deg' }],
   },
@@ -191,18 +154,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -330,
     zIndex: 4,
-    opacity: 0.5,
+    opacity: 1,
   },
-  innerCircle2: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'green',
-    borderRadius: 25,
-    position: 'absolute',
-    top: -10,
-    left: 150,
-    zIndex: 4,
-  },
+
   circle3: {
     width: 400,
     height: 400,
@@ -213,16 +167,6 @@ const styles = StyleSheet.create({
     bottom: -250,
     zIndex: 4,
     opacity: 1,
-  },
-  innerCircle3: {
-    width: 30, // Reduced size
-    height: 30, // Reduced size
-    backgroundColor: 'green',
-    borderRadius: 15,
-    position: 'absolute',
-    top: 95, // Adjusted position
-    left: 5, // Adjusted position
-    zIndex: 4,
   },
   protonAndNeutron: {
     position: 'relative',
