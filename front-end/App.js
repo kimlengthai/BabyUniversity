@@ -20,18 +20,18 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-        <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
+        {/*<Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
         <Stack.Screen options= {{headerShown: false}} name="Home" component={HomeScreen} />
         <Stack.Screen options= {{headerShown: false}} name="signup" component={SignupScreen} /> 
-        <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} /> 
+  <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} /> */}
 
         {/* book pages 6-17 */}
 
         {/* <Stack.Screen options= {{headerShown: false}} name="page0" component={page0} />  */}
-        {/* <Stack.Screen options= {{headerShown: false}} name="page1" component={page1} />  */}
-        {/* <Stack.Screen options= {{headerShown: false}} name="page2" component={page2} />  */}
-        {/* <Stack.Screen options={{headerShown: false}} name="page3" component={page3} /> */}
-      
+        {/*<Stack.Screen options= {{headerShown: false}} name="page1" component={page1} />*/ }
+        {/*<Stack.Screen options= {{headerShown: false}} name="page2" component={page2} />*/ }
+        {<Stack.Screen options={{headerShown: false}} name="page3" component={page3} />}
+        {/*<Stack.Screen options={{headerShown: false}} name="page4" component={page4}>*/}
   
         
        

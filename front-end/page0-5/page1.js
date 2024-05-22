@@ -72,8 +72,7 @@
             <Animated.View style={ballStyle} />
           </TouchableOpacity>
           <Text style={{ color: 'black', fontSize: 50 }}>This is a ball</Text>
-          <Button title="Next" onPress={() => navigation.navigate('Page2')} />
-          <Button title="Back" onPress={() => navigation.goBack()} />
+          
         </View>
       );
     }

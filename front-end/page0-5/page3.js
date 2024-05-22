@@ -7,60 +7,95 @@ const Page3 = () => {
 
   const startAnimation = () => {
     setIsAnimating(true);
-    let bounceCount = 0;
   
-    const bounce = () => {
-      Animated.sequence([
+    const createBounceAnimation = (toValue) => {
+      return Animated.sequence([
         Animated.timing(bounceValue, {
-          toValue: -50,
-          duration: 500,
+          toValue,
+          duration: 300, // Duration of falling
           easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+        Animated.timing(bounceValue, {
+          toValue: toValue - 0.2,
+          duration: 100, // Quick bounce back up
+          easing: Easing.out(Easing.bounce),
+          useNativeDriver: true,
+        }),
+        Animated.timing(bounceValue, {
+          toValue,
+          duration: 100, // Quick return down after bounce
+          easing: Easing.in(Easing.bounce),
           useNativeDriver: true,
         }),
         Animated.timing(bounceValue, {
           toValue: 0,
-          duration: 500,
+          duration: 300, // Duration of returning to original position
           easing: Easing.linear,
           useNativeDriver: true,
-        }),
-      ]).start(() => {
-        bounceCount++;
-        if (bounceCount < 6) {
-          bounce();
-        } else {
-          setIsAnimating(false);
-          bounceValue.setValue(0); // Reset the animation value
-        }
-      });
+        })
+      ]);
     };
   
-    bounce();
-  };
+    const bounceSequence = Animated.sequence([
+      createBounceAnimation(1),
+      createBounceAnimation(2),
+      createBounceAnimation(3),
+      createBounceAnimation(4),
+      createBounceAnimation(5),
+      createBounceAnimation(6)
+    ]);
   
+    bounceSequence.start(() => {
+      Animated.timing(bounceValue, {
+        toValue: 0,
+        duration: 300, // Duration of returning to original position after all bounces
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }).start(() => {
+        setIsAnimating(false);
+      });
+    });
+  };
+    
+  const stopAnimation = () => {
+    setIsAnimating(false);
+    bounceValue.stopAnimation();
+  };
+
+  const translateY = bounceValue.interpolate({
+    inputRange: [0, 1, 2, 3, 4, 5, 6],
+    outputRange: [0, 30, 60, 90, 120, 150, 180], // Downward movement for 6 steps
+  });
+
+  const translateX = bounceValue.interpolate({
+    inputRange: [0, 1, 2, 3, 4, 5, 6],
+    outputRange: [0, 20, 40, 60, 80, 100, 120], // Rightward movement for 6 steps
+  });
+
   const ballStyle = {
     width: 50,
     height: 50,
     borderRadius: 25,
     backgroundColor: 'blue',
+    position: 'absolute',
+    top: -120,
+    left: -30,
     transform: [
-      {
-        translateY: bounceValue,
-      },
+      { translateY },
+      { translateX },
     ],
   };
-  
-  
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={startAnimation}>
-        <Animated.View style={[styles.circle, circleStyle]} />
+      <TouchableOpacity onPress={isAnimating ? stopAnimation : startAnimation}>
+        <Animated.View style={ballStyle} />
       </TouchableOpacity>
-      <Text style={{ color: 'white', fontSize: 50 }}>
-       
-      </Text>
+      <Text style={{ color: 'black', fontSize: 50 }}>This is a ball</Text>
     </View>
   );
-} 
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -68,16 +103,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    position: 'relative',
   },
-  bodyText: {
-    position: 'absolute',
-    zIndex: 100,
-    bottom: 50,
-    fontWeight: '700',
-    color: 'white',
-    
-
-  }
 });
 
 export default Page3;
