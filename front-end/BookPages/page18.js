@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Animated, StyleSheet, Easing, TouchableOpacity } from 'react-native';
-import Page19 from '../BookPages/page19'; 
+import { View, Text, Animated, StyleSheet, Easing } from 'react-native';
 
 const page18 = () => {
   const [animation] = useState(new Animated.Value(0));
-  const [showPage19, setShowPage19 ] = useState(false); //Create a variable for going to page 19
-
-  /* A handler of navigating to page 19 */
-  const goToPage19 = () => 
-    {
-      setShowPage19(true);
-    };
 
   useEffect(() => {
     /*Sets up a continuous loop of animation */
@@ -116,14 +108,6 @@ const page18 = () => {
     ],
   };
 
-  /* A conditional rendering based on the showPage19 */
-  if (showPage19) 
-    {
-      /* If showPage19 is true, render Page19 */
-      /* If false, nothing is rendered. */
-      return <Page19 goToPage19={() => setShowPage19(false)} />;
-    }
-
   return (
     <View style={styles.container}>
       <Animated.View style = {[styles.redBall, redBallStyle]}></Animated.View>
@@ -136,16 +120,11 @@ const page18 = () => {
       <View style = {styles.skip}></View>
       <View style = {styles.line}></View>
       </View>
-      
+
+      <View style={styles.bodyText}>
       <Text style={styles.text}>There are no <Text style={styles.electronText}>electron</Text> with zero energy.</Text>
-
-      <TouchableOpacity style={styles.goBackButton} /*onPress={handleGoBack}*/>
-      <Text style={styles.buttonText}>Back</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.nextButton} onPress={goToPage19}>
-      <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
+      </View>
+      
     </View>
   );
 };
@@ -156,7 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: 'black',
   },
   redBall: {
     width: 80,
@@ -218,58 +197,28 @@ const styles = StyleSheet.create({
   line:
   {
     position: 'absolute',
-    width: '28%',
+    width: '41%',
     height: 15,
     backgroundColor: 'red',
     top: '35%',
     transform: [{ translateY: -155 }, { rotate: '145deg' }],
   },
+  bodyText: {
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: 20,
+    fontWeight: '700',
+    color: 'white',
+  },
   text:
   {
-    fontSize: 40,
-    color: 'black',
-    fontWeight: 'bold',
-    bottom: 180,
-    /*fontFamily: 'Itim_400Regular',*/
+    fontSize: 70,
+    color: 'white',
+    textAlign: 'center'
   },
-  electronText: {
+  electronText: 
+  {
     color: 'green',
-    fontWeight: 'bold',
-  },
-  goBackButton:
-  {
-    color: '#292D32',
-    borderRadius: '20%',
-    backgroundColor: 'green',
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: 60,
-    right: 190,
-    zIndex: 220,
-  },
-  goBack:
-  {
-    width: 77,
-    height: 77,
-  },
-  nextButton:
-  {
-    backgroundColor: '#A2C13C',
-    borderRadius: '20%',
-    zIndex: 1,
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: 140,
-  },
-  buttonText: 
-  {
-    color: '#000000',
-    fontSize: 40,
-    textAlign: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
   },
 });
 

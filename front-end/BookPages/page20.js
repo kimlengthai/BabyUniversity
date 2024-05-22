@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Animated, Easing, TouchableOpacity } from 'react-native';
-import Page19 from '../BookPages/page19';
-import Page21 from './page21';
+import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 
 const Page20 = () => {
   const [animated1] = useState(new Animated.Value(0));
-  const [showpage21, setShowpage21 ] = useState(false);
-  const [showpage19, setShowpage19] = useState(false);
-
-  const handleGoBack = () =>
-    {
-      setShowpage19(true);
-    };
-    const goToPage21 = () => 
-      {
-        setShowpage21(true);
-      };
 
   useEffect(() => {
     animate();
@@ -44,19 +31,6 @@ const Page20 = () => {
   const outputRange = ['0deg', '180deg'];
 
   const rotate1 = animated1.interpolate({ inputRange, outputRange });
-
-  if (showpage19) 
-    {
-      /* If showPage19 is true, render Page19 */
-      /* If false, nothing is rendered. */
-    return <Page19 handleGoBack={() => setShowpage19(false)} />;
-  }
-  if (showpage21) 
-    {
-      /* If showPage21 is true, render Page21 */
-      /* If false, nothing is rendered. */
-      return <Page21 goToPage21={() => setShowpage21(false)} />;
-    }
 
   return (
     <View style={styles.container}>
@@ -89,15 +63,9 @@ const Page20 = () => {
         </View>
       </View>
 
+      <View style={styles.bodyText}>
       <Text style={styles.text}>To jump up.</Text>
-
-      <TouchableOpacity style={styles.nextButton} onPress={goToPage21}>
-      <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
-      <Text style={styles.buttonText}>Back</Text>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -107,8 +75,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'grey',
+    backgroundColor: 'black',
     position: 'relative',
+    width: '100%',
   },
   first: {
     position: 'absolute',
@@ -127,7 +96,7 @@ const styles = StyleSheet.create({
     height: 550,
     borderRadius: 550,
     borderWidth: 3,
-    borderColor: 'black',
+    borderColor: 'white',
     position: 'relative',
   },
   outerCircle: {
@@ -167,17 +136,13 @@ const styles = StyleSheet.create({
     width: 350,
     height: 30,
     position: 'relative',
-    backgroundColor: 'white',
     zIndex: 5,
-    top: 125,
+    top: 80,
   },
   protonAndNeutron:{
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
     position: 'relative',
-    width: 'auto',
-    height: 'auto',
   },
   secondBorderContainer: {
     width: 450,
@@ -188,7 +153,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'black',
+    borderColor: 'white',
     position: 'relative',
     zIndex: 6,
   },
@@ -201,7 +166,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'black',
+    borderColor: 'white',
     position: 'relative',
   },
   redBall: {
@@ -224,52 +189,26 @@ const styles = StyleSheet.create({
   },
   cover:
   {
-    height: 280,
-    width: 800,
-    backgroundColor: 'grey',
+    height: 300,
+    width: 600,
+    backgroundColor: 'black',
     zIndex: 5,
     position: 'absolute',
-    top: 423.23,
+    top: 620,
+  },
+  bodyText: 
+  {
+    textAlign: 'center',
+    position: 'relative',
+    bottom: -450,
+    fontWeight: '700',
+    color: 'white',
   },
   text:
   {
-    fontSize: 40,
-    color: 'black',
-    fontWeight: 'bold',
-    bottom: -200,
+    fontSize: 70,
+    color: 'white',
     zIndex: 6,
-  },
-  goBackButton:
-  {
-    color: '#292D32',
-    borderRadius: '20%',
-    backgroundColor: 'green',
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: -170,
-    right: 190,
-    zIndex: 6,
-  },
-  nextButton:
-  {
-    backgroundColor: '#A2C13C',
-    borderRadius: '20%',
-    zIndex: 1,
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: -250,
-    zIndex: 6,
-  },
-  buttonText: 
-  {
-    color: '#000000',
-    fontSize: 40,
-    /*fontFamily: 'Itim_400Regular',*/
-    textAlign: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
   },
 });
 export default Page20;

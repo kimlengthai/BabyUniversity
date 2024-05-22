@@ -154,31 +154,37 @@ const styles = StyleSheet.create({
   input:
   {
     backgroundColor: '#FFFFFF',
-    padding: 20,
+    paddingHorizontal: 10, // Reduced padding
+    paddingVertical: 5,
     width: 525,
-    height: 43,
+    height: 50, // Increased height
     borderRadius: 14,
     right: 230,
     bottom: 15,
+    fontSize: 18, // Adjust font size if needed
   },
   inputDate:
   {
     backgroundColor: '#FFFFFF',
-    padding: 20,
+    paddingHorizontal: 10, // Reduced padding
+    paddingVertical: 5,
     right: 190,
     borderRadius: 14,
     width: 183,
-    height: 43,
+    height: 50, // Increased height
     bottom: 5,
+    fontSize: 18, // Adjust font size if needed
   },
   inputCVV:
   {
     backgroundColor: '#FFFFFF',
     width: 183,
-    height: 43,
+    height: 50, // Increased height
     borderRadius: 14,
-    padding: 20,
+    paddingHorizontal: 10, // Reduced padding
+    paddingVertical: 5,
     right: 120,
+    fontSize: 18, // Adjust font size if needed
   },
   header:
   {
