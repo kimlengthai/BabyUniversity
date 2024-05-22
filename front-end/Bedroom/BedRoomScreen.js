@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Page18 from '../BookPages/page18';
-
+import SwipeBook from '../screens/SwipeBook';
 
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 
@@ -9,17 +9,12 @@ import { auth } from '../firebase';
 
 // const image = <Image source={require('./bedroombackground.png')} />
 
-const BedRoomScreen = () => {
-  /* click book's image will go to page 18 */
-const [showPage18, setShowPage18] = useState(false);
-const goToPage18 = () =>
-  {
-    setShowPage18(true);
+const BedRoomScreen = ({navigation}) => {
+  const openBook = () => {
+    navigation.navigate('SwipeBook');
   };
-  if (showPage18)
-    {
-      return <Page18 goToPage18 = {() => setShowPage18(false)} />;
-    }
+
+  
   return(
     <View style = {styles.container}>
      {/* Background */}  
@@ -38,12 +33,9 @@ const goToPage18 = () =>
         style={styles.clock} 
       />
       {/* books */}
-      <TouchableOpacity onPress={goToPage18} style={styles.booksContainer}>
-      <Image 
-        source={require('../assets/bedRoomImages/books.png')} 
-        style={styles.books}
-      />
-      </TouchableOpacity>  
+      <TouchableOpacity onPress={openBook} style={styles.booksContainer}>
+        <Image source={require('../assets/bedRoomImages/books.png')} style={styles.books} />
+      </TouchableOpacity>
       
      
       
