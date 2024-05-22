@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text } from 'react-native';
 
 
-import CircleAnimation from '../page6-17/components/CircleAnimation';
+import CircleAnimation from './components/CircleAnimation';
+
 export default function Page8() {
   return (
     <View style = {styles.container}>
