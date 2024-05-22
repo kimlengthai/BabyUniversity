@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   line:
   {
     position: 'absolute',
-    width: '41%',
+    width: '28%',
     height: 15,
     backgroundColor: 'red',
     top: '35%',

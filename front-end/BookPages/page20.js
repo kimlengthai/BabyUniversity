@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     height: 30,
     position: 'relative',
     zIndex: 5,
-    top: 80,
+    top: 50,
   },
   protonAndNeutron:{
     justifyContent: 'center',
@@ -189,20 +189,21 @@ const styles = StyleSheet.create({
   },
   cover:
   {
-    height: 300,
+    height: 280,
     width: 600,
     backgroundColor: 'black',
     zIndex: 5,
     position: 'absolute',
-    top: 620,
+    top: 450,
   },
   bodyText: 
   {
     textAlign: 'center',
-    position: 'relative',
-    bottom: -450,
+    position: 'absolute',
+    bottom: 20,
     fontWeight: '700',
     color: 'white',
+    zIndex: 200,
   },
   text:
   {

@@ -24,7 +24,7 @@ const Page23 = () => {
   // Interpolate animated values for arrow position
   const arrowPosition = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [-450, 500], // Start from left (-250px) to right (300px)
+    outputRange: [-650, 700], // Start from left (-250px) to right (300px)
   });
 
   return (
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     height: 0,
     backgroundColor: 'transparent',
     borderStyle: 'solid',
-    top: 115,
+    top: 32,
     left: 80,
     borderLeftWidth: 27,
     borderRightWidth: 27,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     height: 0,
     backgroundColor: 'transparent',
     borderStyle: 'solid',
-    top: -20,
+    top: -78,
     left: 80,
     borderLeftWidth: 27,
     borderRightWidth: 27,
@@ -102,9 +102,10 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     textAlign: 'center',
-    position: 'relative',
-    bottom: -450,
+    position: 'absolute',
+    bottom: 20,
     fontWeight: '700',
+    zIndex: 200,
   },
   text: {
     fontSize: 70,
