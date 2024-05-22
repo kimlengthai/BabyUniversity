@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   inputContainer: {
-    width: '50%'
+    width: '50%',
+    marginTop: 200,
   },
   inputRow: {
     width: '100%',

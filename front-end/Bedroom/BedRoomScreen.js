@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
+import Page18 from '../BookPages/page18';
 
 
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 
 import { auth } from '../firebase';
-import { useNavigation } from '@react-navigation/native';
+/*import { useNavigation } from '@react-navigation/native';*/
 
 // const image = <Image source={require('./bedroombackground.png')} />
 
 const BedRoomScreen = () => {
+  /* click book's image will go to page 18 */
+const [showPage18, setShowPage18] = useState(false);
+const goToPage18 = () =>
+  {
+    setShowPage18(true);
+  };
+  if (showPage18)
+    {
+      return <Page18 goToPage18 = {() => setShowPage18(false)} />;
+    }
   return(
     <View style = {styles.container}>
      {/* Background */}  
@@ -26,11 +37,14 @@ const BedRoomScreen = () => {
         source={require('../assets/bedRoomImages/clock.png')} 
         style={styles.clock} 
       />
-      {/* books */}  
+      {/* books */}
+      <TouchableOpacity onPress={goToPage18} style={styles.booksContainer}>
       <Image 
         source={require('../assets/bedRoomImages/books.png')} 
-        style={styles.books} 
+        style={styles.books}
       />
+      </TouchableOpacity>  
+      
      
       
       {/* rectangle */} 
@@ -90,7 +104,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: 0,
       resizeMode: 'contain',
-
+      backgroundColor: '#D8EEF7' /*add bg colour*/
     },
     headerTextContainer: {
       position: 'absolute',
@@ -150,6 +164,13 @@ const styles = StyleSheet.create({
       position: 'absolute',
       right: '20%',
       top: '70%'
+    },
+    /* Add a touching screen for book's image */
+    booksContainer:
+    {
+      position: 'absolute',
+      top: '26%',
+      right: '72%'
     }
    
   });
