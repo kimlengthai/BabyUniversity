@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { View, Animated, StyleSheet, Easing, Text } from 'react-native';
+import { View, Animated, StyleSheet, Easing, Text, TouchableOpacity } from 'react-native';
 
 const Page5 = () => {
   const [animated1] = useState(new Animated.Value(0));
   const [animated2] = useState(new Animated.Value(0));
   const [animated3] = useState(new Animated.Value(0));
+  const [animated4] = useState(new Animated.Value(0));
+
+  const animateFirstCircle = () => {
+    console.log("animating first circle");
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(animated4, {
+          toValue: 1,
+          duration: 1000, // Adjust the duration to control the speed of the bounce
+          useNativeDriver: true,
+          easing: Easing.linear,
+        }),
+        Animated.timing(animated4, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: true,
+          easing: Easing.linear,
+        }),
+      ])
+    ).start();
+  };
 
   useEffect(() => {
     animate();
@@ -46,6 +67,15 @@ const Page5 = () => {
   const rotate2 = animated2.interpolate({ inputRange, outputRange });
   const rotate3 = animated3.interpolate({ inputRange, outputRange });
 
+  const scale = animated4.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1.5], // Adjust the range to control the scaling effect
+  });
+
+  const handleBallPress = () => {
+    animateFirstCircle(); // Start the animation when the ball is pressed
+  };
+
   return (
     <View style={styles.container}>
     <View style={styles.magnifyGlass}></View>
@@ -82,7 +112,12 @@ const Page5 = () => {
       </View>
 
       <View style={styles.line}></View>
-      <View style={styles.ball}></View>
+
+      <TouchableOpacity onPress={handleBallPress} style={styles.touchableArea}>
+        <Animated.View style={[styles.ball, { transform: [{ scale }] }]} />
+      </TouchableOpacity>
+
+      
 
       <View style = {styles.bodyText}>
       <Text style = {{color: 'white', fontSize: 70}}>All balls are made of atoms.</Text>
@@ -100,6 +135,14 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: 'black',
   },
+  touchableArea: {
+    width: 200, // Set the width to match the ball width
+    height: 200, // Set the height to match the ball height
+    position: 'absolute',
+    borderRadius: 100, // Adjusted to match the ball's border radius
+    right: 10, // Adjusted to match the ball's position
+    bottom: 0, // Adjusted to match the ball's position
+  },  
   magnifyGlass: {
     width: 400,
     height: 400,
