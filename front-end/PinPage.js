@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { auth } from './firebase'; // Adjust the path based on your firebase setup
+import ParentUI from './ParentUI/ParentUI';
 
 const PinEntryScreen = ({ navigation }) => {
   const [pin, setPin] = useState('');
@@ -23,7 +24,7 @@ const PinEntryScreen = ({ navigation }) => {
     .then((response) => {
       if (response.status === 200) {
         console.log(response.data.message);
-        navigation.navigate('PaymentPage');
+        navigation.navigate('ParentUI');
       }
     })
     .catch((error) => {

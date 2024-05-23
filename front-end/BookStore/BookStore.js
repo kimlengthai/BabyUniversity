@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { Itim_400Regular } from '@expo-google-fonts/itim'; // Import custom font
 import { useFonts } from "expo-font";
 import phyDoodleShapes from '../assets/BgImage/doodle.png'; // Import background image
-import goBackButton from '../assets/menuImages/gobackIcon.png'; //
+import goBackButton from '../assets/menuImages/gobackIcon.png';
 import ParentUI from '../ParentUI/ParentUI'; // Import the ParentUI component
 import AiBook from '../assets/booksImages/AIBook.png'; // Import AI for Babies Book
 import NucPhysics from '../assets/booksImages/nuclearPhysicsBook.png'; // Import Nuclear Physics for Babies Book
@@ -14,7 +14,7 @@ import buyButton from '../assets/buyButtons/BuyButton.png';
 import Payment from './Payment';
 
 const BookStore = () => {
-  //Have to place showParentUI before fontsLoaded for issues relating to using the Hook
+  // Have to place showParentUI before fontsLoaded for issues relating to using the Hook
   const [showParentUI, setShowParentUI] = useState(false); // State to toggle ParentUI
   const [showPayment, setShowPayment] = useState(false); // State to toggle Payment page
 
@@ -28,12 +28,12 @@ const BookStore = () => {
 
   const handleGoBack = () => {
     // Handle onPress event for goBackIcon
-    // navigate back to the prevous page
+    // navigate back to the previous page
     setShowParentUI(true); // Set showParentUI state to true
   };
 
-  //if showParentUI is true
-  //return handlGoeBack
+  // if showParentUI is true
+  // return handleGoBack
   if (showParentUI) {
     // passing a handleGoBack function to toggle the showParentUI state
     return <ParentUI handleGoBack={() => setShowParentUI(false)} />;
@@ -49,144 +49,100 @@ const BookStore = () => {
       <Text style={styles.header}>The Book Store</Text>
       
       <View>
-      <Image source={phyDoodleShapes} style={[styles.backgroundImage]} />
-      <Text style={styles.AiBookTitle}>Artificial Intelligence for Babies</Text>
-      <Image source={AiBook} style={[styles.AiBookImg]} />
-      <Image source={AiBookDesc} style={[styles.AiBookDescImg]} />
-      <Text style={styles.pricetag}>$12.99</Text>
-      <TouchableOpacity style={styles.buyButtonIcon} onPress={() => setShowPayment(true)}>
-      <Image source={buyButton} style={[styles.buyButton]} />
-      </TouchableOpacity>
-      <Image source={horiLine} style={[styles.horiLine]} />
+        <Image source={phyDoodleShapes} style={styles.backgroundImage} resizeMode="contain" />
+        <Text style={styles.AiBookTitle}>Artificial Intelligence for Babies</Text>
+        <Image source={AiBook} style={styles.AiBookImg} resizeMode="contain" />
+        <Image source={AiBookDesc} style={styles.AiBookDescImg} resizeMode="contain" />
+        <Text style={styles.pricetag}>$12.99</Text>
+        <TouchableOpacity style={styles.buyButtonIcon} onPress={() => setShowPayment(true)}>
+          <Image source={buyButton} style={styles.buyButton} resizeMode="contain" />
+        </TouchableOpacity>
+        <Image source={horiLine} style={styles.horiLine} resizeMode="contain" />
       </View>
 
       <View>
-      <Text style={styles.NPBookTitle}>Nuclear Physics for Babies</Text>
-      <Image source={NucPhysics} style={[styles.NucPhysicsImg]} />
-      <Image source={nucPhyDesc} style={[styles.NuclearPhysicsBookDesc]} />
+        <Text style={styles.NPBookTitle}>Nuclear Physics for Babies</Text>
+        <Image source={NucPhysics} style={styles.NucPhysicsImg} resizeMode="contain" />
+        <Image source={nucPhyDesc} style={styles.NuclearPhysicsBookDesc} resizeMode="contain" />
       </View>
 
       <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
-        <Image source={goBackButton} style={styles.goBack}/>
+        <Image source={goBackButton} style={styles.goBack} resizeMode="contain" />
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: 
-  {
+  container: {
     flex: 1,
     backgroundColor: '#E0F6FF',
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  header:
-  {
-    fontSize: 50,
-    fontFamily: "Itim_400Regular",
-    color: '#3F3CB4',
-    top: 265,
-  },
-  AiBookTitle:
-  {
-    fontSize: 40,
-    fontFamily: "Itim_400Regular",
-    color: '#ED5D5B',
-    bottom: 0,
-    left: 100,
-    width: 550,
-    height: 48,
-  },
-  AiBookImg:
-  {
-    left: 120,
-    bottom: -20,
-  },
-  AiBookDescImg:
-  {
-    top: -220,
-    left: 410,
-  },
-  pricetag:
-  {
-    fontSize: 30,
-    fontFamily: "Itim_400Regular",
-    color: '#3D3AAF',
-    width: 84,
-    height: 36,
-    bottom: 170,
-    left: 785,
-  },
-  buyButton:
-  {
-    bottom: 210,
-    left: 920,
-  },
-  horiLine:
-  {
-    right: -50,
-    bottom: 138,
-  },
-  NPBookTitle:
-  {
-    fontSize: 40,
-    fontFamily: "Itim_400Regular",
-    color: '#ED5D5B',
-    bottom: 130,
-    right: 175,
-    width: 455,
-    height: 48,
-  },
-  NucPhysicsImg:
-  {
-    right: 155,
-    bottom: 85,
-  },
-  NuclearPhysicsBookDesc:
-  {
-    left: 135,
-    bottom: 263,
-  },
-  browseButton:
-  {
-    backgroundColor: '#A2C13C',
-    borderRadius: '20%',
-    marginTop: 295,
-    zIndex: 1,
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-  },
-  buttonText: 
-  {
-    color: '#000000',
-    fontSize: 40,
-    fontFamily: 'Itim_400Regular',
-    textAlign: 'center',
-    paddingVertical: 25,
-    paddingHorizontal: 45,
-  },  
-  backgroundImage: 
-  {
-    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
-    marginTop: 160,
-    marginBottom: -710,
+    padding: 10,
   },
-  goBackIcon:
-  {
-    color: '#292D32',
-    backgroundColor: 'transparent',
-    bottom: 960,
-    right: 535,
-    zIndex: 1,
+  header: {
+    fontSize: 50,
+    fontFamily: 'Itim_400Regular',
+    color: '#3F3CB4',
+    marginVertical: 20,
   },
-  goBack:
-  {
-    width: 77,
-    height: 77,
+  AiBookTitle: {
+    fontSize: 30,
+    fontFamily: 'Itim_400Regular',
+    color: '#ED5D5B',
+    textAlign: 'center',
+    marginVertical: 10,
+  },
+  AiBookImg: {
+    width: 150,
+    height: 150,
+    marginVertical: 10,
+  },
+  AiBookDescImg: {
+    width: 300,
+    height: 80,
+    marginVertical: 10,
+  },
+  pricetag: {
+    fontSize: 20,
+    fontFamily: 'Itim_400Regular',
+    color: '#3D3AAF',
+    marginVertical: 10,
+  },
+  buyButton: {
+    width: 100,
+    height: 40,
+    marginVertical: 10,
+  },
+  horiLine: {
+    width: 300,
+    height: 2,
+    marginVertical: 10,
+  },
+  NPBookTitle: {
+    fontSize: 30,
+    fontFamily: 'Itim_400Regular',
+    color: '#ED5D5B',
+    textAlign: 'center',
+    marginVertical: 10,
+  },
+  NucPhysicsImg: {
+    width: 150,
+    height: 150,
+    marginVertical: 10,
+  },
+  NuclearPhysicsBookDesc: {
+    width: 300,
+    height: 80,
+    marginVertical: 10,
+  },
+  goBackIcon: {
+    marginVertical: 10,
+  },
+  goBack: {
+    width: 50,
+    height: 50,
   },
 });
 
