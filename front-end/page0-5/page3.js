@@ -7,7 +7,7 @@ const Page3 = () => {
 
   const startAnimation = () => {
     setIsAnimating(true);
-  
+
     const createBounceAnimation = (toValue) => {
       return Animated.sequence([
         Animated.timing(bounceValue, {
@@ -36,7 +36,7 @@ const Page3 = () => {
         })
       ]);
     };
-  
+
     const bounceSequence = Animated.sequence([
       createBounceAnimation(1),
       createBounceAnimation(2),
@@ -45,7 +45,7 @@ const Page3 = () => {
       createBounceAnimation(5),
       createBounceAnimation(6)
     ]);
-  
+
     bounceSequence.start(() => {
       Animated.timing(bounceValue, {
         toValue: 0,
@@ -57,7 +57,7 @@ const Page3 = () => {
       });
     });
   };
-    
+
   const stopAnimation = () => {
     setIsAnimating(false);
     bounceValue.stopAnimation();
@@ -85,6 +85,10 @@ const Page3 = () => {
       { translateY },
       { translateX },
     ],
+    shadowColor: 'blue', // Shadow color set to red
+    shadowOffset: { width: 0, height: 5 }, // Position shadow directly below the ball
+    shadowOpacity: 3.8,
+    shadowRadius: 20,
   };
 
   return (
@@ -92,7 +96,7 @@ const Page3 = () => {
       <TouchableOpacity onPress={isAnimating ? stopAnimation : startAnimation}>
         <Animated.View style={ballStyle} />
       </TouchableOpacity>
-      <Text style={{ color: 'black', fontSize: 50 }}>This is a ball</Text>
+      <Text style={styles.text}>This is a ball.</Text>
     </View>
   );
 }
@@ -102,8 +106,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     position: 'relative',
+  },
+  text: {
+    position: 'absolute',
+    bottom: 20, // Adjust as needed to position the text at the bottom
+    color: 'white',
+    fontSize: 70,
+    textAlign: 'center',
+    fontWeight: '700',
+    width: '100%',
   },
 });
 

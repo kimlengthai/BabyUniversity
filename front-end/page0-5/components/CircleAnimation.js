@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'white',
     position: 'relative',
+    top: -50, // Adjust this value to move it up
   },
   outerCircle: {
     width: 50,
@@ -180,6 +181,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     position: 'relative',
     zIndex: 99,
+    top: -50, // Adjust this value to move it up
   },
   secondCircle: {
     width: 50,
@@ -197,6 +199,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'white',
     position: 'relative',
+    top: -50, // Adjust this value to move it up
   },
   thirdCircle: {
     width: 50,

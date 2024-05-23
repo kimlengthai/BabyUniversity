@@ -11,6 +11,7 @@ import page1 from './page0-5/page1'
 import page2 from './page0-5/page2'
 import page3 from './page0-5/page3'
 import page4 from './page0-5/page4'
+import page5 from './page0-5/page5'
 
 
 const Stack = createNativeStackNavigator();
@@ -28,10 +29,11 @@ export default function App() {
         {/* book pages 6-17 */}
 
         {/* <Stack.Screen options= {{headerShown: false}} name="page0" component={page0} />  */}
-        {/*<Stack.Screen options= {{headerShown: false}} name="page1" component={page1} />*/ }
-        {/*<Stack.Screen options= {{headerShown: false}} name="page2" component={page2} />*/ }
-        {<Stack.Screen options={{headerShown: false}} name="page3" component={page3} />}
-        {/*<Stack.Screen options={{headerShown: false}} name="page4" component={page4}>*/}
+        {/* <Stack.Screen options= {{headerShown: false}} name="page1" component={page1} /> */}
+        {/* <Stack.Screen options= {{headerShown: false}} name="page2" component={page2} /> */}
+        {/* <Stack.Screen options={{headerShown: false}} name="page3" component={page3} /> */}
+        {/*  <Stack.Screen options={{headerShown: false}} name="page4" component={page4}/> */}
+        { <Stack.Screen options={{headerShown: false}} name="page5" component={page5} /> }
   
         
        

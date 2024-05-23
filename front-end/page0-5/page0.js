@@ -11,8 +11,8 @@ export default function Page0() {
   return (
     <View style={styles.container}>
       {/* text */}
-      <Text style={{ color: 'red', fontSize: 100, marginTop: 50 }}>Quantum <Text style={{ color: 'blue' }}>Physics.</Text></Text>
-      <Text style={{ color: 'white', fontSize: 100, marginTop: 50 }}>for <Text style={{ color: 'yellow' }}>Babies.</Text></Text>
+      <Text style={{ color: 'red', fontSize: 70, marginTop: 5 }}>Quantum <Text style={{ color: 'blue' }}>Physics.</Text></Text>
+      <Text style={{ color: 'white', fontSize: 70, marginTop: 5, marginBottom: 10, }}>for <Text style={{ color: 'yellow' }}>Babies.</Text></Text>
       <View style={{ flex: 1 }}>
         <CircleAnimation />
       </View>
@@ -30,11 +30,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
     backgroundColor: 'black',
+    width: '100%',
+    height: '100%',
   },
   text: {
     position: 'absolute',
     zIndex: 100,
-    bottom: 50,
+    bottom: 20,
     fontWeight: '700',
+    marginTop: 100,
   },
 });

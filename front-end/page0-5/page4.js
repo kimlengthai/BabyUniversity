@@ -8,7 +8,7 @@ const Page4 = () => {
         <View style={styles.ball}></View>
         <View style={styles.shadow}></View>
       </View>
-      <Text style={styles.footer}>
+      <Text style={styles.text}>
         This ball has <Text style={styles.zeroEnergy}>zero energy</Text>.
       </Text>
     </View>
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1e1919',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'black',
   },
   mycanvas: {
     margin: 300,
@@ -39,9 +40,9 @@ const styles = StyleSheet.create({
     top: 170,
     zIndex: 1,
     shadowColor: '#004dc7',
-    shadowOffset: { width: 15, height: 15 },
-    shadowOpacity: 0.5,
-    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 5.5,
+    shadowRadius: 25,
     elevation: 5,
   },
   shadow: {
@@ -58,12 +59,13 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
     elevation: 5,
   },
-  footer: {
+  text: {
     position: 'absolute',
-    top: '70%',
-    left: '17%',
-    fontSize: 60,
+    zIndex: 100,
+    bottom: 50,
+    fontWeight: '700',
     color: 'white',
+    fontSize: 70,
   },
   zeroEnergy: {
     color: '#004dc7',
