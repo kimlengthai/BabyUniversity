@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, TextInput, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, StyleSheet, Image, KeyboardAvoidingView, Alert } from 'react-native';
 import { Itim_400Regular } from '@expo-google-fonts/itim';
 import { useFonts } from 'expo-font';
 import phyDoodleShapes from '../assets/BgImage/doodle.png';
@@ -12,6 +12,11 @@ import PurchaseSuccessful from '../purchaseSuccessful';
 const Payment = () => {
   const [showParentUI, setShowParentUI] = useState(false);
   const [purchaseComplete, setPurchaseComplete] = useState(false);
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
+  const [name, setName] = useState('');
+
   const [fontsLoaded] = useFonts({
     Itim_400Regular,
   });
@@ -24,8 +29,24 @@ const Payment = () => {
     setShowParentUI(true);
   };
 
-  const handleConfirmPurchase = () => {
-    setPurchaseComplete(true);
+  const handleConfirmPurchase = async () => {
+    try {
+      const response = await fetch('http://your-api-endpoint/saveDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cardNumber, expiryDate, cvv, name }),
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        setPurchaseComplete(true);
+      } else {
+        Alert.alert('Error', data.message);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to process payment');
+    }
   };
 
   if (showParentUI) {
@@ -48,6 +69,9 @@ const Payment = () => {
             <TextInput
               style={styles.input}
               placeholder="Enter your card number"
+              value={cardNumber}
+              onChangeText={setCardNumber}
+              keyboardType="numeric"
             />
           </View>
 
@@ -56,11 +80,18 @@ const Payment = () => {
             <TextInput
               style={styles.inputDate}
               placeholder="Enter your expiry date"
+              value={expiryDate}
+              onChangeText={setExpiryDate}
+              keyboardType="numeric"
             />
             <Text style={styles.labelCVV}>CVV:</Text>
             <TextInput
               style={styles.inputCVV}
               placeholder="Enter your CVV"
+              value={cvv}
+              onChangeText={setCvv}
+              keyboardType="numeric"
+              secureTextEntry
             />
           </View>
 
@@ -69,6 +100,8 @@ const Payment = () => {
             <TextInput
               style={styles.input}
               placeholder="Enter your card name"
+              value={name}
+              onChangeText={setName}
             />
           </View>
         </View>
