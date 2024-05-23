@@ -82,6 +82,7 @@ const Page5 = () => {
       </View>
 
       <View style={styles.line}></View>
+      <View style={styles.ball}></View>
 
       <View style = {styles.bodyText}>
       <Text style = {{color: 'white', fontSize: 70}}>All balls are made of atoms.</Text>
@@ -112,16 +113,28 @@ const styles = StyleSheet.create({
     borderWidth: 10, // Increased thickness
     borderColor: 'white', // White color
   },
+  ball: {
+    backgroundColor: 'yellow', // Change to yellow color
+    width: 200,
+    height: 200,
+    borderWidth: 5, // Set border width to 5
+    borderColor: 'blue', // Set border color to black
+    position: 'absolute',
+    borderRadius: 100,
+    right: 670,
+    bottom: 250,
+    zIndex: 0, // Set zIndex behind the magnifyingGlass
+  },  
   line:
   {
     width: 200,
     height: 50, 
-    backgroundColor: "yellow",
+    backgroundColor: "white",
      borderRadius: 2,
      top: 120,
      left: 240,
      zIndex: 2,
-     transform: [{ rotate: '34deg' }],
+     transform: [{ rotate: '36deg' }],
   },
   first: {
     position: 'absolute',
