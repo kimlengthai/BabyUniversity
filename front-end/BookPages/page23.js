@@ -25,7 +25,7 @@ const Page23 = () => {
   // Interpolate animated values for arrow position
   const arrowPosition = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [-650, 700], // Start from left (-250px) to right (300px)
+    outputRange: [-585, 700], // Start from left (-250px) to right (300px)
   });
 
   return (

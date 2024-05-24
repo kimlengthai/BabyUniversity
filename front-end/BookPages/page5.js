@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     height: 400,
     backgroundColor: 'turquoise',
     position: 'absolute',
-    right: 400,
+    right: -100,
     bottom: 220,
     transform: [{ rotate: '310deg' }],
     zIndex: 1,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     borderColor: 'blue', // Set border color to black
     position: 'absolute',
     borderRadius: 100,
-    right: 670,
+    right: 150,
     bottom: 250,
     zIndex: 0, // Set zIndex behind the magnifyingGlass
   },  

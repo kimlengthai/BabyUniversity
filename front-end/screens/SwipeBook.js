@@ -3,6 +3,12 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { useNavigation } from '@react-navigation/native';
 
+import Page0 from '../BookPages/page0'
+import Page1 from '../BookPages/page1' 
+import Page2 from '../BookPages/page2'
+import Page3 from '../BookPages/page3'
+import Page4 from '../BookPages/page4'
+import Page5 from '../BookPages/page5'
 import Page6v2 from '../BookPages/Page6V2'
 import Page7 from '../BookPages/Page7'
 import Page8 from '../BookPages/Page8'
@@ -30,6 +36,12 @@ const SwipeBook = () => {
   const carouselRef = useRef(null);
 
   const data = [
+    { key: 'page0', component: <Page0 /> },
+    { key: 'page1', component: <Page1 /> },
+    { key: 'page2', component: <Page2 /> },
+    { key: 'page3', component: <Page3 /> },
+    { key: 'page4', component: <Page4 /> },
+    { key: 'page5', component: <Page5 /> },
     { key: 'page6', component: <Page6v2 /> },
     // Add more pages as needed
     { key: 'page7', component: <Page7 /> },

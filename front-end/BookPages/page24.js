@@ -17,8 +17,16 @@ const Page24 = () => {
 
   return (
     <View style={styles.container}>
+
       <BackButton />
       <Image source={picture} style={styles.pictureImg} />
+
+    
+    <TouchableOpacity>
+    <Image source={picture} style={styles.pictureImg} />
+    </TouchableOpacity>
+      
+
       <View style={styles.bodyText}>
         <Text style={styles.text}>Now you are a quantum physicist.</Text>
       </View>
