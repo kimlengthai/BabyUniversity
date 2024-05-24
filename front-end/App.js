@@ -1,16 +1,3 @@
-// import React from 'react';
-// import { View, Text } from 'react-native';
-// import SignupScreen from './SignUp/signup';
-// import LoginScreen from './screens/LoginScreen';
-// const App = () => {
-//   return (
-//     <View>
-//       <Text > <SignupScreen /> {/* Render your signup screen component */} </Text>
-//     </View>
-//   );
-// };
-
-// export default App;
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,14 +6,20 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import BedRoomScreen from './Bedroom/BedRoomScreen';
 
+import SignupScreen from './SignUp/signup';
+
+
 
 import SwipeBook from './screens/SwipeBook';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
+
       <Stack.Navigator initialRouteName='Login'>
+
 
          <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
         {/* <Stack.Screen options= {{headerShown: false}} name="Home" component={HomeScreen} /> */}
@@ -46,5 +39,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-

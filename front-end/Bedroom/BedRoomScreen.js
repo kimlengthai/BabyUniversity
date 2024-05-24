@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import Page18 from '../BookPages/page18';
+
+
+
 import SwipeBook from '../screens/SwipeBook';
+
 
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 
@@ -9,12 +12,17 @@ import { auth } from '../firebase';
 
 // const image = <Image source={require('./bedroombackground.png')} />
 
+
+
+
+
 const BedRoomScreen = ({navigation}) => {
   const openBook = () => {
     navigation.navigate('SwipeBook');
   };
 
   
+
   return(
     <View style = {styles.container}>
      {/* Background */}  
@@ -33,9 +41,11 @@ const BedRoomScreen = ({navigation}) => {
         style={styles.clock} 
       />
       {/* books */}
+
       <TouchableOpacity onPress={openBook} style={styles.booksContainer}>
         <Image source={require('../assets/bedRoomImages/books.png')} style={styles.books} />
       </TouchableOpacity>
+
       
      
       

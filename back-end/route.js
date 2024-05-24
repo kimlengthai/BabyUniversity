@@ -1,16 +1,16 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { firebaseConfig} from './connection.js';
+import {auth,db} from '../front-end/firebase.js';
 import { getDataFromDB, saveDataToDB } from './App.js';
 import { Router } from 'express';
 
 
 
-const db = firebase.firestore();
+//const db = firebase.firestore();
 
 const router = Router();
 
-firebase.initializeApp(firebaseConfig);
+//firebase.initializeApp(firebaseConfig);
 
 
 // Define a route for the default
@@ -33,23 +33,15 @@ router.get('/retrieve', async (req, res) => {
   // Define a route for save 
   router.post('/save', async (req, res) => {
     try {
-      const { email, password, firstName, lastName, dob } = req.body;
+      const { email, password, firstName, lastName, DOB, parentalPin } = req.body;
   
       // Perform validations
-      if (!validateEmail(email)) {
-        throw new Error('Invalid email format');
-      }
-  
-      if (!validateName(firstName) || !validateName(lastName)) {
-        throw new Error('First name and last name must only contain letters');
-      }
-  
-      if (!validateDOB(dob)) {
-        throw new Error('Invalid date of birth format. Must be in DD/MM/YYYY format');
+      if (!email || !password || !firstName || !lastName || !DOB || !parentalPin) {
+        return res.status(400).json({ message: 'All fields are required' });
       }
   
       // Proceed with saving data
-      const userData = { email, password, firstName, lastName, dob };
+      const userData = { email, password, firstName, lastName, DOB, parentalPin };
       const docRef = await saveDataToDB(db, userData);
       console.log('Document written with ID:', docRef.id);
       res.status(200).json({ message: 'Data saved successfully' });
