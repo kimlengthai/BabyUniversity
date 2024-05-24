@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import CircleAnimation from './components3/CircleAnimation3';
 import Hammer from './componentHammer/Hammer';
-
+import BackButton from './BackButton';
 export default function Page0() {
   const handleHammerPress = () => 
     {
@@ -11,6 +11,7 @@ export default function Page0() {
   
   return (
     <View style={styles.container}>
+      <BackButton />
       {/* text */}
       <Text style={{ color: 'red', fontSize: 70, marginTop: 5 }}>Quantum <Text style={{ color: 'blue' }}>Physics</Text></Text>
       <Text style={{ color: 'white', fontSize: 70, marginTop: 5, marginBottom: 10, }}>for <Text style={{ color: 'yellow' }}>Babies.</Text></Text>

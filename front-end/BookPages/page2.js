@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Animated, Easing, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
+import BackButton from './BackButton';
 
 const Page2 = () => {
   const [animated1] = useState(new Animated.Value(0));
@@ -31,6 +32,7 @@ const Page2 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <View style={styles.circleContainer}>
         <Animated.View style={[styles.circle, { transform: [{ scale }] }]}>
           <TouchableOpacity onPress={animateFirstCircle}>
@@ -59,6 +61,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
     backgroundColor: 'black',
+    width : '100%',
+    height: 'auto'
   },
   circleContainer: {
     alignItems: 'center',

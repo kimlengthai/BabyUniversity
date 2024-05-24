@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Animated, Easing, TouchableOpacity, Text } from 'react-native';
-
+import BackButton from './BackButton';
 const page1 = () => {
   const [bounceValue] = useState(new Animated.Value(0));
   const [isAnimating, setIsAnimating] = useState(false);
@@ -66,6 +66,7 @@ const page1 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <TouchableOpacity onPress={isAnimating ? stopAnimation : startAnimation}>
         <Animated.View style={ballStyle} />
         <View style={styles.shadow} />
@@ -82,6 +83,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'black',
     position: 'relative',
+    width : '100%',
+    height: 'auto'
   },
   shadow: {
     width: 100,
