@@ -3,6 +3,7 @@ import { Text,View, TextInput, Button, StyleSheet, KeyboardAvoidingView, Touchab
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
 import UIBallAnimation from '../ballAnimation/ballAnimation'
+import SignupScreen from '../SignUp/signup';
 
 const LoginScreen = () => {
 
@@ -17,13 +18,7 @@ const LoginScreen = () => {
   const handleSignup = () => {
     // Handle login logic here
     // console.log('Logging in with:', { username, password });
-    auth
-        .createUserWithEmailAndPassword(username, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log(user.email);
-        })
-        .catch(error => alert(error.message))
+    navigation.navigate('SignUp')
   }
   const handleLogin = () => {
     auth

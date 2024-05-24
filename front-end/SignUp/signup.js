@@ -1,10 +1,15 @@
-
 import React, { useState } from 'react';
-import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, ImageBackground, Dimensions, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-//import { validateEmail, validateFirstName, validateLastName, validateDOB, validateParentalPin, validatePassword } from '../validation';
-//import SignupImage from '../assets/signupimage.png';
 import axios from 'axios';
+import { auth } from '../firebase';
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+// Import validation functions
+const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const validateName = (firstName) => /^[A-Za-z]+$/.test(firstName);
+const validateLastName = (lastName) => /^[A-Za-z]+$/.test(lastName);
+const validateDOB = (DOB) => /^\d{2}\/\d{2}\/\d{4}$/.test(DOB);
+const validateParentalPin = (parentalPin) => /^\d{4}$/.test(parentalPin);
 
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
@@ -15,89 +20,54 @@ const SignupScreen = () => {
   const [DOB, setDOB] = useState('');
   const [parentalPin, setParentalPin] = useState('');
   const [error, setError] = useState(null);
-  const [emailError, setEmailError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
-  const [firstNameError, setFirstNameError] = useState(null);
-  const [lastNameError, setLastNameError] = useState(null);
-  const [DOBError, setDOBError] = useState(null);
-  const [parentalPinError, setParentalPinError] = useState(null);
 
   const navigation = useNavigation();
   const screenWidth = Dimensions.get('window').width;
 
-  const signUpTitleFontSize = Math.min(24, screenWidth * 0.06);
+  // Calculate the font size based on the screenWidth
+  const signUpTitleFontSize = Math.min(24, screenWidth * 0.06); // Adjust the factor (0.06) as needed
 
   const handleSignup = async () => {
-    setEmailError(null);
-    setPasswordError(null);
-    setConfirmPasswordError(null);
-    setFirstNameError(null);
-    setLastNameError(null);
-    setDOBError(null);
-    setParentalPinError(null);
-    setError(null);
-    /*
+    // Perform validations
     if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-      setTimeout(() => setEmailError(null), 5000); // Clear error message after 5 seconds
+      setError('Invalid email format');
       return;
     }
-
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-      setTimeout(() => setEmailError(null), 5000);
+    if (!validateName(firstName) || !validateName(lastName)) {
+      setError('First name and last name must only contain letters');
       return;
     }
-
-    const passwordErrors = validatePassword(password, confirmPassword);
-    if (passwordErrors.length > 0) {
-      setPasswordError(passwordErrors[0]);
-      setTimeout(() => setPasswordError(null), 5000);
-      return;
-    }
-
-    if (!validateFirstName(firstName)) {
-      setFirstNameError('First name must contain only alphabets.');
-      setTimeout(() => setFirstNameError(null), 5000);
-      return;
-    }
-    
-    if (!validateLastName(lastName)) {
-      setLastNameError('Last name must contain only alphabets.');
-      setTimeout(() => setLastNameError(null), 5000);
-      return;
-    }
-
-
     if (!validateDOB(DOB)) {
-      setDOBError('Invalid date of birth format. Use DD/MM/YYYY.');
-      setTimeout(() => setDOBError(null), 5000);
+      setError('Invalid date of birth format. Must be in DD/MM/YYYY format');
+      return;
+    }
+    if (!validateParentalPin(parentalPin)) {
+      setError('Please enter a four digit number only');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
       return;
     }
 
-    if (!validateParentalPin(parentalPin)) {
-      setParentalPinError('Parental pin must be a 4-digit number.');
-      setTimeout(() => setParentalPinError(null), 5000);
-      return;
-    }
-*/
     // Save the user's details to the Firebase database
     try {
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
       const requestUrl = 'http://localhost:3000/save';
       const requestBody = {
         email,
-        password,
         firstName,
         lastName,
         DOB,
         parentalPin
       };
-
+      
       // Send the user details to the backend API using Axios
       const response = await axios.post(requestUrl, requestBody);
-      console.log(response.data.message);
-      navigation.replace('Bedroom');
+      console.log(response.data.message); 
+      navigation.replace('Bedroom'); 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('The email address is already in use by another account.');
@@ -109,94 +79,83 @@ const SignupScreen = () => {
 
   return (
     <View style={styles.container}>
-     
-        <KeyboardAvoidingView style={styles.container} behavior='padding'>
-          <Text style={[styles.signUpTitle, { fontSize: signUpTitleFontSize }]}>Baby University</Text>
-          <View style={styles.inputContainer}>
-            <View style={styles.inputRow}>
-              <Text style={styles.label}>Email:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your Email"
-                value={email}
-                onChangeText={text => setEmail(text)}
-              />
-              {emailError && <Text style={styles.errorText}>{emailError}</Text>}
-            </View>
-            <View style={styles.inputRow}>
-              <Text style={styles.label}>Password:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your password"
-                secureTextEntry
-                value={password}
-                onChangeText={text => setPassword(text)}
-
-              />
-              {passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
-            </View>
-            <View style={styles.inputRow}>
-              <Text style={styles.label}>Confirm Password:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Confirm your password"
-                secureTextEntry
-                value={confirmPassword}
-                onChangeText={text => setConfirmPassword(text)}
-              />
-            </View>
-            <View style={styles.inputRow}>
-              <Text style={styles.label}>First Name:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your first name"
-                value={firstName}
-                onChangeText={text => setFirstName(text)}
-              />
-              {firstNameError && <Text style={styles.errorText}>{firstNameError}</Text>}
-            </View>
-
-            <View style={styles.inputRow}>
-              <Text style={styles.label}>Last Name:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your last name"
-                value={lastName}
-                onChangeText={text => setLastName(text)}
-              />
-            </View>
-            {lastNameError && <Text style={styles.errorText}>{lastNameError}</Text>}
-            <View style={styles.inputRow}>
-          <Text style={styles.label}>DOB:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your date of birth"
-            value={DOB}
-            onChangeText={text => setDOB(text)}
-          />
-          {DOBError && <Text style={styles.errorText}>{DOBError}</Text>}
+      <KeyboardAvoidingView style={styles.container} behavior='padding'>
+        <Text style={[styles.signUpTitle, { fontSize: signUpTitleFontSize }]}>Baby University</Text>
+        <View style={styles.inputContainer}>
+          <View style={styles.inputRow}>
+            <Text style={styles.label}>Email:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Email"
+              value={email}
+              onChangeText={text => setEmail(text)}
+            />
+          </View>
+          <View style={styles.inputRow}>
+            <Text style={styles.label}>Password:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your password"
+              secureTextEntry
+              value={password}
+              onChangeText={text => setPassword(text)}
+            />
+          </View>
+          <View style={styles.inputRow}>
+            <Text style={styles.label}>Confirm Password:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Confirm your password"
+              secureTextEntry
+              value={confirmPassword}
+              onChangeText={text => setConfirmPassword(text)}
+            />
+          </View>
+          <View style={styles.inputRow}>
+            <Text style={styles.label}>First Name:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your first name"
+              value={firstName}
+              onChangeText={text => setFirstName(text)}
+            />
+          </View>
+          <View style={styles.inputRow}>
+            <Text style={styles.label}>Last Name:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your last name"
+              value={lastName}
+              onChangeText={text => setLastName(text)}
+            />
+          </View>
+          <View style={styles.inputRow}>
+            <Text style={styles.label}>DOB:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your date of birth"
+              value={DOB}
+              onChangeText={text => setDOB(text)}
+            />
+          </View>
+          <View style={styles.inputRow}>
+            <Text style={styles.label}>Parental Pin:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter a four digit pin"
+              value={parentalPin}
+              onChangeText={text => setParentalPin(text)}
+            />
+          </View>
         </View>
-            <View style={styles.inputRow}>
-              <Text style={styles.label}>Parental Pin:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter a four digit pin"
-                value={parentalPin}
-                onChangeText={text => setParentalPin(text)}
-              />
-              {parentalPinError && <Text style={styles.errorText}>{parentalPinError}</Text>}
-            </View>
-          </View>
-
-
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={handleSignup} style={styles.button}>
-              <Text style={styles.buttonText}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
-
-        </KeyboardAvoidingView>
-     
+        
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={handleSignup} style={styles.button}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+        {error && <Text style={styles.errorText}>{error}</Text>}
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -221,7 +180,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between', 
   },
   label: {
     marginRight: 10,

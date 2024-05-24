@@ -23,17 +23,32 @@ router.get('/retrieve', async (req, res) => {
 });
 
 // Define a route for save
+const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const validateName = (name) => /^[A-Za-z]+$/.test(name);
+const validateDOB = (dob) => /^\d{2}\/\d{2}\/\d{4}$/.test(dob);
+const validateParentalPin = (pin) => /^\d{4}$/.test(pin);
+
+// Define a route for save
 router.post('/save', async (req, res) => {
   try {
-    const { email, password, firstName, lastName, DOB, parentalPin } = req.body;
+    const { email, firstName, lastName, DOB, parentalPin } = req.body;
 
     // Perform validations
-    if (!email || !password || !firstName || !lastName || !DOB || !parentalPin) {
-      return res.status(400).json({ message: 'All fields are required' });
+    if (!validateEmail(email)) {
+      throw new Error('Invalid email format');
+    }
+    if (!validateName(firstName) || !validateName(lastName)) {
+      throw new Error('First name and last name must only contain letters');
+    }
+    if (!validateDOB(DOB)) {
+      throw new Error('Invalid date of birth format. Must be in DD/MM/YYYY format');
+    }
+    if (!validateParentalPin(parentalPin)) {
+      throw new Error('Please enter a four digit number only');
     }
 
     // Proceed with saving data
-    const userData = { email, password, firstName, lastName, DOB, parentalPin };
+    const userData = { email, firstName, lastName, DOB, parentalPin };
     const docRef = await saveDataToDB(db, userData);
     console.log('Document written with ID:', docRef.id);
     res.status(200).json({ message: 'Data saved successfully' });
