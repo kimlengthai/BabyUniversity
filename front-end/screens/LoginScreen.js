@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import UIBallAnimation from '../ballAnimation/ballAnimation'
-import SignupScreen from '../SignUp/signup';
-
-import { auth } from '../firebase';
-
+import UIBallAnimation from '../ballAnimation/ballAnimation';
+import { auth } from '../firebase'; // Make sure the path to your firebase config is correct
 
 const LoginScreen = () => {
     const [username, setUsername] = useState('');
@@ -13,7 +10,7 @@ const LoginScreen = () => {
     const [isLoginClicked, setIsLoginClicked] = useState(false);
 
     const navigation = useNavigation();
-/*
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
@@ -22,48 +19,28 @@ const LoginScreen = () => {
         });
         return unsubscribe;
     }, []);
-    */
 
     const handleSignup = () => {
         navigation.navigate('SignUp');
     };
 
-   
-   
+    const handleLogin = () => {
+        setIsLoginClicked(true);
+        auth
+            .signInWithEmailAndPassword(username, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log("Logged in with user", user.email);
+                navigation.navigate('Bedroom');
+            })
+            .catch(error => alert(error.message))
+            .finally(() => setIsLoginClicked(false));
+    };
 
-  const handleSignup = () => {
-    // Handle login logic here
-    // console.log('Logging in with:', { username, password });
-    navigation.navigate('SignUp')
-  }
-  const handleLogin = () => {
-    auth
-      .signInWithEmailAndPassword(username, password)
-      .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log("logged in with user", user.email);
-        navigation.navigate('Bedroom');
-      })
-      .catch(error => alert(error.message))
-  };
-  return (
-    <KeyboardAvoidingView 
-    style = {styles.container}
-    behavior='padding'
-    >
-        <View style = {styles.ballAnimationContainer}><UIBallAnimation /></View>
-        <View style = {styles.inputContainer}>
-            
-            <View style={styles.inputRow}>
-                <Text style={styles.label}>Username:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter your username"
-                    value={username}
-                    onChangeText = {text =>setUsername(text)}
-                    // onChangeText={setUsername}
-                />
-
+    return (
+        <KeyboardAvoidingView style={styles.container} behavior='padding'>
+            <View style={styles.ballAnimationContainer}>
+                <UIBallAnimation />
             </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputRow}>
@@ -106,69 +83,59 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-
-
-  },
-  ballAnimationContainer: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    zIndex: 0,
-  },
-  inputContainer: {
-    width: '50%',
-    marginTop: 200,
-  },
-  inputRow: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 40,
-  },
-  label: {
-    marginRight: 20,
-  },
-  input: {
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 20,
-    
-    borderRadius: 15,
-    color: 'black',
-    fontSize: 18,
-    backgroundColor: 'white'
-    
-
-  },
-  buttonContainer:{ 
-    width: '30%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40
-  },
-  button: {
-    // width: '100%',
-    backgroundColor: 'blue',
-    paddingVertical : 15,
-    paddingHorizontal: 50,   
-    borderRadius: 20,
-    alignItems: 'center',
-    marginBottom: 20,
-
-
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    ballAnimationContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+    },
+    inputContainer: {
+        width: '50%',
+        marginTop: 200,
+    },
+    inputRow: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 40,
+    },
+    label: {
+        marginRight: 20,
+    },
+    input: {
+        flex: 1,
+        paddingHorizontal: 15,
+        paddingVertical: 20,
+        borderRadius: 15,
+        color: 'black',
+        fontSize: 18,
+        backgroundColor: 'white'
+    },
+    buttonContainer: {
+        width: '30%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40
+    },
+    button: {
+        backgroundColor: 'blue',
+        paddingVertical: 15,
+        paddingHorizontal: 50,
+        borderRadius: 20,
+        alignItems: 'center',
+        marginBottom: 20,
+    },
     buttonText: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 20,
-   
-
-  },
+        color: 'white',
+        fontWeight: '700',
+        fontSize: 20,
+    },
 });
 
 export default LoginScreen;

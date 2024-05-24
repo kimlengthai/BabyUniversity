@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
 import SwipeBook from '../screens/SwipeBook';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 import { auth } from '../firebase';
+import MenuButton from '../MenuButton';
 
 const BedRoomScreen = ({navigation}) => {
   const openBook = () => {
@@ -11,11 +11,13 @@ const BedRoomScreen = ({navigation}) => {
 
   return(
     <View style = {styles.container}>
+
      {/* Background */}  
       <Image 
         source={require('../assets/bedRoomImages/background_doodle.png')} 
         style={styles.background} 
       />
+      <MenuButton userMode = "parents" />
        {/* header text title */}  
       <View style = {styles.headerTextContainer}>
         <Text style = {styles.bedroomTitle}>Bedroom</Text>
@@ -47,39 +49,37 @@ const BedRoomScreen = ({navigation}) => {
         style={styles.group9} 
       />
 
+      {/* group 8 */}  
+      <Image 
+        source={require('../assets/bedRoomImages/Group8.png')} 
+        style={styles.group8} 
+      />
 
-  if (showPage18) {
-    return <Page18 goToPage18={() => setShowPage18(false)} />;
-  }
+      {/* car */}  
+      <Image 
+        source={require('../assets/bedRoomImages/car.png')} 
+        style={styles.car} 
+      />
 
-  return (
-    <View style={styles.container}>
-      <Image source={backgroundDoodle} style={styles.background} />
-      <MenuButton userMode="parents" />
+      {/* ball */}  
+      <Image 
+        source={require('../assets/bedRoomImages/basketball.png')} 
+        style={styles.ball} 
+      />
+      {/* books capinet */}
+      <Image 
+        source={require('../assets/bedRoomImages/booksCapinet.png')} 
+        style={styles.booksCapinet} 
+      />
 
-      <View style={styles.headerTextContainer}>
-        <Text style={styles.bedroomTitle}>Bedroom</Text>
-      </View>
 
-      <Image source={clock} style={styles.clock} />
-      <TouchableOpacity onPress={goToPage18} style={styles.booksContainer}>
-        <Image source={books} style={styles.books} />
-      </TouchableOpacity>
-      <View style={styles.rectangle}></View>
-      <Image source={canvas} style={styles.canvas} />
-      <Image source={group9} style={styles.group9} />
-      <Image source={group8} style={styles.group8} />
-      <Image source={car} style={styles.car} />
-      <Image source={basketball} style={styles.ball} />
-      <Image source={booksCapinet} style={styles.booksCapinet} />
     </View>
-  );
+    
+  )
 };
-
 export default BedRoomScreen;
 
 const styles = StyleSheet.create({
-
     container: {
       flex: 1,     
       position: 'relative',
@@ -161,4 +161,3 @@ const styles = StyleSheet.create({
     }
    
   });
-

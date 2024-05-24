@@ -4,14 +4,6 @@ import 'firebase/compat/firestore';
 import { auth, db } from '../front-end/firebase.js';
 import { getDataFromDB, saveDataToDB } from './App.js';
 import { Router } from 'express';
-const router = Router();
-
-
-
-
-
-
-//const db = firebase.firestore();
 
 const router = Router();
 

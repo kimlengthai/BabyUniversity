@@ -1,38 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import ParentUI from '../ParentUI/ParentUI';
-import picture from '../assets/picture.png';
+import picture from '../picture.png';
 import BackButton from './BackButton';
 
 const Page24 = () => {
-  const [showParentUI, setShowParentUI] = useState(false);
 
-  const goToParentUI = () => {
-    setShowParentUI(true);
-  };
-
-  if (showParentUI) {
-    return <ParentUI goToParentUI={() => setShowParentUI(false)} />;
-  }
 
   return (
     <View style={styles.container}>
-
       <BackButton />
       <Image source={picture} style={styles.pictureImg} />
-
-    
-    <TouchableOpacity>
-    <Image source={picture} style={styles.pictureImg} />
-    </TouchableOpacity>
-      
-
       <View style={styles.bodyText}>
         <Text style={styles.text}>Now you are a quantum physicist.</Text>
       </View>
-      <TouchableOpacity style={styles.nextButton} onPress={goToParentUI}>
-        <Text style={styles.buttonText}>Go to Parent UI</Text>
-      </TouchableOpacity>
+      
     </View>
   );
 };

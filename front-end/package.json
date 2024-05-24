@@ -13,7 +13,6 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "axios": "^1.7.2",
-
     "esm": "^3.2.25",
     "expo": "^50.0.13",
     "expo-av": "~13.10.6",
@@ -25,12 +24,9 @@
     "react-native": "^0.73.5",
     "react-native-gesture-handler": "^2.16.2",
     "react-native-reanimated": "^3.9.0",
-
     "react-native-safe-area-context": "^4.10.1",
     "react-native-screens": "^3.31.1",
-
     "react-native-snap-carousel": "^3.9.1",
-
     "react-native-web": "~0.19.6",
     "validator": "^13.11.0"
   },
