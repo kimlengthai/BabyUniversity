@@ -16,6 +16,10 @@ const Payment = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [name, setName] = useState('');
+  const [cardNumberError, setCardNumberError] = useState('');
+  const [expiryDateError, setExpiryDateError] = useState('');
+  const [cvvError, setCvvError] = useState('');
+  const [nameError, setNameError] = useState('');
 
   const [fontsLoaded] = useFonts({
     Itim_400Regular,
@@ -30,8 +34,54 @@ const Payment = () => {
   };
 
   const handleConfirmPurchase = async () => {
+    let isValid = true;
+
+    // Clear previous error messages
+    setCardNumberError('');
+    setExpiryDateError('');
+    setCvvError('');
+    setNameError('');
+
+    // Validate card number
+    if (!cardNumber) {
+      setCardNumberError('Card number is required');
+      isValid = false;
+    }
+
+    // Validate expiry date
+    const expiryDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    if (!expiryDate) {
+      setExpiryDateError('Expiry date is required');
+      isValid = false;
+    } else if (!expiryDateRegex.test(expiryDate)) {
+      setExpiryDateError('Invalid expiry date format');
+      isValid = false;
+    }
+
+    // Validate CVV
+    if (!cvv) {
+      setCvvError('CVV is required');
+      isValid = false;
+    } else if (!/^[0-9]{3,4}$/.test(cvv)) {
+      setCvvError('Invalid CVV');
+      isValid = false;
+    }
+
+    // Validate name
+    if (!name) {
+      setNameError('Name is required');
+      isValid = false;
+    } else if (!/^[A-Za-z\s]+$/.test(name)) {
+      setNameError('Invalid name');
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return;
+    }
+
     try {
-      const response = await fetch('http://your-api-endpoint/saveDetails', {
+      const response = await fetch('http://localhost:3000/saveDetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,6 +124,7 @@ const Payment = () => {
               keyboardType="numeric"
             />
           </View>
+          {cardNumberError ? <Text style={styles.error}>{cardNumberError}</Text> : null}
 
           <View style={styles.numberContainer}>
             <Text style={styles.label}>Expiry Date:</Text>
@@ -84,6 +135,8 @@ const Payment = () => {
               onChangeText={setExpiryDate}
               keyboardType="numeric"
             />
+            {expiryDateError ? <Text style={styles.error}>{expiryDateError}</Text> : null}
+
             <Text style={styles.labelCVV}>CVV:</Text>
             <TextInput
               style={styles.inputCVV}
@@ -93,6 +146,7 @@ const Payment = () => {
               keyboardType="numeric"
               secureTextEntry
             />
+            {cvvError ? <Text style={styles.error}>{cvvError}</Text> : null}
           </View>
 
           <View style={styles.nameContainer}>
@@ -103,6 +157,7 @@ const Payment = () => {
               value={name}
               onChangeText={setName}
             />
+            {nameError ? <Text style={styles.error}>{nameError}</Text> : null}
           </View>
         </View>
         <Image source={AiBook} style={styles.AiBookImg} />
@@ -232,22 +287,24 @@ const styles = StyleSheet.create({
     height: 50,
   },
   backgroundImage: {
-    flex: 1,
-    justifyContent: 'center',
+    position: 'absolute',
+    width: '100%',
     height: '100%',
-    marginTop: 10,
-    marginBottom: -600,
+    top: 0,
+    left: 0,
   },
   goBackIcon: {
-    color: '#292D32',
-    backgroundColor: 'transparent',
-    bottom: 800,
-    right: 535,
-    zIndex: 1,
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
   },
   goBack: {
     width: 77,
     height: 77,
+  },
+  error: {
+    color: 'red',
+    marginTop: 10,
   },
 });
 

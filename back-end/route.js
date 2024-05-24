@@ -1,16 +1,9 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { auth,db} from '../front-end/firebase.js';
+import { auth, db } from '../front-end/firebase.js';
 import { getDataFromDB, saveDataToDB } from './App.js';
 import { Router } from 'express';
-
-
-
-
-
 const router = Router();
-
-
 
 // Define a route for the default
 router.get('/', (req, res) => {
@@ -20,16 +13,16 @@ router.get('/', (req, res) => {
 // Define a route for retrieve
 router.get('/retrieve', async (req, res) => {
   try {
-    const data = await getDataFromDB(db); // Await the result of getDataFromDB()
+    const data = await getDataFromDB(db);
     console.log(data);
-    res.send(data); // Send the retrieved data to the browser
+    res.send(data);
   } catch (error) {
-    console.error('Error gettting data from DB:', error);
-    res.status(500).send('Error gettting data from DB');
+    console.error('Error getting data from DB:', error);
+    res.status(500).send('Error getting data from DB');
   }
 });
 
-// Define a route for save 
+// Define a route for save
 router.post('/save', async (req, res) => {
   try {
     const { email, password, firstName, lastName, DOB, parentalPin } = req.body;
@@ -49,6 +42,7 @@ router.post('/save', async (req, res) => {
     res.status(500).json({ message: 'Error saving document' });
   }
 });
+
 router.get('/checkpin', async (req, res) => {
   try {
     const { email, pin } = req.query;
@@ -91,7 +85,6 @@ router.get('/checkpin', async (req, res) => {
   }
 });
 
-
 router.post('/saveDetails', async (req, res) => {
   try {
     const { cardNumber, expiryDate, cvv, name } = req.body;
@@ -102,7 +95,8 @@ router.post('/saveDetails', async (req, res) => {
     }
 
     // Expiry date validation
-    if (!moment(expiryDate, 'MM/YY', true).isValid()) {
+    const expiryDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    if (!expiryDateRegex.test(expiryDate)) {
       return res.status(400).json({ message: 'Invalid expiry date format' });
     }
 
@@ -118,7 +112,7 @@ router.post('/saveDetails', async (req, res) => {
 
     // Save to database
     const paymentData = { cardNumber, expiryDate, cvv, name };
-    const docRef = await saveDataToDBPayment(db, paymentData);
+    const docRef = await saveDataToDB(db, paymentData);
     console.log('Document written with ID:', docRef.id);
     res.status(200).json({ message: 'Data saved successfully' });
   } catch (error) {
@@ -126,6 +120,7 @@ router.post('/saveDetails', async (req, res) => {
     res.status(500).json({ message: 'Error saving document' });
   }
 });
+
 
 
 
