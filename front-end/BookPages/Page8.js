@@ -3,14 +3,15 @@ import { View, Animated, StyleSheet, Easing, Text } from 'react-native';
 
 
 import CircleAnimation from './components/CircleAnimation';
-export default function Page6() {
+
+export default function Page8() {
   return (
     <View style = {styles.container}>
       <CircleAnimation  />
 
       {/* text */}
       <View style = {styles.text}>
-        <Text style = {{color: 'white', fontSize: 50}}>Here are <Text style ={{color: 'blue'}}>neutrons.</Text></Text>
+        <Text style = {{color: 'white', fontSize: 50}}>And <Text style ={{color: 'green'}}>electrons.</Text></Text>
       </View>
     </View>
   )

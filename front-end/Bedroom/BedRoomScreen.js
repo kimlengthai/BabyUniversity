@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import Page0 from '../page0-5/page0';
+
+
+
+import SwipeBook from '../screens/SwipeBook';
 
 
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 
 import { auth } from '../firebase';
-import { useNavigation } from '@react-navigation/native';
+/*import { useNavigation } from '@react-navigation/native';*/
 
 // const image = <Image source={require('./bedroombackground.png')} />
 
-const BedRoomScreen = () => {
-  const navigation = useNavigation();
-  /* click book's image will go to page 18 */
-const [showPage0, setShowPage0] = useState(false);
-const goToPage0 = () =>
-  {
-    setShowPage0(true);
+
+
+
+
+const BedRoomScreen = ({navigation}) => {
+  const openBook = () => {
+    navigation.navigate('SwipeBook');
   };
-  if (showPage0)
-    {
-      return <Page0 goToPage0 = {() => setShowPage0(false)} />;
-    }
+
+  
+
   return(
     <View style = {styles.container}>
      {/* Background */}  
@@ -39,12 +41,11 @@ const goToPage0 = () =>
         style={styles.clock} 
       />
       {/* books */}
-      <TouchableOpacity onPress={goToPage0} style={styles.booksContainer}>
-      <Image 
-        source={require('../assets/bedRoomImages/books.png')} 
-        style={styles.books}
-      />
-      </TouchableOpacity>  
+
+      <TouchableOpacity onPress={openBook} style={styles.booksContainer}>
+        <Image source={require('../assets/bedRoomImages/books.png')} style={styles.books} />
+      </TouchableOpacity>
+
       
      
       
