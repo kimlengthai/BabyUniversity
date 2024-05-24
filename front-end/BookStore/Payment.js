@@ -176,16 +176,19 @@ const Payment = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: 
+  {
     flex: 1,
     backgroundColor: '#E0F6FF',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-  paymentContainer: {
+  paymentContainer:
+  {
     width: '50%',
   },
-  cardContainer: {
+  cardContainer:
+  {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
@@ -194,7 +197,8 @@ const styles = StyleSheet.create({
     left: 60,
     top: -30,
   },
-  numberContainer: {
+  numberContainer:
+  {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
@@ -202,7 +206,8 @@ const styles = StyleSheet.create({
     left: 60,
     top: -10,
   },
-  nameContainer: {
+  nameContainer:
+  {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
@@ -215,93 +220,113 @@ const styles = StyleSheet.create({
     marginRight: 250,
     bottom: 20,
     fontSize: 30,
-    fontFamily: 'Itim_400Regular',
+    fontFamily: "Itim_400Regular",
   },
-  labelCVV: {
+  labelCVV: 
+  {
     marginRight: 20,
     right: 123,
     fontSize: 30,
-    fontFamily: 'Itim_400Regular',
+    fontFamily: "Itim_400Regular",
   },
-  input: {
+  input:
+  {
     backgroundColor: '#FFFFFF',
-    padding: 20,
+    paddingHorizontal: 10, // Reduced padding
+    paddingVertical: 5,
     width: 525,
-    height: 43,
+    height: 50, // Increased height
     borderRadius: 14,
     right: 230,
     bottom: 15,
+    fontSize: 18, // Adjust font size if needed
   },
-  inputDate: {
+  inputDate:
+  {
     backgroundColor: '#FFFFFF',
-    padding: 20,
+    paddingHorizontal: 10, // Reduced padding
+    paddingVertical: 5,
     right: 190,
     borderRadius: 14,
     width: 183,
-    height: 43,
+    height: 50, // Increased height
     bottom: 5,
+    fontSize: 18, // Adjust font size if needed
   },
-  inputCVV: {
+  inputCVV:
+  {
     backgroundColor: '#FFFFFF',
     width: 183,
-    height: 43,
+    height: 50, // Increased height
     borderRadius: 14,
-    padding: 20,
+    paddingHorizontal: 10, // Reduced padding
+    paddingVertical: 5,
     right: 120,
+    fontSize: 18, // Adjust font size if needed
   },
-  header: {
+  header:
+  {
     fontSize: 50,
-    fontFamily: 'Itim_400Regular',
+    fontFamily: "Itim_400Regular",
     color: '#3F3CB4',
     top: 125,
     left: 5,
   },
-  AiBookTitle: {
-    fontSize: 30,
-    fontFamily: 'Itim_400Regular',
+  AiBookTitle:
+  {
+    fontSize: 40,
+    fontFamily: "Itim_400Regular",
     color: '#ED5D5B',
     bottom: 45,
     left: 60,
-    width: 300,
-    height: 36,
+    width: 550,
+    height: 48,
   },
-  AiBookImg: {
-    left: 200,
-    bottom: 200,
-    width: 150,
-    height: 150,
+  AiBookImg:
+  {
+    left: 865,
+    bottom: 275,
+    width: 254,
+    height: 254,
   },
-  pricetag: {
-    fontSize: 25,
-    fontFamily: 'Itim_400Regular',
+  pricetag:
+  {
+    fontSize: 30,
+    fontFamily: "Itim_400Regular",
     color: '#3D3AAF',
     width: 84,
     height: 36,
-    bottom: 220,
-    left: 240,
+    bottom: 260,
+    left: 950,
   },
-  ConfirmPurchaseButton: {
-    bottom: 100,
-    left: 200,
-    width: 150,
-    height: 50,
+  ConfirmPurchaseButton:
+  {
+    bottom: 70,
+    left: 840,
   },
-  backgroundImage: {
-    position: 'absolute',
-    width: '100%',
+  backgroundImage: 
+  {
+    flex: 1,
+    justifyContent: 'center',
     height: '100%',
-    top: 0,
-    left: 0,
+    marginTop: 10,
+    marginBottom: -600,
   },
-  goBackIcon: {
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
+  goBackIcon:
+  {
+    color: '#292D32',
+    backgroundColor: 'transparent',
+    bottom: 800,
+    right: 535,
+    zIndex: 1,
   },
-  goBack: {
+  goBack:
+  {
     width: 77,
     height: 77,
   },
+
+
   error: {
     color: 'red',
     marginTop: 10,
