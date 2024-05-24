@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
+import BackButton from './BackButton';
 const Page4 = () => {
   return (
     <View style={styles.container}>
+      <BackButton />
       <View style={styles.mycanvas}>
         <View style={styles.ball}></View>
         <View style={styles.shadow}></View>
@@ -22,6 +23,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'black',
+    width : '100%',
+    height: 'auto'
   },
   mycanvas: {
     margin: 300,

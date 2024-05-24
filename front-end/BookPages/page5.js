@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text, TouchableOpacity } from 'react-native';
-
+import BackButton from './BackButton';
 const Page5 = () => {
   const [animated1] = useState(new Animated.Value(0));
   const [animated2] = useState(new Animated.Value(0));
@@ -78,50 +78,51 @@ const Page5 = () => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.magnifyGlass}></View>
-      <View style={styles.first}>
-        <Animated.View style={[styles.outerBorderContainer, { transform: [{ rotate: rotate1 }] }]}>
-          <View style={styles.outerCircle} />
-        </Animated.View>
-      </View>
+        <BackButton />
+        <View style={styles.magnifyGlass}></View>
+        <View style={styles.first}>
+          <Animated.View style={[styles.outerBorderContainer, { transform: [{ rotate: rotate1 }] }]}>
+            <View style={styles.outerCircle} />
+          </Animated.View>
+        </View>
 
-      <View style={styles.second}>
-        <Animated.View style={[styles.secondBorderContainer, { transform: [{ rotate: rotate2 }] }]}>
-          <View style={styles.secondCircle} />
-        </Animated.View>
-      </View>
+        <View style={styles.second}>
+          <Animated.View style={[styles.secondBorderContainer, { transform: [{ rotate: rotate2 }] }]}>
+            <View style={styles.secondCircle} />
+          </Animated.View>
+        </View>
 
-      <View style={styles.third}>
-        <Animated.View style={[styles.thirdBorderContainer, { transform: [{ rotate: rotate3 }] }]}>
-          <View style={styles.thirdCircle} />
-        </Animated.View>
-      </View>
+        <View style={styles.third}>
+          <Animated.View style={[styles.thirdBorderContainer, { transform: [{ rotate: rotate3 }] }]}>
+            <View style={styles.thirdCircle} />
+          </Animated.View>
+        </View>
 
-      {/* Inside the circle */}
-      <View style={styles.insideTheCircle}>
-        <View style={styles.protonAndNeutron}>
-          <View style={styles.firstRow}>
-            <View style={[styles.proton, styles.proton1, { backgroundColor: 'blue' }]}></View>
-            <View style={[styles.neutron, styles.neutron1, { backgroundColor: 'red' }]}></View>
-          </View>
-          <View style={styles.secondRow}>
-            <View style={[styles.neutron, styles.neutron2, { backgroundColor: 'red' }]}></View>
-            <View style={[styles.proton, styles.proton2, { backgroundColor: 'blue' }]}></View>
+        {/* Inside the circle */}
+        <View style={styles.insideTheCircle}>
+          <View style={styles.protonAndNeutron}>
+            <View style={styles.firstRow}>
+              <View style={[styles.proton, styles.proton1, { backgroundColor: 'blue' }]}></View>
+              <View style={[styles.neutron, styles.neutron1, { backgroundColor: 'red' }]}></View>
+            </View>
+            <View style={styles.secondRow}>
+              <View style={[styles.neutron, styles.neutron2, { backgroundColor: 'red' }]}></View>
+              <View style={[styles.proton, styles.proton2, { backgroundColor: 'blue' }]}></View>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={styles.line}></View>
+        <View style={styles.line}></View>
 
-      <TouchableOpacity onPress={handleBallPress} style={styles.touchableArea}>
-        <Animated.View style={[styles.ball, { transform: [{ scale }] }]} />
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleBallPress} style={styles.touchableArea}>
+          <Animated.View style={[styles.ball, { transform: [{ scale }] }]} />
+        </TouchableOpacity>
 
-      
+        
 
-      <View style = {styles.bodyText}>
-      <Text style = {{color: 'white', fontSize: 70}}>All balls are made of atoms.</Text>
-      </View>
+        <View style = {styles.bodyText}>
+            <Text style = {{color: 'white', fontSize: 70}}>All balls are made of atoms.</Text>
+        </View>
 
     </View>
   );
@@ -134,6 +135,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
     backgroundColor: 'black',
+    width: '100%',
+    height: 'auto'
   },
   touchableArea: {
     width: 200, // Set the width to match the ball width
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
     height: 400,
     backgroundColor: 'turquoise',
     position: 'absolute',
-    right: -100,
+    right: 400,
     bottom: 220,
     transform: [{ rotate: '310deg' }],
     zIndex: 1,
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
     borderColor: 'blue', // Set border color to black
     position: 'absolute',
     borderRadius: 100,
-    right: 150,
+    right: 650,
     bottom: 250,
     zIndex: 0, // Set zIndex behind the magnifyingGlass
   },  
