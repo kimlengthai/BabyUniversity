@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import UIBallAnimation from '../ballAnimation/ballAnimation'
+import SignupScreen from '../SignUp/signup';
+
 import { auth } from '../firebase';
-import UIBallAnimation from '../ballAnimation/ballAnimation';
+
 
 const LoginScreen = () => {
     const [username, setUsername] = useState('');
@@ -25,27 +28,42 @@ const LoginScreen = () => {
         navigation.navigate('SignUp');
     };
 
-    const handleLogin = () => {
-        setIsLoginClicked(true);
-        auth.signInWithEmailAndPassword(username, password)
-            .then(userCredentials => {
-                const user = userCredentials.user;
-                console.log("logged in with user", user.email);
-                navigation.navigate("Bedroom");
-            })
-            .catch(error => {
-                setIsLoginClicked(false);
-                alert(error.message);
-            });
-    };
+   
+   
 
-    return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior='padding'
-        >
-            <View style={styles.ballAnimationContainer}>
-                <UIBallAnimation />
+  const handleSignup = () => {
+    // Handle login logic here
+    // console.log('Logging in with:', { username, password });
+    navigation.navigate('SignUp')
+  }
+  const handleLogin = () => {
+    auth
+      .signInWithEmailAndPassword(username, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log("logged in with user", user.email);
+        navigation.navigate('Bedroom');
+      })
+      .catch(error => alert(error.message))
+  };
+  return (
+    <KeyboardAvoidingView 
+    style = {styles.container}
+    behavior='padding'
+    >
+        <View style = {styles.ballAnimationContainer}><UIBallAnimation /></View>
+        <View style = {styles.inputContainer}>
+            
+            <View style={styles.inputRow}>
+                <Text style={styles.label}>Username:</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter your username"
+                    value={username}
+                    onChangeText = {text =>setUsername(text)}
+                    // onChangeText={setUsername}
+                />
+
             </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputRow}>
