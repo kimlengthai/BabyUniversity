@@ -18,8 +18,8 @@ export default function App() {
       <Stack.Screen options= {{headerShown: false}} name="Login" component={LoginScreen} />
       <Stack.Screen options= {{headerShown: false}} name="SignUp" component={SignupScreen} />
         <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} />
-        <Stack.Screen name="PinEntry" component={PinEntryScreen} />
-        <Stack.Screen name="ParentUI" component={ParentUI} />
+        <Stack.Screen options={{headerShown: false}} name="PinEntry" component={PinEntryScreen} />
+        <Stack.Screen options={{headerShown: false}} name="ParentUI" component={ParentUI} />
 
       </Stack.Navigator>
     </NavigationContainer>
