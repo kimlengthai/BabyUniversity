@@ -1,27 +1,12 @@
 import React, { useState } from 'react';
-
-
-
 import SwipeBook from '../screens/SwipeBook';
-
-
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
-
 import { auth } from '../firebase';
-/*import { useNavigation } from '@react-navigation/native';*/
-
-// const image = <Image source={require('./bedroombackground.png')} />
-
-
-
-
 
 const BedRoomScreen = ({navigation}) => {
   const openBook = () => {
     navigation.navigate('SwipeBook');
   };
-
-  
 
   return(
     <View style = {styles.container}>
@@ -45,10 +30,7 @@ const BedRoomScreen = ({navigation}) => {
       <TouchableOpacity onPress={openBook} style={styles.booksContainer}>
         <Image source={require('../assets/bedRoomImages/books.png')} style={styles.books} />
       </TouchableOpacity>
-
-      
-     
-      
+   
       {/* rectangle */} 
       <View style = {styles.rectangle}></View>
 
@@ -167,7 +149,7 @@ const styles = StyleSheet.create({
       right: '20%',
       top: '70%'
     },
-    /* Add a touching screen for book's image */
+
     booksContainer:
     {
       position: 'absolute',

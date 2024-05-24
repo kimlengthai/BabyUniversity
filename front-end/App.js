@@ -3,28 +3,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
 import BedRoomScreen from './Bedroom/BedRoomScreen';
-
-import SignupScreen from './SignUp/signup';
-
+import SignUp from './SignUp/signup';
 
 
 import SwipeBook from './screens/SwipeBook';
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-
       <Stack.Navigator initialRouteName='Login'>
 
-
-         <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
-        {/* <Stack.Screen options= {{headerShown: false}} name="Home" component={HomeScreen} /> */}
+        <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{headerShown: false}} name='SignUp' component={SignUp} />
         <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} /> 
-
+        {/* Book pages */}
         <Stack.Screen options= {{headerShown: false}} name="SwipeBook" component={SwipeBook} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -39,3 +33,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+

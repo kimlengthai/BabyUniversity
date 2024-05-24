@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        backgroundColor: 'red',
+        backgroundColor: 'black',
         width: '100%',
         height: 'auto'
     },
