@@ -1,16 +1,3 @@
-// import React from 'react';
-// import { View, Text } from 'react-native';
-// import SignupScreen from './SignUp/signup';
-// import LoginScreen from './screens/LoginScreen';
-// const App = () => {
-//   return (
-//     <View>
-//       <Text > <SignupScreen /> {/* Render your signup screen component */} </Text>
-//     </View>
-//   );
-// };
-
-// export default App;
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -45,5 +32,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-
