@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import CircleAnimation from './components/CircleAnimation';
+import CircleAnimation from './components3/CircleAnimation3';
 
 
 export default function Page0() {

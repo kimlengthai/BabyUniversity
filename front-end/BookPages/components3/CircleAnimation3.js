@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text } from 'react-native';
 
-const CircleAnimation = () => {
+const CircleAnimation3 = () => {
   const [animated1] = useState(new Animated.Value(0));
   const [animated2] = useState(new Animated.Value(0));
   const [animated3] = useState(new Animated.Value(0));
@@ -213,4 +213,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default CircleAnimation;
+export default CircleAnimation3;
