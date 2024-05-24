@@ -114,6 +114,8 @@ const styles = StyleSheet.create({
     width: 100,
     height: 40,
     marginVertical: 10,
+    top: -100,
+    right: -800,
   },
   horiLine: {
     width: 300,
