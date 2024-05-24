@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, StyleSheet, Easing } from 'react-native';
+import BackButton from './BackButton';
 
 const page18 = () => {
   const [animation] = useState(new Animated.Value(0));
@@ -110,6 +111,7 @@ const page18 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <Animated.View style = {[styles.redBall, redBallStyle]}></Animated.View>
       <Animated.View style = {[styles.blueBall, blueBallStyle]}></Animated.View>
       <Animated.View style = {[styles.greenBall, greenBallStyle]}></Animated.View>
@@ -136,6 +138,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'black',
+    width: '100%',
+    height: 'auto'
   },
   redBall: {
     width: 80,

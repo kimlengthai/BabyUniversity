@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text,TouchableOpacity } from 'react-native';
+import BackButton from './BackButton';
 
 const Page6V2 = () => {
     const [neutronScale] = useState(new Animated.Value(1));
@@ -28,6 +29,8 @@ const Page6V2 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
+
       <View style={styles.first}>
         <View style={styles.outerBorderContainer}>
           <View style={styles.outerCircle} />
@@ -45,22 +48,8 @@ const Page6V2 = () => {
           <View style={styles.thirdCircle} />
         </View>
       </View>
-
-      {/* Inside the circle */}
-      {/* <View style={styles.insideTheCircle}>
-        <View style = {styles.protonAndNeutron}>
-          <View style = {styles.firstRow}>
-            <View style={[styles.proton, styles.proton1,{ backgroundColor: 'blue' }]}></View>
-            <View style={[styles.neutron, styles.neutron1, { backgroundColor: 'red' }]}></View>
-          </View>
-          <View style = {styles.secondRow}>
-            <View style={[styles.neutron, styles.neutron2, { backgroundColor: 'red' }]}></View>
-            <View style={[styles.proton, styles.proton2, { backgroundColor: 'blue' }]}></View>
-          </View>
-        </View>
-      </View> */}
-      
-        <View style={styles.insideTheCircle}>
+ 
+      <View style={styles.insideTheCircle}>
         <TouchableOpacity onPress={animateNeutron}>
           <View style={styles.protonAndNeutron}>
             <View style={styles.firstRow}>
@@ -89,7 +78,7 @@ const Page6V2 = () => {
       
         <View style = {styles.text}>
             <Text style = {{color: 'white', fontSize: 50}}>Here are <Text style ={{color: 'blue'}}>neutrons.</Text></Text>
-      </View>
+        </View>
       
     </View>
   );
@@ -98,10 +87,13 @@ const Page6V2 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
     position: 'relative',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    width: '100%',
+    height: 'auto'
+
   },
   first: {
     position: 'absolute',

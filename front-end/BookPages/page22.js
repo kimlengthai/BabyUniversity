@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, StyleSheet, Easing, Text } from 'react-native';
+import BackButton from './BackButton';
 
 const Page22 = () => {
   const [animated2] = useState(new Animated.Value(0));
@@ -34,6 +35,7 @@ const Page22 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <View style={styles.first}>
         <View style={[styles.outerBorderContainer]}>
         </View>
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     position: 'relative',
     width: '100%',
+    height: 'auto'
   },
   first: {
     position: 'absolute',

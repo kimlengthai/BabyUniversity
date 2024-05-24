@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
+import BackButton from './BackButton';
 
 const Page21 = () => {
   const [animated1] = useState(new Animated.Value(0));
@@ -34,6 +35,7 @@ const Page21 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <View style={styles.first}>
         <Animated.View style={[styles.outerBorderContainer, { transform: [{ rotate: rotate1 }] }]}>
           <View style={styles.outerCircle} />
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     position: 'relative',
     width: '100%',
+    height: 'auto'
   },
   first: {
     position: 'absolute',
