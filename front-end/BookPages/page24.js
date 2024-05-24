@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import ParentUI from '../ParentUI/ParentUI';
 import picture from '../assets/picture.png';
+import BackButton from './BackButton';
 
 const Page24 = () => {
   const [showParentUI, setShowParentUI] = useState(false);
@@ -16,6 +17,7 @@ const Page24 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <Image source={picture} style={styles.pictureImg} />
       <View style={styles.bodyText}>
         <Text style={styles.text}>Now you are a quantum physicist.</Text>
@@ -35,6 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f4f5',
     position: 'relative',
     width: '100%',
+    height: 'auto'
   },
   pictureImg: {
     left: 0,

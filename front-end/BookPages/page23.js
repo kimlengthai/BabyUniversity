@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
+import BackButton from './BackButton';
 
 const Page23 = () => {
   // Animated values for arrow animation
@@ -29,6 +30,7 @@ const Page23 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       {/* Arrows */}
       <Animated.View style={[styles.arrow, { transform: [{ translateX: arrowPosition }] }]} />
       <Animated.View style={[styles.triangle, { transform: [{ translateX: arrowPosition }, { rotate: '90deg' }] }]} />
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     position: 'relative',
     width: '100%',
+    height: 'auto'
   },
   arrow: {
     width: 150,

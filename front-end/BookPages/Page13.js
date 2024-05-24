@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
 import React, { useState } from 'react';
+import BackButton from './BackButton';
 
 const Page13 = () => {
   const [electronScale] = useState(() => {
@@ -46,6 +47,7 @@ const Page13 = () => {
 
   return (
     <View style={styles.container}>
+      <BackButton />
       <View style={styles.circleContainer}>
         <View style={styles.circle}></View>
 
@@ -90,6 +92,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
     backgroundColor: 'black',
+    width: '100%',
+    height: 'auto'
   },
   circleContainer: {
     width: 900,
