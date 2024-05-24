@@ -1,16 +1,32 @@
-import React, { useEffect,useState } from 'react';
-import { Text,View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import { auth } from '../firebase';
+import React, { useState, useEffect } from 'react';
+import { Text, View, TextInput, Button, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import UIBallAnimation from '../ballAnimation/ballAnimation'
 import SignupScreen from '../SignUp/signup';
 
+import { auth } from '../firebase';
+
+
 const LoginScreen = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoginClicked, setIsLoginClicked] = useState(false);
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+    const navigation = useNavigation();
+/*
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                navigation.navigate("Bedroom");
+            }
+        });
+        return unsubscribe;
+    }, []);
+    */
 
-   const navigation = useNavigation()
+    const handleSignup = () => {
+        navigation.navigate('SignUp');
+    };
 
    
    
@@ -47,50 +63,53 @@ const LoginScreen = () => {
                     onChangeText = {text =>setUsername(text)}
                     // onChangeText={setUsername}
                 />
-            </View>
-            <View style={styles.inputRow}>
-                <Text style={styles.label}>Password:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter your password"
-                    secureTextEntry
-                    value={password}
-                    // onChangeText={setPassword}
-                    onChangeText = {text =>setPassword(text)}
 
-                />
             </View>
-            
-            
-      </View>
-      <View style = {styles.buttonContainer}>
-         <TouchableOpacity
-        onPress={handleLogin}
-        style= {styles.button}
-        >
-            <Text style= {styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-        onPress={handleSignup}
-        style= {styles.button}
-        >
-            <Text style= {styles.buttonText}>Create Account</Text>
-        </TouchableOpacity> 
-        
-        
-      </View>
-    </KeyboardAvoidingView>
-
-    
-    
-  );
+            <View style={styles.inputContainer}>
+                <View style={styles.inputRow}>
+                    <Text style={styles.label}>Username:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter your username"
+                        value={username}
+                        onChangeText={text => setUsername(text)}
+                    />
+                </View>
+                <View style={styles.inputRow}>
+                    <Text style={styles.label}>Password:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter your password"
+                        secureTextEntry
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                    />
+                </View>
+            </View>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                    onPress={handleLogin}
+                    style={styles.button}
+                    disabled={isLoginClicked} // Disable button when login is clicked
+                >
+                    <Text style={styles.buttonText}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={handleSignup}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Create Account</Text>
+                </TouchableOpacity>
+            </View>
+        </KeyboardAvoidingView>
+    );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
 
 
   },

@@ -1,24 +1,52 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+
+import SwipeBook from '../screens/SwipeBook';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 import { auth } from '../firebase';
-import { useNavigation } from '@react-navigation/native';
-import MenuButton from '../MenuButton';
 
-import backgroundDoodle from '../assets/bedRoomImages/background_doodle.png';
-import clock from '../assets/bedRoomImages/clock.png';
-import books from '../assets/bedRoomImages/books.png';
-import canvas from '../assets/bedRoomImages/Canvas.png';
-import group9 from '../assets/bedRoomImages/Group9.png';
-import group8 from '../assets/bedRoomImages/Group8.png';
-import car from '../assets/bedRoomImages/car.png';
-import basketball from '../assets/bedRoomImages/basketball.png';
-import booksCapinet from '../assets/bedRoomImages/booksCapinet.png';
-
-const BedRoomScreen = () => {
-  const [showPage18, setShowPage18] = useState(false);
-  const goToPage18 = () => {
-    setShowPage18(true);
+const BedRoomScreen = ({navigation}) => {
+  const openBook = () => {
+    navigation.navigate('SwipeBook');
   };
+
+  return(
+    <View style = {styles.container}>
+     {/* Background */}  
+      <Image 
+        source={require('../assets/bedRoomImages/background_doodle.png')} 
+        style={styles.background} 
+      />
+       {/* header text title */}  
+      <View style = {styles.headerTextContainer}>
+        <Text style = {styles.bedroomTitle}>Bedroom</Text>
+      </View>
+      
+      {/* Clock */}  
+      <Image 
+        source={require('../assets/bedRoomImages/clock.png')} 
+        style={styles.clock} 
+      />
+      {/* books */}
+
+      <TouchableOpacity onPress={openBook} style={styles.booksContainer}>
+        <Image source={require('../assets/bedRoomImages/books.png')} style={styles.books} />
+      </TouchableOpacity>
+   
+      {/* rectangle */} 
+      <View style = {styles.rectangle}></View>
+
+       {/* canvas */}  
+       <Image 
+        source={require('../assets/bedRoomImages/Canvas.png')} 
+        style={styles.canvas} 
+      />
+
+      {/* group 9 */}  
+      <Image 
+        source={require('../assets/bedRoomImages/Group9.png')} 
+        style={styles.group9} 
+      />
+
 
   if (showPage18) {
     return <Page18 goToPage18={() => setShowPage18(false)} />;
@@ -51,101 +79,86 @@ const BedRoomScreen = () => {
 export default BedRoomScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  background: {
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
-  },
-  headerTextContainer: {
-    position: 'absolute',
-    top: '8%',
-  },
-  bedroomTitle: {
-    fontSize: 45,
-    fontWeight: '700',
-  },
-  rectangle: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    backgroundColor: '#F7D553',
-    height: '28%',
-  },
-  booksCapinet: {
-    position: 'absolute',
-    right: 0,
-    top: '20%',
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  clock: {
-    position: 'absolute',
-    top: 70,
-    left: 70,
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  books: {
-    position: 'absolute',
-    top: '25%',
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  canvas: {
-    position: 'absolute',
-    left: '2%',
-    top: '38%',
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  group9: {
-    position: 'absolute',
-    top: '80%',
-    left: '25%',
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  group8: {
-    position: 'absolute',
-    top: '90%',
-    left: '50%',
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  car: {
-    position: 'absolute',
-    top: '75%',
-    left: '40%',
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  ball: {
-    position: 'absolute',
-    right: '20%',
-    top: '70%',
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  booksContainer: {
-    position: 'absolute',
-    top: '26%',
-    right: '72%',
-  },
-});
+
+    container: {
+      flex: 1,     
+      position: 'relative',
+      justifyContent: 'center',
+      alignItems: 'center'
+
+    },
+    background: {
+      position: 'absolute',
+      top: 0,
+      resizeMode: 'contain',
+      backgroundColor: '#D8EEF7' /*add bg colour*/
+    },
+    headerTextContainer: {
+      position: 'absolute',
+      top: '8%'
+      
+    },
+    bedroomTitle: {
+     fontSize: 45,
+     fontWeight: '700'
+
+    },
+    rectangle: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      backgroundColor: '#F7D553',
+      height: "28%",
+
+    },
+    booksCapinet: {
+      position: 'absolute',
+      right: 0,
+      top: '20'
+
+    },
+    clock: {
+      position: 'absolute',
+      top: 70,
+      left: 70
+    },
+    books: {
+      position: 'absolute',
+      top: '25%'
+    },
+    canvas: {
+      position: 'absolute',
+      left: '2%',
+      top: '38%'
+    },
+    group9: {
+      position: 'absolute',
+      top: '80%',
+      left: '25%'
+    },
+    group8: {
+      position: 'absolute',
+      top: '90%',
+      left: '50%'
+    },
+    car: {
+      position: 'absolute',
+      top: '75%',
+      left: '40%'
+    },
+    ball: {
+      position: 'absolute',
+      right: '20%',
+      top: '70%'
+    },
+
+    booksContainer:
+    {
+      position: 'absolute',
+      top: '26%',
+      right: '72%'
+    }
+   
+  });
+

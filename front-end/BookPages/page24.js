@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import Page23 from './page23';
 import ParentUI from '../ParentUI/ParentUI';
 import picture from '../assets/picture.png';
+import BackButton from './BackButton';
 
 const Page24 = () => {
   const [showParentUI, setShowParentUI] = useState(false);
-  const [showpage23, setShowpage23 ] = useState(false);
 
-  const handleGoBack = () =>
-    {
-      setShowpage23(true);
-    };
+  const goToParentUI = () => {
+    setShowParentUI(true);
+  };
 
-  const goToParentUI = () => 
-    {
-      setShowParentUI(true);
-    };  
-
-    if (showpage23) {
-    return <Page23 handleGoBack={() => setShowpage23(false)} />;
+  if (showParentUI) {
+    return <ParentUI goToParentUI={() => setShowParentUI(false)} />;
   }
-  if (showParentUI) 
-    {
-      return <ParentUI goToParentUI={() => setShowParentUI(false)} />;
-    }
+
   return (
     <View style={styles.container}>
-    <Image source={picture} style={[styles.pictureImg]} />
-      <Text style={styles.text}>Now you are a quantum physicist.</Text>
+
+      <BackButton />
+      <Image source={picture} style={styles.pictureImg} />
+
+    
+    <TouchableOpacity>
+    <Image source={picture} style={styles.pictureImg} />
+    </TouchableOpacity>
+      
+
+      <View style={styles.bodyText}>
+        <Text style={styles.text}>Now you are a quantum physicist.</Text>
+      </View>
       <TouchableOpacity style={styles.nextButton} onPress={goToParentUI}>
-      <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.goBackButton} onPress={handleGoBack}>
-      <Text style={styles.buttonText}>Back</Text>
+        <Text style={styles.buttonText}>Go to Parent UI</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,57 +44,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f3f4f5',
     position: 'relative',
+    width: '100%',
+    height: 'auto'
   },
-  pictureImg:
-  {
+  pictureImg: {
     left: 0,
     bottom: 0,
     width: 270,
     height: 250,
     backgroundColor: 'transparent',
   },
-  text: {
-    fontSize: 40,
-    color: 'black',
-    fontWeight: 'bold',
-    top: 50,
-  },
-  nextButton:
-  {
-    backgroundColor: '#A2C13C',
-    borderRadius: '20%',
-    zIndex: 1,
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
+  bodyText: {
+    textAlign: 'center',
+    position: 'relative',
     bottom: -100,
-    zIndex: 6,
+    fontWeight: '700',
   },
-  buttonText: 
-  {
+  text: {
+    fontSize: 70,
+    color: 'black',
+    textAlign: 'center',
+  },
+  nextButton: {
+    backgroundColor: '#A2C13C',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    bottom: -200,
+    right: -270,
+  },
+  buttonText: {
     color: '#000000',
-    fontSize: 40,
-    /*fontFamily: 'Itim_400Regular',*/
+    fontSize: 24,
     textAlign: 'center',
     paddingVertical: 15,
     paddingHorizontal: 35,
-  },
-  goBackButton:
-  {
-    color: '#292D32',
-    borderRadius: '20%',
-    backgroundColor: 'green',
-    shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset
-    shadowOpacity: 0.5, // Shadow opacity
-    bottom: -22,
-    right: 190,
-    zIndex: 6,
-  },
-  goBack:
-  {
-    width: 77,
-    height: 77,
   },
 });
 

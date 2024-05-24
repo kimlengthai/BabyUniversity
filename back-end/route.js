@@ -1,9 +1,23 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+
 import { auth, db } from '../front-end/firebase.js';
 import { getDataFromDB, saveDataToDB } from './App.js';
 import { Router } from 'express';
 const router = Router();
+
+
+
+
+
+
+//const db = firebase.firestore();
+
+const router = Router();
+
+//firebase.initializeApp(firebaseConfig);
+
+
 
 // Define a route for the default
 router.get('/', (req, res) => {
@@ -12,6 +26,7 @@ router.get('/', (req, res) => {
 
 // Define a route for retrieve
 router.get('/retrieve', async (req, res) => {
+
   try {
     const data = await getDataFromDB(db);
     console.log(data);
@@ -86,6 +101,8 @@ router.get('/checkpin', async (req, res) => {
           res.status(400).json({ message: 'Incorrect PIN' });
           return;
         }
+
+    
       }
     });
 
@@ -139,5 +156,6 @@ router.post('/saveDetails', async (req, res) => {
 
 
 
-  
+ 
+
   export default router;

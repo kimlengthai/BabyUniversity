@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import axios from 'axios';
 import { auth } from '../firebase';
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native';
@@ -11,6 +12,7 @@ const validateLastName = (lastName) => /^[A-Za-z]+$/.test(lastName);
 const validateDOB = (DOB) => /^\d{2}\/\d{2}\/\d{4}$/.test(DOB);
 const validateParentalPin = (parentalPin) => /^\d{4}$/.test(parentalPin);
 
+
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,9 +22,17 @@ const SignupScreen = () => {
   const [DOB, setDOB] = useState('');
   const [parentalPin, setParentalPin] = useState('');
   const [error, setError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+  const [firstNameError, setFirstNameError] = useState(null);
+  const [lastNameError, setLastNameError] = useState(null);
+  const [DOBError, setDOBError] = useState(null);
+  const [parentalPinError, setParentalPinError] = useState(null);
 
   const navigation = useNavigation();
   const screenWidth = Dimensions.get('window').width;
+
 
   // Calculate the font size based on the screenWidth
   const signUpTitleFontSize = Math.min(24, screenWidth * 0.06); // Adjust the factor (0.06) as needed
@@ -47,8 +57,17 @@ const SignupScreen = () => {
     }
     if (password !== confirmPassword) {
       setError('Passwords do not match');
+
       return;
     }
+    
+    if (!validateLastName(lastName)) {
+      setLastNameError('Last name must contain only alphabets.');
+      setTimeout(() => setLastNameError(null), 5000);
+      return;
+    }
+
+
 
     // Save the user's details to the Firebase database
     try {
@@ -63,11 +82,13 @@ const SignupScreen = () => {
         DOB,
         parentalPin
       };
+
       
       // Send the user details to the backend API using Axios
       const response = await axios.post(requestUrl, requestBody);
       console.log(response.data.message); 
       navigation.replace('Bedroom'); 
+
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('The email address is already in use by another account.');
@@ -79,6 +100,7 @@ const SignupScreen = () => {
 
   return (
     <View style={styles.container}>
+
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
         <Text style={[styles.signUpTitle, { fontSize: signUpTitleFontSize }]}>Baby University</Text>
         <View style={styles.inputContainer}>
@@ -156,6 +178,7 @@ const SignupScreen = () => {
         </View>
         {error && <Text style={styles.errorText}>{error}</Text>}
       </KeyboardAvoidingView>
+
     </View>
   );
 };
@@ -171,6 +194,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     color: '#3F3CB4'
+
   },
   inputContainer: {
     width: '80%',
@@ -186,6 +210,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontWeight: 'bold',
   },
+
   input: {
     flex: 1,
     height: 40,
