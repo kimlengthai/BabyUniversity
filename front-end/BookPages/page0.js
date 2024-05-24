@@ -1,23 +1,28 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import CircleAnimation from './components3/CircleAnimation3';
-
+import Hammer from './componentHammer/Hammer';
 
 export default function Page0() {
- 
-
-  /* A handler of navigating to page 19 */
+  const handleHammerPress = () => 
+    {
+      console.log('Hammer pressed!');
+    };
   
   return (
     <View style={styles.container}>
       {/* text */}
-      <Text style={{ color: 'red', fontSize: 70, marginTop: 5 }}>Quantum <Text style={{ color: 'blue' }}>Physics.</Text></Text>
+      <Text style={{ color: 'red', fontSize: 70, marginTop: 5 }}>Quantum <Text style={{ color: 'blue' }}>Physics</Text></Text>
       <Text style={{ color: 'white', fontSize: 70, marginTop: 5, marginBottom: 10, }}>for <Text style={{ color: 'yellow' }}>Babies.</Text></Text>
       <View style={{ flex: 1 }}>
         <CircleAnimation />
       </View>
       <View style={styles.text}>
-        <Text style={{ color: 'white', fontSize: 50 }}>By <Text style={{ color: 'white' }}>Chris Ferrie.</Text></Text>
+        <Text style={{ color: 'white', fontSize: 50 }}>By <Text style={{ color: 'white' }}>Chris Ferrie</Text></Text>
+      </View>
+
+      <View style={styles.hammer}>
+      <Hammer onPress={handleHammerPress} />
       </View>
     </View>
   );
@@ -39,5 +44,10 @@ const styles = StyleSheet.create({
     bottom: 20,
     fontWeight: '700',
     marginTop: 100,
+  },
+  hammer: {
+    position: 'absolute',
+    top: 400,
+    right: 550,
   },
 });
