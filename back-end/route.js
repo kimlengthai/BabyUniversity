@@ -66,8 +66,9 @@ const withRetry = async (fn) => {
     }
   }
 };
-
+/*
 router.get('/checkpin', async (req, res) => {
+
   try {
     const { email, pin } = req.query;
     console.log(`Received email: ${email}`);
@@ -113,7 +114,51 @@ router.get('/checkpin', async (req, res) => {
     res.status(500).json({ message: 'Error checking PIN' });
   }
 });
+*/
 
+router.get('/checkpin', async (req, res) => {
+  try {
+    const { email, pin } = req.query;
+    console.log(`Received email: ${email}`);
+    console.log(`Received pin: ${pin}`);
+
+    // Retrieve all documents from the 'user' collection
+    const snapshot = await db.collection('user').get();
+
+    // Iterate over each document
+    let userFound = false;
+    snapshot.forEach(doc => {
+      const userData = doc.data();
+      console.log('User data retrieved:', userData);
+
+      // Compare the email in the document with the provided email
+      if (userData.email === email) {
+        userFound = true;
+        const parentalPin = userData.parentalPin;
+
+        // Compare the provided PIN with the parental PIN
+        if (pin === parentalPin) {
+          res.status(200).json({ message: 'PIN verified successfully' });
+          return;
+        } else {
+          res.status(400).json({ message: 'Incorrect PIN' });
+          return;
+        }
+
+    
+      }
+    });
+
+    // If no matching email is found
+    if (!userFound) {
+      console.log(`User not found in database for email: ${email}`);
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error checking PIN:', error);
+    res.status(500).json({ message: 'Error checking PIN' });
+  }
+});
 
 router.post('/saveDetails', async (req, res) => {
   try {
