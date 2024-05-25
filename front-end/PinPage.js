@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { auth } from './firebase'; // Adjust the path based on your firebase setup
 import ParentUI from './ParentUI/ParentUI';
@@ -45,6 +45,9 @@ const PinEntryScreen = ({ navigation }) => {
         maxLength={4}
       />
       <Button title="Submit" onPress={handlePinSubmit} />
+      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.goBackText}>Go Back</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -72,6 +75,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     fontSize: 24,
+  },
+  goBackButton: {
+    marginTop: 20,
+  },
+  goBackText: {
+    color: '#3F3CB4',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

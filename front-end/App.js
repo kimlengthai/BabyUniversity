@@ -9,6 +9,8 @@ import LoginScreen from './screens/LoginScreen';
 import ParentUI from '../front-end/ParentUI/ParentUI';
 import SignupScreen from './SignUp/signup';
 import SwipeBook from './screens/SwipeBook';
+import LogoutSuccessful from './Logout Page';
+import UsernameDisplay from './UserName'
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -17,11 +19,13 @@ export default function App() {
       <Stack.Navigator>
 
       <Stack.Screen options= {{headerShown: false}} name="Login" component={LoginScreen} />
+      <Stack.Screen options= {{headerShown: false}} name="Logout" component={LogoutSuccessful} />
       <Stack.Screen options= {{headerShown: false}} name="SignUp" component={SignupScreen} />
       <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} />
       <Stack.Screen options={{headerShown: false}} name='SwipeBook' component={SwipeBook} />
       <Stack.Screen options={{headerShown: false}} name="PinEntry" component={PinEntryScreen} />
       <Stack.Screen options={{headerShown: false}} name="ParentUI" component={ParentUI} />
+      <Stack.Screen options={{headerShown: false}} name="UserName" component={UsernameDisplay} />
 
       </Stack.Navigator>
     </NavigationContainer>

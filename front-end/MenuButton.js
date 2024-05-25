@@ -10,6 +10,7 @@ import logoutIcon from './assets/menuImages/logoutIcon.png';
 import toggleButtonIcon from './assets/menuImages/toggleButton.png';
 import parentsIcon from './assets/menuImages/parents.png';
 
+
 const MenuButton = ({ userMode, onOptionPress }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigation = useNavigation();
@@ -30,13 +31,20 @@ const MenuButton = ({ userMode, onOptionPress }) => {
     } else {
       if (option === 'Switch to Kids mode') {
         console.log(option);
+        navigation.navigate('Bedroom')
         // switch to kids bedroom view page
       } else if (option === 'Settings') {
         console.log(option);
         // switch to settings view page
       } else if (option === 'Logout') {
         console.log(option);
+        navigation.navigate('Logout')
         // logout the user
+      }
+      if (option === 'UserName') {
+        console.log(option);
+        navigation.navigate('UserName')
+        // switch to kids bedroom view page
       }
     }
   };

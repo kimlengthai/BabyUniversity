@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 import { auth } from '../firebase';
-import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // Import validation functions
@@ -11,7 +10,6 @@ const validateName = (firstName) => /^[A-Za-z]+$/.test(firstName);
 const validateLastName = (lastName) => /^[A-Za-z]+$/.test(lastName);
 const validateDOB = (DOB) => /^\d{2}\/\d{2}\/\d{4}$/.test(DOB);
 const validateParentalPin = (parentalPin) => /^\d{4}$/.test(parentalPin);
-
 
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
@@ -22,23 +20,19 @@ const SignupScreen = () => {
   const [DOB, setDOB] = useState('');
   const [parentalPin, setParentalPin] = useState('');
   const [error, setError] = useState(null);
-  const [emailError, setEmailError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
-  const [firstNameError, setFirstNameError] = useState(null);
-  const [lastNameError, setLastNameError] = useState(null);
-  const [DOBError, setDOBError] = useState(null);
-  const [parentalPinError, setParentalPinError] = useState(null);
 
   const navigation = useNavigation();
   const screenWidth = Dimensions.get('window').width;
 
-
-  // Calculate the font size based on the screenWidth
-  const signUpTitleFontSize = Math.min(24, screenWidth * 0.06); // Adjust the factor (0.06) as needed
+  const signUpTitleFontSize = Math.min(28, screenWidth * 0.05);
 
   const handleSignup = async () => {
-    // Perform validations
+    
+    if (!email || !password || !confirmPassword || !firstName || !lastName || !DOB || !parentalPin) {
+      setError('Please fill in all fields.');
+      return;
+    }
+  
     if (!validateEmail(email)) {
       setError('Invalid email format');
       return;
@@ -48,7 +42,7 @@ const SignupScreen = () => {
       return;
     }
     if (!validateDOB(DOB)) {
-      setError('Invalid date of birth format. Must be in DD/MM/YYYY format');
+      setError('Invalid date of birth format. Must be in DD/MM/YYYY format or invalid date');
       return;
     }
     if (!validateParentalPin(parentalPin)) {
@@ -57,19 +51,14 @@ const SignupScreen = () => {
     }
     if (password !== confirmPassword) {
       setError('Passwords do not match');
-
       return;
     }
-    
+
     if (!validateLastName(lastName)) {
-      setLastNameError('Last name must contain only alphabets.');
-      setTimeout(() => setLastNameError(null), 5000);
+      setError('Last name must contain only alphabets.');
       return;
     }
 
-
-
-    // Save the user's details to the Firebase database
     try {
       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
@@ -83,12 +72,9 @@ const SignupScreen = () => {
         parentalPin
       };
 
-      
-      // Send the user details to the backend API using Axios
       const response = await axios.post(requestUrl, requestBody);
       console.log(response.data.message); 
       navigation.replace('Bedroom'); 
-
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('The email address is already in use by another account.');
@@ -99,8 +85,7 @@ const SignupScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
         <Text style={[styles.signUpTitle, { fontSize: signUpTitleFontSize }]}>Baby University</Text>
         <View style={styles.inputContainer}>
@@ -119,6 +104,10 @@ const SignupScreen = () => {
               style={styles.input}
               placeholder="Enter your password"
               secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              textContentType="oneTimeCode" // Change to oneTimeCode to disable suggestion
+              passwordRules="" // Add empty password rules
               value={password}
               onChangeText={text => setPassword(text)}
             />
@@ -129,6 +118,10 @@ const SignupScreen = () => {
               style={styles.input}
               placeholder="Confirm your password"
               secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              textContentType="oneTimeCode" // Change to oneTimeCode to disable suggestion
+              passwordRules="" // Add empty password rules
               value={confirmPassword}
               onChangeText={text => setConfirmPassword(text)}
             />
@@ -178,41 +171,46 @@ const SignupScreen = () => {
         </View>
         {error && <Text style={styles.errorText}>{error}</Text>}
       </KeyboardAvoidingView>
-
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   signUpTitle: {
     fontWeight: 'bold',
-    fontSize: 24,
     marginBottom: 20,
-    color: '#3F3CB4'
-
+    color: '#3F3CB4',
   },
   inputContainer: {
-    width: '80%',
+    width: '90%',
     marginBottom: 20,
   },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    justifyContent: 'space-between', 
+    justifyContent: 'space-between',
   },
   label: {
     marginRight: 10,
     fontWeight: 'bold',
-  },
-
-  input: {
     flex: 1,
+  },
+  input: {
+    flex: 2,
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
@@ -221,29 +219,22 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+    width: '60%',
   },
   button: {
-    backgroundColor: '#D8EEF7',
+    backgroundColor: '#3F3CB4',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+    alignItems: 'center',
   },
   buttonText: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
   },
   errorText: {
     color: 'red',
     marginTop: 10,
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#D8EEF7',
-    width: '100%',
-    height: '100%',
   },
 });
 
