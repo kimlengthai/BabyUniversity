@@ -71,22 +71,16 @@ const styles = StyleSheet.create({
         marginBottom: -225,
     },
     BrowseBookRed: {
-        width: 50,
-        height: 50,
         marginRight: 30,
         top: -105,
         right: 373,
     },
     PurchaseHistoryGreen: {
-        width: 50,
-        height: 50,
         top: -106,
         marginRight: 30,
         marginLeft: 30,
     },
     TrackingYellow: {
-        width: 50,
-        height: 50,
         marginLeft: 30,
         left: 370,
         top: -256,
