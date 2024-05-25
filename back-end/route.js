@@ -115,7 +115,7 @@ router.get('/checkpin', async (req, res) => {
 });
 
 
-rorouter.post('/saveDetails', async (req, res) => {
+router.post('/saveDetails', async (req, res) => {
   try {
     const { cardNumber, expiryDate, cvv, name } = req.body;
 
