@@ -39,7 +39,10 @@ const validateParentalPin = (pin) => /^\d{4}$/.test(pin);
 router.post('/save', async (req, res) => {
   try {
     const { email, firstName, lastName, DOB, parentalPin } = req.body;
-
+    if (!email || !firstName || !lastName || !DOB || !parentalPin) {
+      throw new Error('Please fill in all fields.');
+    }
+/*
     // Perform validations
     if (!validateEmail(email)) {
       throw new Error('Invalid email format');
@@ -48,11 +51,11 @@ router.post('/save', async (req, res) => {
       throw new Error('First name and last name must only contain letters');
     }
     if (!validateDOB(DOB)) {
-      throw new Error('Invalid date of birth format. Must be in DD/MM/YYYY format');
+      throw new Error('Invalid date of birth format. Must be in DD/MM/YYYY format or invalid date');
     }
     if (!validateParentalPin(parentalPin)) {
       throw new Error('Please enter a four digit number only');
-    }
+    }*/
 
     // Proceed with saving data
     const userData = { email, firstName, lastName, DOB, parentalPin };

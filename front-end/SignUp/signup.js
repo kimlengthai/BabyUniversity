@@ -27,6 +27,12 @@ const SignupScreen = () => {
   const signUpTitleFontSize = Math.min(28, screenWidth * 0.05);
 
   const handleSignup = async () => {
+    
+    if (!email || !password || !confirmPassword || !firstName || !lastName || !DOB || !parentalPin) {
+      setError('Please fill in all fields.');
+      return;
+    }
+  
     if (!validateEmail(email)) {
       setError('Invalid email format');
       return;
@@ -36,7 +42,7 @@ const SignupScreen = () => {
       return;
     }
     if (!validateDOB(DOB)) {
-      setError('Invalid date of birth format. Must be in DD/MM/YYYY format');
+      setError('Invalid date of birth format. Must be in DD/MM/YYYY format or invalid date');
       return;
     }
     if (!validateParentalPin(parentalPin)) {
