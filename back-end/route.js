@@ -115,13 +115,18 @@ router.get('/checkpin', async (req, res) => {
 });
 
 
-router.post('/saveDetails', async (req, res) => {
+rorouter.post('/saveDetails', async (req, res) => {
   try {
     const { cardNumber, expiryDate, cvv, name } = req.body;
 
     // Basic validation
     if (!cardNumber || !expiryDate || !cvv || !name) {
       return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Card number validation
+    if (!/^\d{10}$/.test(cardNumber)) {
+      return res.status(400).json({ message: 'Invalid card number format' });
     }
 
     // Expiry date validation
@@ -131,7 +136,7 @@ router.post('/saveDetails', async (req, res) => {
     }
 
     // CVV validation
-    if (!/^[0-9]{3,4}$/.test(cvv)) {
+    if (!/^\d{3,4}$/.test(cvv)) {
       return res.status(400).json({ message: 'Invalid CVV' });
     }
 
@@ -140,7 +145,7 @@ router.post('/saveDetails', async (req, res) => {
       return res.status(400).json({ message: 'Invalid name' });
     }
 
-    // Save to database
+    // Save to database (replace this with your actual database saving logic)
     const paymentData = { cardNumber, expiryDate, cvv, name };
     const docRef = await saveDataToDB(db, paymentData);
     console.log('Document written with ID:', docRef.id);
@@ -150,5 +155,4 @@ router.post('/saveDetails', async (req, res) => {
     res.status(500).json({ message: 'Error saving document' });
   }
 });
-
 export default router;

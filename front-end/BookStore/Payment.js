@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, TextInput, StyleSheet, Image, KeyboardAvoidingView, Alert } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, StyleSheet, Image, KeyboardAvoidingView, Alert, ScrollView } from 'react-native';
 import { Itim_400Regular } from '@expo-google-fonts/itim';
 import { useFonts } from 'expo-font';
 import phyDoodleShapes from '../assets/BgImage/doodle.png';
@@ -43,8 +43,8 @@ const Payment = () => {
     setNameError('');
 
     // Validate card number
-    if (!cardNumber) {
-      setCardNumberError('Card number is required');
+    if (!/^\d{10}$/.test(cardNumber)) {
+      setCardNumberError('Card number must be 10 digits');
       isValid = false;
     }
 
@@ -59,24 +59,25 @@ const Payment = () => {
     }
 
     // Validate CVV
-    if (!cvv) {
-      setCvvError('CVV is required');
-      isValid = false;
-    } else if (!/^[0-9]{3,4}$/.test(cvv)) {
-      setCvvError('Invalid CVV');
+    if (!/^\d{3,4}$/.test(cvv)) {
+      setCvvError('CVV must be 3 or 4 digits');
       isValid = false;
     }
 
     // Validate name
-    if (!name) {
-      setNameError('Name is required');
-      isValid = false;
-    } else if (!/^[A-Za-z\s]+$/.test(name)) {
-      setNameError('Invalid name');
+    if (!/^[A-Za-z\s]+$/.test(name)) {
+      setNameError('Name is required and cannot contain numbers');
       isValid = false;
     }
 
     if (!isValid) {
+      // Clear errors after 5 seconds
+      setTimeout(() => {
+        setCardNumberError('');
+        setExpiryDateError('');
+        setCvvError('');
+        setNameError('');
+      }, 5000);
       return;
     }
 
@@ -109,227 +110,183 @@ const Payment = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
-      <Text style={styles.header}>The Book Store</Text>
-      <View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <Text style={styles.header}>The Book Store</Text>
         <Image source={phyDoodleShapes} style={styles.backgroundImage} />
-        <Text style={styles.AiBookTitle}>Artificial Intelligence for Babies</Text>
-        <View style={styles.paymentContainer}>
-          <View style={styles.cardContainer}>
-            <Text style={styles.label}>Card Number: </Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your card number"
-              value={cardNumber}
-              onChangeText={setCardNumber}
-              keyboardType="numeric"
-            />
+        <View style={styles.contentContainer}>
+          <View style={styles.formContainer}>
+            <Text style={styles.AiBookTitle}>Artificial Intelligence for Babies</Text>
+            
+            <View style={styles.inputGroup}>
+              <View style={styles.inputRow}>
+                <Text style={styles.label}>Card Number</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your card number"
+                  value={cardNumber}
+                  onChangeText={setCardNumber}
+                  keyboardType="numeric"
+                />
+              </View>
+              {cardNumberError ? <Text style={styles.error}>{cardNumberError}</Text> : null}
+            </View>
+
+            <View style={styles.inputGroup}>
+              <View style={styles.inputRow}>
+                <Text style={styles.label}>Expiry Date</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="MM/YY"
+                  value={expiryDate}
+                  onChangeText={setExpiryDate}
+                  keyboardType="numeric"
+                />
+              </View>
+              {expiryDateError ? <Text style={styles.error}>{expiryDateError}</Text> : null}
+            </View>
+
+            <View style={styles.inputGroup}>
+              <View style={styles.inputRow}>
+                <Text style={styles.label}>CVV</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your CVV"
+                  value={cvv}
+                  onChangeText={setCvv}
+                  keyboardType="numeric"
+                  secureTextEntry
+                />
+              </View>
+              {cvvError ? <Text style={styles.error}>{cvvError}</Text> : null}
+            </View>
+
+            <View style={styles.inputGroup}>
+              <View style={styles.inputRow}>
+                <Text style={styles.label}>Name on Card</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your card name"
+                  value={name}
+                  onChangeText={setName}
+                />
+              </View>
+              {nameError ? <Text style={styles.error}>{nameError}</Text> : null}
+            </View>
+
+            <TouchableOpacity style={styles.buyButtonIcon} onPress={handleConfirmPurchase}>
+              <Image source={ConfirmPurchaseButton} style={styles.ConfirmPurchaseButton} />
+            </TouchableOpacity>
           </View>
-          {cardNumberError ? <Text style={styles.error}>{cardNumberError}</Text> : null}
 
-          <View style={styles.numberContainer}>
-            <Text style={styles.label}>Expiry Date:</Text>
-            <TextInput
-              style={styles.inputDate}
-              placeholder="Enter your expiry date"
-              value={expiryDate}
-              onChangeText={setExpiryDate}
-              keyboardType="numeric"
-            />
-            {expiryDateError ? <Text style={styles.error}>{expiryDateError}</Text> : null}
-
-            <Text style={styles.labelCVV}>CVV:</Text>
-            <TextInput
-              style={styles.inputCVV}
-              placeholder="Enter your CVV"
-              value={cvv}
-              onChangeText={setCvv}
-              keyboardType="numeric"
-              secureTextEntry
-            />
-            {cvvError ? <Text style={styles.error}>{cvvError}</Text> : null}
-          </View>
-
-          <View style={styles.nameContainer}>
-            <Text style={styles.label}>Name on Card:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your card name"
-              value={name}
-              onChangeText={setName}
-            />
-            {nameError ? <Text style={styles.error}>{nameError}</Text> : null}
+          <View style={styles.bookContainer}>
+            <Image source={AiBook} style={styles.AiBookImg} />
+            <Text style={styles.pricetag}>$12.99</Text>
           </View>
         </View>
-        <Image source={AiBook} style={styles.AiBookImg} />
-        <Text style={styles.pricetag}>$12.99</Text>
 
-        <TouchableOpacity style={styles.buyButtonIcon} onPress={handleConfirmPurchase}>
-          <Image source={ConfirmPurchaseButton} style={styles.ConfirmPurchaseButton} />
+        <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
+          <Image source={goBackButton} style={styles.goBack} />
         </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
-        <Image source={goBackButton} style={styles.goBack} />
-      </TouchableOpacity>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
-
 const styles = StyleSheet.create({
-  container: 
-  {
+  container: {
     flex: 1,
     backgroundColor: '#E0F6FF',
-    alignItems: "center",
-    justifyContent: "center",
   },
-  paymentContainer:
-  {
-    width: '50%',
+  scrollView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
   },
-  cardContainer:
-  {
+  header: {
+    fontSize: 50,
+    fontFamily: 'Itim_400Regular',
+    color: '#3F3CB4',
+    marginVertical: 20,
+  },
+  contentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     width: '100%',
-    display: 'flex',
+  },
+  formContainer: {
+    width: '60%',
+    paddingRight: 20,
+  },
+  bookContainer: {
+    width: '35%',
+    alignItems: 'center',
+  },
+  inputGroup: {
+    marginVertical: 10,
+  },
+  inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 40,
-    left: 60,
-    top: -30,
-  },
-  numberContainer:
-  {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    left: 60,
-    top: -10,
-  },
-  nameContainer:
-  {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 40,
-    left: 60,
-    top: -10,
   },
   label: {
-    marginRight: 250,
-    bottom: 20,
-    fontSize: 30,
-    fontFamily: "Itim_400Regular",
-  },
-  labelCVV: 
-  {
-    marginRight: 20,
-    right: 123,
-    fontSize: 30,
-    fontFamily: "Itim_400Regular",
-  },
-  input:
-  {
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 10, // Reduced padding
-    paddingVertical: 5,
-    width: 525,
-    height: 50, // Increased height
-    borderRadius: 14,
-    right: 230,
-    bottom: 15,
-    fontSize: 18, // Adjust font size if needed
-  },
-  inputDate:
-  {
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 10, // Reduced padding
-    paddingVertical: 5,
-    right: 190,
-    borderRadius: 14,
-    width: 183,
-    height: 50, // Increased height
-    bottom: 5,
-    fontSize: 18, // Adjust font size if needed
-  },
-  inputCVV:
-  {
-    backgroundColor: '#FFFFFF',
-    width: 183,
-    height: 50, // Increased height
-    borderRadius: 14,
-    paddingHorizontal: 10, // Reduced padding
-    paddingVertical: 5,
-    right: 120,
-    fontSize: 18, // Adjust font size if needed
-  },
-  header:
-  {
-    fontSize: 50,
-    fontFamily: "Itim_400Regular",
-    color: '#3F3CB4',
-    top: 125,
-    left: 5,
-  },
-  AiBookTitle:
-  {
-    fontSize: 40,
-    fontFamily: "Itim_400Regular",
-    color: '#ED5D5B',
-    bottom: 45,
-    left: 60,
-    width: 550,
-    height: 48,
-  },
-  AiBookImg:
-  {
-    left: 865,
-    bottom: 275,
-    width: 254,
-    height: 254,
-  },
-  pricetag:
-  {
-    fontSize: 30,
-    fontFamily: "Itim_400Regular",
-    color: '#3D3AAF',
-    width: 84,
-    height: 36,
-    bottom: 260,
-    left: 950,
-  },
-  ConfirmPurchaseButton:
-  {
-    bottom: 70,
-    left: 840,
-  },
-  backgroundImage: 
-  {
+    fontSize: 20,
+    fontFamily: 'Itim_400Regular',
+    marginBottom: 5,
     flex: 1,
-    justifyContent: 'center',
+  },
+  input: {
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    fontSize: 18,
+    flex: 2,
+  },
+  AiBookTitle: {
+    fontSize: 30,
+    fontFamily: 'Itim_400Regular',
+    color: '#ED5D5B',
+    textAlign: 'center',
+    marginVertical: 20,
+  },
+  AiBookImg: {
+    width: 200,
+    height: 200,
+  },
+  pricetag: {
+    fontSize: 30,
+    fontFamily: 'Itim_400Regular',
+    color: '#3D3AAF',
+    marginVertical: 10,
+  },
+  ConfirmPurchaseButton: {
+    width: 400,
+    height: 80,
+    marginVertical:30,
+    marginHorizontal:146,
+    position:'absolute'
+  },
+  
+  
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
     height: '100%',
-    marginTop: 10,
-    marginBottom: -600,
+    zIndex: -1,
   },
-  goBackIcon:
-  {
-    color: '#292D32',
-    backgroundColor: 'transparent',
-    bottom: 800,
-    right: 535,
-    zIndex: 1,
+  goBackIcon: {
+    position:'absolute',
+    top:20,
+    left:20
   },
-  goBack:
-  {
-    width: 77,
-    height: 77,
+  goBack: {
+    width: 50,
+    height: 50,
   },
-
-
   error: {
     color: 'red',
-    marginTop: 10,
+    marginLeft: 10,
   },
 });
 
