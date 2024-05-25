@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import axios from 'axios';
 import { auth } from './firebase'; // Adjust the path based on your firebase setup
 import ParentUI from './ParentUI/ParentUI';
@@ -35,15 +35,17 @@ const PinEntryScreen = ({ navigation }) => {
       setError('Incorrect PIN. Please try again.');
     });
   };
+  
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
 
   return (
     <View style={styles.container}>
-    <Image source={phyDoodleShapes} style={[styles.backgroundImage]} />
+      <Image source={phyDoodleShapes} style={styles.backgroundImage} />
       <Text style={styles.errorText}>{error}</Text>
-      <Text style={styles.prompt}>Enter 4-Digit PIN:</Text>
+      <Text style={styles.prompt}>Switching to parents mode</Text>
+      <Text style={styles.prompt}>Please enter your PIN</Text>
       <TextInput
         style={styles.input}
         value={pin}
@@ -51,9 +53,9 @@ const PinEntryScreen = ({ navigation }) => {
         keyboardType="numeric"
         maxLength={4}
       />
-      <View style={styles.submitButtonContainer}>
-        <Button title="Submit" onPress={handlePinSubmit} />
-      </View>
+      <TouchableOpacity style={styles.submitButtonContainer} onPress={handlePinSubmit}>
+        <Text style={styles.submitButtonText}>Enter</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
         <Text style={styles.goBackText}>Go Back</Text>
       </TouchableOpacity>
@@ -73,14 +75,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     marginTop: 0,
-    marginBottom: -200,
+    marginBottom: -320,
   },
   errorText: {
     color: 'red',
     marginBottom: 10,
+    bottom: 110,
   },
   prompt: {
-    fontSize: 30,
+    fontSize: 40,
     marginBottom: 20,
     fontFamily: 'Itim_400Regular',
     color: '#3F3CB4',
@@ -100,6 +103,16 @@ const styles = StyleSheet.create({
   },
   submitButtonContainer: {
     bottom: 300,
+    backgroundColor: '#A2C13C',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+  },
+  submitButtonText: {
+    color: '#000000',
+    fontSize: 24,
+    fontFamily: 'Itim_400Regular',
+    textAlign: 'center',
   },
   goBackButton: {
     marginTop: 20,
