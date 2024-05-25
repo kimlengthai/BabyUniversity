@@ -7,10 +7,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-//firebase.initializeApp(firebaseConfig);
-
-
-
 // Define a route for the default
 router.get('/', (req, res) => {
   res.send('Welcome to my Node.js application!');
@@ -18,7 +14,6 @@ router.get('/', (req, res) => {
 
 // Define a route for retrieve
 router.get('/retrieve', async (req, res) => {
-
   try {
     const data = await getDataFromDB(db);
     console.log(data);
@@ -29,7 +24,6 @@ router.get('/retrieve', async (req, res) => {
   }
 });
 
-// Define a route for save
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const validateName = (name) => /^[A-Za-z]+$/.test(name);
 const validateDOB = (dob) => /^\d{2}\/\d{2}\/\d{4}$/.test(dob);
@@ -42,20 +36,6 @@ router.post('/save', async (req, res) => {
     if (!email || !firstName || !lastName || !DOB || !parentalPin) {
       throw new Error('Please fill in all fields.');
     }
-/*
-    // Perform validations
-    if (!validateEmail(email)) {
-      throw new Error('Invalid email format');
-    }
-    if (!validateName(firstName) || !validateName(lastName)) {
-      throw new Error('First name and last name must only contain letters');
-    }
-    if (!validateDOB(DOB)) {
-      throw new Error('Invalid date of birth format. Must be in DD/MM/YYYY format or invalid date');
-    }
-    if (!validateParentalPin(parentalPin)) {
-      throw new Error('Please enter a four digit number only');
-    }*/
 
     // Proceed with saving data
     const userData = { email, firstName, lastName, DOB, parentalPin };
@@ -68,27 +48,52 @@ router.post('/save', async (req, res) => {
   }
 });
 
+// Retry logic for transient errors
+const MAX_RETRIES = 3;
+
+const withRetry = async (fn) => {
+  let attempt = 0;
+  while (attempt < MAX_RETRIES) {
+    try {
+      return await fn();
+    } catch (error) {
+      attempt++;
+      if (attempt >= MAX_RETRIES || error.code !== 'UNAVAILABLE') {
+        throw error;
+      }
+      console.log(`Retrying Firestore operation... (${attempt}/${MAX_RETRIES})`);
+      await new Promise(resolve => setTimeout(resolve, 1000 * attempt)); // Exponential backoff
+    }
+  }
+};
+
 router.get('/checkpin', async (req, res) => {
   try {
     const { email, pin } = req.query;
     console.log(`Received email: ${email}`);
     console.log(`Received pin: ${pin}`);
 
-    // Retrieve all documents from the 'user' collection
-    const snapshot = await db.collection('user').get();
+    // Check if email and pin are provided
+    if (!email || !pin) {
+      return res.status(400).json({ message: 'Email and pin are required' });
+    }
 
-    // Iterate over each document
+    // Convert email to lowercase for case-insensitive comparison
+    const normalizedEmail = email.toLowerCase();
+
+    const snapshot = await withRetry(() => db.collection('user').get());
+
     let userFound = false;
-    snapshot.forEach(doc => {
+    for (const doc of snapshot.docs) {
       const userData = doc.data();
-      console.log('User data retrieved:', userData);
-
-      // Compare the email in the document with the provided email
-      if (userData.email === email) {
+      // Compare the email in the document with the provided email (both in lowercase)
+      const emailFetchedFromData = userData.email.toLowerCase();
+      console.log(emailFetchedFromData);
+      if (emailFetchedFromData === normalizedEmail) {
         userFound = true;
-        const parentalPin = userData.parentalPin;
+        console.log("user found with this email: " + userData.email);
 
-        // Compare the provided PIN with the parental PIN
+        const parentalPin = userData.parentalPin;
         if (pin === parentalPin) {
           res.status(200).json({ message: 'PIN verified successfully' });
           return;
@@ -96,12 +101,9 @@ router.get('/checkpin', async (req, res) => {
           res.status(400).json({ message: 'Incorrect PIN' });
           return;
         }
-
-    
       }
-    });
+    }
 
-    // If no matching email is found
     if (!userFound) {
       console.log(`User not found in database for email: ${email}`);
       res.status(404).json({ message: 'User not found' });
@@ -111,6 +113,7 @@ router.get('/checkpin', async (req, res) => {
     res.status(500).json({ message: 'Error checking PIN' });
   }
 });
+
 
 router.post('/saveDetails', async (req, res) => {
   try {
@@ -148,9 +151,4 @@ router.post('/saveDetails', async (req, res) => {
   }
 });
 
-
-
-
- 
-
-  export default router;
+export default router;
