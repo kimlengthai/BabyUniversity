@@ -31,14 +31,22 @@ const validateDOB = (dob) => {
   return { valid: true };
 };
 const validateParentalPin = (pin) => /^\d{4}$/.test(pin);
-const validatePassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(password);
+const validatePassword = (password) => {
+  if (!password) return 'Please enter your password.';
+  if (password.length < 6) return 'Password must be at least 6 characters long.';
+  
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+  if (!passwordRegex.test(password)) return 'Password must include at least one lowercase letter, one uppercase letter, one special character, and one number.';
+
+  return null;
+};
 
 // This route validates user input from signup by invoking the tests above
 // Provides error messages for users to view based on different errors
 // Once successful the data is saved to the database 
 router.post('/save', async (req, res) => {
   try {
-    const { email, firstName, lastName, DOB, parentalPin, password, confirmPassword } = req.body;
+    const { email, firstName, lastName, DOB, parentalPin} = req.body;
     
     const errors = {};
 
@@ -60,18 +68,15 @@ router.post('/save', async (req, res) => {
     if (!parentalPin) errors.parentalPin = 'Please enter a four-digit pin.';
     else if (!validateParentalPin(parentalPin)) errors.parentalPin = 'Please enter a valid four-digit pin.';
 
-    if (!password) errors.password = 'Please enter your password.';
-    else if (!validatePassword(password)) errors.password = 'Password must be at least 6 characters long and include at least one lowercase letter, one uppercase letter, one special character, and one number.';
-
-    if (!confirmPassword) errors.confirmPassword = 'Please confirm your password.';
-    else if (password !== confirmPassword) errors.confirmPassword = 'Passwords do not match.';
+    
+    
 
     if (Object.keys(errors).length > 0) {
       return res.status(400).json({ errors });
     }
 
     // Proceed with saving data
-    const userData = { email, firstName, lastName, DOB, parentalPin, password };
+    const userData = { email, firstName, lastName, DOB, parentalPin };
     const docRef = await saveDataToDB(db, userData);
     console.log('Document written with ID:', docRef.id);
     res.status(200).json({ message: 'Data saved successfully' });

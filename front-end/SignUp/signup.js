@@ -4,28 +4,48 @@ import { auth } from '../firebase';
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import phyDoodleShapes from '../assets/BgImage/doodle.png';
-//Setting and defining variables and methods for validations
+
+// Setting and defining variables and methods for validations
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const validateName = (name) => /^[A-Za-z]+$/.test(name);
 const validateDOB = (dob) => {
   const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
-  if (!datePattern.test(DOB)) return { valid: false, message: 'Please enter date in DD/MM/YYYY format.' };
-  const [day, month, year] = DOB.split('/').map(Number);
+  if (!datePattern.test(dob)) return { valid: false, message: 'Please enter date in DD/MM/YYYY format.' };
+  const [day, month, year] = dob.split('/').map(Number);
   const date = new Date(year, month - 1, day);
-  if (date.getDate() !== day || date.getMonth() !== month - 1 || date.getFullYear() !== year) return { valid: false, message: 'Incorrect date enetered. Please enter a different date' };
+  if (date.getDate() !== day || date.getMonth() !== month - 1 || date.getFullYear() !== year) return { valid: false, message: 'Incorrect date entered. Please enter a different date' };
   return { valid: true };
 };
 const validateParentalPin = (pin) => /^\d{4}$/.test(pin);
-const validatePassword = (password) => {
-  if (!password) errors.password = 'Please enter your password.';
-  else if (password.length < 6) errors.password = 'Password must be at least 6 characters long.';
-  else if (!/(?=.*[a-z])/.test(password)) errors.password = 'Password must have one or more owercase letters.';
-  else if (!/(?=.*[A-Z])/.test(password)) errors.password = 'Password must have one or more uppercase letters.';
-  else if (!/(?=.*\d)/.test(password)) errors.password = 'Password must have one or more numbers.';
-  else if (!/(?=.*[@$!%*?&])/.test(password)) errors.password = 'Password must have one or more special characters.';
+const validatePassword = (password, confirmPassword) => {
+  const errors = [];
 
-  return null;
-};
+  // Ensure password is at least 6 characters long
+  if (password.length < 6) {
+    errors.push('Password must be at least 6 characters long.');
+  }
+
+  const capitalRegex = /[A-Z]/;
+  if (!capitalRegex.test(password)) {
+    errors.push('Password must contain at least one uppercase letter.');
+  }
+
+  const specialRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+  if (!specialRegex.test(password)) {
+    errors.push('Password must contain at least one special character.');
+  }
+
+  const numberRegex = /[0-9]/;
+  if (!numberRegex.test(password)) {
+    errors.push('Password must contain at least one number.');
+  }
+
+  if (password !== confirmPassword) {
+    errors.push('Passwords do not match.');
+  }
+
+  return errors;
+}
 
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
@@ -45,12 +65,6 @@ const handleSignup = async () => {
 
   if (!email) newErrors.email = 'Please enter your email.';
   else if (!validateEmail(email)) newErrors.email = 'Invalid email format.';
-
-  if (!password) newErrors.password = 'Please enter your password.';
-  else if (!validatePassword(password)) newErrors.password = 'Password must be at least 6 characters long and include at least one lowercase letter, one uppercase letter, one special character, and one number.';
-
-  if (!confirmPassword) newErrors.confirmPassword = 'Please confirm your password.';
-  else if (password !== confirmPassword) newErrors.confirmPassword = 'Passwords do not match.';
 
   if (!firstName) newErrors.firstName = 'Please enter your first name.';
   else if (!validateName(firstName)) newErrors.firstName = 'First name must only contain letters.';
@@ -75,7 +89,7 @@ const handleSignup = async () => {
       const user = userCredential.user;
 
       const requestUrl = 'http://localhost:3000/save';
-      const requestBody = { email, firstName, lastName, DOB, parentalPin, password };
+      const requestBody = { email, firstName, lastName, DOB, parentalPin };
 
       const response = await axios.post(requestUrl, requestBody);
       console.log(response.data.message); 
@@ -90,110 +104,109 @@ const handleSignup = async () => {
   }
 };
 
-  return (
+return (
     
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-       <Image source={phyDoodleShapes} style={styles.backgroundImage} />
-      <KeyboardAvoidingView style={styles.container} behavior='padding'>
-      <Text style={styles.prompt}>Baby University Sign up page</Text>
-        <View style={styles.inputContainer}>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Email:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your Email"
-              value={email}
-              onChangeText={text => setEmail(text)}
-            />
-            {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Password:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your password"
-              secureTextEntry
-              autoCapitalize="none"
-              autoCorrect={false}
-              textContentType="oneTimeCode" 
-              passwordRules=""
-              value={password}
-              onChangeText={text => setPassword(text)}
-            />
-            {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Confirm Password:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Confirm your password"
-              secureTextEntry
-              autoCapitalize="none"
-              autoCorrect={false}
-              textContentType="oneTimeCode"
-              passwordRules=""
-              value={confirmPassword}
-              onChangeText={text => setConfirmPassword(text)}
-            />
-            {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword}</Text>}
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>First Name:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your first name"
-              value={firstName}
-              onChangeText={text => setFirstName(text)}
-            />
-            {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Last Name:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your last name"
-              value={lastName}
-              onChangeText={text => setLastName(text)}
-            />
-            {errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>DOB:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your date of birth"
-              value={DOB}
-              onChangeText={text => setDOB(text)}
-            />
-            {errors.DOB && <Text style={styles.errorText}>{errors.DOB}</Text>}
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Parental Pin:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter a four digit pin"
-              secureTextEntry
-              value={parentalPin}
-              onChangeText={text => setParentalPin(text)}
-            />
-            {errors.parentalPin && <Text style={styles.errorText}>{errors.parentalPin}</Text>}
-          </View>
+  <ScrollView contentContainerStyle={styles.scrollContainer}>
+     <Image source={phyDoodleShapes} style={styles.backgroundImage} />
+    <KeyboardAvoidingView style={styles.container} behavior='padding'>
+    <Text style={styles.header}>Baby University Sign up page</Text>
+      <View style={styles.inputContainer}>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Email:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your Email"
+            value={email}
+            onChangeText={text => setEmail(text)}
+          />
+          {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
         </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleSignup} style={styles.button}>
-            <Text style={styles.buttonText}>Sign Up</Text>
-          </TouchableOpacity>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Password:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your password"
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+            textContentType="oneTimeCode" 
+            passwordRules=""
+            value={password}
+            onChangeText={text => setPassword(text)}
+          />
+          {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
         </View>
-        {errors.general && <Text style={styles.errorText}>{errors.general}</Text>}
-        <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('Login')}>
-  <Text style={styles.goBackText}>Go Back</Text>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Confirm Password:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm your password"
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+            textContentType="oneTimeCode"
+            passwordRules=""
+            value={confirmPassword}
+            onChangeText={text => setConfirmPassword(text)}
+          />
+          {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword}</Text>}
+        </View>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>First Name:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your first name"
+            value={firstName}
+            onChangeText={text => setFirstName(text)}
+          />
+          {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
+        </View>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Last Name:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your last name"
+            value={lastName}
+            onChangeText={text => setLastName(text)}
+          />
+          {errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
+        </View>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>DOB:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your date of birth"
+            value={DOB}
+            onChangeText={text => setDOB(text)}
+          />
+          {errors.DOB && <Text style={styles.errorText}>{errors.DOB}</Text>}
+        </View>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Parental Pin:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter a four digit pin"
+            secureTextEntry
+            value={parentalPin}
+            onChangeText={text => setParentalPin(text)}
+          />
+          {errors.parentalPin && <Text style={styles.errorText}>{errors.parentalPin}</Text>}
+        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleSignup} style={styles.button}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+      {errors.general && <Text style={styles.errorText}>{errors.general}</Text>}
+      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('Login')}>
+<Text style={styles.goBackText}>Go Back</Text>
 </TouchableOpacity>
 
-      </KeyboardAvoidingView>
-    </ScrollView>
-  );
+    </KeyboardAvoidingView>
+  </ScrollView>
+);
 };
-
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
@@ -202,12 +215,11 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: -320,
   },
-  prompt: {
-    fontSize: 40,
-    marginBottom: 20,
+  header: {
+    fontSize: 50,
     fontFamily: 'Itim_400Regular',
     color: '#3F3CB4',
-    bottom: 350,
+    marginVertical: 20,
   },
   scrollContainer: {
     flexGrow: 1,
@@ -275,5 +287,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
 export default SignupScreen;
