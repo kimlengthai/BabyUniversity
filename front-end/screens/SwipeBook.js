@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Button } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { useNavigation } from '@react-navigation/native';
+import { Audio } from 'expo-av';
 
 import Page0 from '../BookPages/page0'
 import Page1 from '../BookPages/page1' 
@@ -22,8 +23,8 @@ import Page15 from '../BookPages/Page15'
 import Page16 from '../BookPages/Page16'
 import Page17 from '../BookPages/Page17'
 import Page18 from '../BookPages/page18'
-import Page19 from '../BookPages/page19'  
-import Page20 from '../BookPages/page20'  
+import Page19 from '../BookPages/page19'
+import Page20 from '../BookPages/page20'
 import Page21 from '../BookPages/page21'
 import Page22 from '../BookPages/page22'
 import Page23 from '../BookPages/page23'
@@ -34,6 +35,9 @@ const { width: screenWidth } = Dimensions.get('window');
 
 const SwipeBook = () => {
   const carouselRef = useRef(null);
+  const [sound, setSound] = useState();
+
+  const pageNum = 0;
 
   const data = [
     { key: 'page0', component: <Page0 /> },
@@ -64,6 +68,50 @@ const SwipeBook = () => {
     { key: 'page24', component: <Page24 /> },
   ];
 
+  const audioPaths = {
+    "paths": [
+      require('../assets/booksAudio/bookaudio0.mp3'),
+      require('../assets/booksAudio/bookaudio1.mp3'),
+      require('../assets/booksAudio/bookaudio2.mp3'),
+      require('../assets/booksAudio/bookaudio3.mp3'),
+      require('../assets/booksAudio/bookaudio4.mp3'),
+      require('../assets/booksAudio/bookaudio5.mp3'),
+      require('../assets/booksAudio/bookaudio6.mp3'),
+      require('../assets/booksAudio/bookaudio7.mp3'),
+      require('../assets/booksAudio/bookaudio8.mp3'),
+      require('../assets/booksAudio/bookaudio9.mp3'),
+      require('../assets/booksAudio/bookaudio10.mp3'),
+      require('../assets/booksAudio/bookaudio11.mp3'),
+      require('../assets/booksAudio/bookaudio12.mp3'),
+      require('../assets/booksAudio/bookaudio13.mp3'),
+      require('../assets/booksAudio/bookaudio14.mp3'),
+      require('../assets/booksAudio/bookaudio15.mp3'),
+      require('../assets/booksAudio/bookaudio16.mp3'),
+      require('../assets/booksAudio/bookaudio17.mp3'),
+      require('../assets/booksAudio/bookaudio18.mp3'),
+      require('../assets/booksAudio/bookaudio19.mp3'),
+      require('../assets/booksAudio/bookaudio20.mp3'),
+      require('../assets/booksAudio/bookaudio21.mp3'),
+      require('../assets/booksAudio/bookaudio22.mp3'),
+      require('../assets/booksAudio/bookaudio23.mp3'),
+      require('../assets/booksAudio/bookaudio24.mp3'),
+    ]
+  }
+
+  async function playBookSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      audioPaths['paths'][carouselRef.current.currentIndex]//this.refs.carouselRef.currentIndex]
+    );
+    setSound(sound);
+    await sound.playAsync();
+  }
+
+  async function playSwipeSound() {
+    const { sound } = await Audio.Sound.createAsync(require('../assets/booksSFX/PageSwipe_SoundEffect.mp3'));
+    setSound(sound);
+    await sound.playAsync();
+  }
+
   const renderItem = ({ item }) => (
     <View style={styles.pageContainer}>
       {item.component}
@@ -79,6 +127,8 @@ const SwipeBook = () => {
         sliderWidth={screenWidth}
         itemWidth={screenWidth}
         layout={'default'}
+        onBeforeSnapToItem={playSwipeSound}
+        onSnapToItem={playBookSound}
       />
     </View>
   );
