@@ -1,15 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { auth } from '../firebase';
-import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Dimensions, ScrollView } from 'react-native';
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-// Import validation functions
+import phyDoodleShapes from '../assets/BgImage/doodle.png';
+//Setting and defining variables and methods for validations
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-const validateName = (firstName) => /^[A-Za-z]+$/.test(firstName);
-const validateLastName = (lastName) => /^[A-Za-z]+$/.test(lastName);
-const validateDOB = (DOB) => /^\d{2}\/\d{2}\/\d{4}$/.test(DOB);
-const validateParentalPin = (parentalPin) => /^\d{4}$/.test(parentalPin);
+const validateName = (name) => /^[A-Za-z]+$/.test(name);
+const validateDOB = (dob) => {
+  const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
+  if (!datePattern.test(DOB)) return { valid: false, message: 'Please enter date in DD/MM/YYYY format.' };
+  const [day, month, year] = DOB.split('/').map(Number);
+  const date = new Date(year, month - 1, day);
+  if (date.getDate() !== day || date.getMonth() !== month - 1 || date.getFullYear() !== year) return { valid: false, message: 'Incorrect date enetered. Please enter a different date' };
+  return { valid: true };
+};
+const validateParentalPin = (pin) => /^\d{4}$/.test(pin);
+const validatePassword = (password) => {
+  if (!password) errors.password = 'Please enter your password.';
+  else if (password.length < 6) errors.password = 'Password must be at least 6 characters long.';
+  else if (!/(?=.*[a-z])/.test(password)) errors.password = 'Password must have one or more owercase letters.';
+  else if (!/(?=.*[A-Z])/.test(password)) errors.password = 'Password must have one or more uppercase letters.';
+  else if (!/(?=.*\d)/.test(password)) errors.password = 'Password must have one or more numbers.';
+  else if (!/(?=.*[@$!%*?&])/.test(password)) errors.password = 'Password must have one or more special characters.';
+
+  return null;
+};
 
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
@@ -19,75 +35,67 @@ const SignupScreen = () => {
   const [lastName, setLastName] = useState('');
   const [DOB, setDOB] = useState('');
   const [parentalPin, setParentalPin] = useState('');
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const navigation = useNavigation();
-  const screenWidth = Dimensions.get('window').width;
-
-  const signUpTitleFontSize = Math.min(28, screenWidth * 0.05);
-
-  const handleSignup = async () => {
-    
-    if (!email || !password || !confirmPassword || !firstName || !lastName || !DOB || !parentalPin) {
-      setError('Please fill in all fields.');
-      return;
-    }
   
-    if (!validateEmail(email)) {
-      setError('Invalid email format');
-      return;
-    }
-    if (!validateName(firstName) || !validateName(lastName)) {
-      setError('First name and last name must only contain letters');
-      return;
-    }
-    if (!validateDOB(DOB)) {
-      setError('Invalid date of birth format. Must be in DD/MM/YYYY format or invalid date');
-      return;
-    }
-    if (!validateParentalPin(parentalPin)) {
-      setError('Please enter a four digit number only');
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
+// Ensures all details are validated prior to saving to the database
+const handleSignup = async () => {
+  const newErrors = {};
 
-    if (!validateLastName(lastName)) {
-      setError('Last name must contain only alphabets.');
-      return;
-    }
+  if (!email) newErrors.email = 'Please enter your email.';
+  else if (!validateEmail(email)) newErrors.email = 'Invalid email format.';
 
+  if (!password) newErrors.password = 'Please enter your password.';
+  else if (!validatePassword(password)) newErrors.password = 'Password must be at least 6 characters long and include at least one lowercase letter, one uppercase letter, one special character, and one number.';
+
+  if (!confirmPassword) newErrors.confirmPassword = 'Please confirm your password.';
+  else if (password !== confirmPassword) newErrors.confirmPassword = 'Passwords do not match.';
+
+  if (!firstName) newErrors.firstName = 'Please enter your first name.';
+  else if (!validateName(firstName)) newErrors.firstName = 'First name must only contain letters.';
+
+  if (!lastName) newErrors.lastName = 'Please enter your last name.';
+  else if (!validateName(lastName)) newErrors.lastName = 'Last name must only contain letters.';
+
+  if (!DOB) newErrors.DOB = 'Please enter your date of birth.';
+  else {
+    const dobValidation = validateDOB(DOB);
+    if (!dobValidation.valid) newErrors.DOB = dobValidation.message;
+  }
+
+  if (!parentalPin) newErrors.parentalPin = 'Please enter a four-digit pin.';
+  else if (!validateParentalPin(parentalPin)) newErrors.parentalPin = 'Please enter a valid four-digit pin.';
+
+  setErrors(newErrors);
+
+  if (Object.keys(newErrors).length === 0) {
     try {
       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
 
       const requestUrl = 'http://localhost:3000/save';
-      const requestBody = {
-        email,
-        firstName,
-        lastName,
-        DOB,
-        parentalPin
-      };
+      const requestBody = { email, firstName, lastName, DOB, parentalPin, password };
 
       const response = await axios.post(requestUrl, requestBody);
       console.log(response.data.message); 
       navigation.replace('Bedroom'); 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        setError('The email address is already in use by another account.');
+        setErrors({ email: 'The email address is already in use by another account.' });
       } else {
-        setError('Signup failed: ' + error.message);
+        setErrors({ general: 'Signup failed: ' + error.message });
       }
     }
-  };
+  }
+};
 
   return (
+    
     <ScrollView contentContainerStyle={styles.scrollContainer}>
+       <Image source={phyDoodleShapes} style={styles.backgroundImage} />
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
-        <Text style={[styles.signUpTitle, { fontSize: signUpTitleFontSize }]}>Baby University</Text>
+      <Text style={styles.prompt}>Baby University Sign up page</Text>
         <View style={styles.inputContainer}>
           <View style={styles.inputRow}>
             <Text style={styles.label}>Email:</Text>
@@ -97,6 +105,7 @@ const SignupScreen = () => {
               value={email}
               onChangeText={text => setEmail(text)}
             />
+            {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
           </View>
           <View style={styles.inputRow}>
             <Text style={styles.label}>Password:</Text>
@@ -106,11 +115,12 @@ const SignupScreen = () => {
               secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
-              textContentType="oneTimeCode" // Change to oneTimeCode to disable suggestion
-              passwordRules="" // Add empty password rules
+              textContentType="oneTimeCode" 
+              passwordRules=""
               value={password}
               onChangeText={text => setPassword(text)}
             />
+            {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
           </View>
           <View style={styles.inputRow}>
             <Text style={styles.label}>Confirm Password:</Text>
@@ -120,11 +130,12 @@ const SignupScreen = () => {
               secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
-              textContentType="oneTimeCode" // Change to oneTimeCode to disable suggestion
-              passwordRules="" // Add empty password rules
+              textContentType="oneTimeCode"
+              passwordRules=""
               value={confirmPassword}
               onChangeText={text => setConfirmPassword(text)}
             />
+            {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword}</Text>}
           </View>
           <View style={styles.inputRow}>
             <Text style={styles.label}>First Name:</Text>
@@ -134,6 +145,7 @@ const SignupScreen = () => {
               value={firstName}
               onChangeText={text => setFirstName(text)}
             />
+            {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
           </View>
           <View style={styles.inputRow}>
             <Text style={styles.label}>Last Name:</Text>
@@ -143,6 +155,7 @@ const SignupScreen = () => {
               value={lastName}
               onChangeText={text => setLastName(text)}
             />
+            {errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
           </View>
           <View style={styles.inputRow}>
             <Text style={styles.label}>DOB:</Text>
@@ -152,30 +165,50 @@ const SignupScreen = () => {
               value={DOB}
               onChangeText={text => setDOB(text)}
             />
+            {errors.DOB && <Text style={styles.errorText}>{errors.DOB}</Text>}
           </View>
           <View style={styles.inputRow}>
             <Text style={styles.label}>Parental Pin:</Text>
             <TextInput
               style={styles.input}
               placeholder="Enter a four digit pin"
+              secureTextEntry
               value={parentalPin}
               onChangeText={text => setParentalPin(text)}
             />
+            {errors.parentalPin && <Text style={styles.errorText}>{errors.parentalPin}</Text>}
           </View>
         </View>
-        
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={handleSignup} style={styles.button}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
-        {error && <Text style={styles.errorText}>{error}</Text>}
+        {errors.general && <Text style={styles.errorText}>{errors.general}</Text>}
+        <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('Login')}>
+  <Text style={styles.goBackText}>Go Back</Text>
+</TouchableOpacity>
+
       </KeyboardAvoidingView>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    height: '100%',
+    marginTop: 0,
+    marginBottom: -320,
+  },
+  prompt: {
+    fontSize: 40,
+    marginBottom: 20,
+    fontFamily: 'Itim_400Regular',
+    color: '#3F3CB4',
+    bottom: 350,
+  },
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
@@ -188,11 +221,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-  },
-  signUpTitle: {
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#3F3CB4',
   },
   inputContainer: {
     width: '90%',
@@ -234,7 +262,17 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    marginTop: 10,
+    marginTop: 5,
+    marginLeft: 10,
+    fontSize: 12,
+  },
+  goBackButton: {
+    marginTop: 20,
+  },
+  goBackText: {
+    color: '#3F3CB4',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

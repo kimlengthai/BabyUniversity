@@ -3,10 +3,17 @@ import SwipeBook from '../screens/SwipeBook';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
 import { auth } from '../firebase';
 import MenuButton from '../MenuButton';
+import LogoutSuccessful from '../Logout Page';
 
 const BedRoomScreen = ({navigation}) => {
   const openBook = () => {
     navigation.navigate('SwipeBook');
+  };
+
+  const handleLogout= () => {
+   
+      navigation.navigate('Logout');
+    
   };
 
   return(
@@ -71,7 +78,9 @@ const BedRoomScreen = ({navigation}) => {
         source={require('../assets/bedRoomImages/booksCapinet.png')} 
         style={styles.booksCapinet} 
       />
-
+ <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
 
     </View>
     
@@ -80,6 +89,17 @@ const BedRoomScreen = ({navigation}) => {
 export default BedRoomScreen;
 
 const styles = StyleSheet.create({
+  logoutButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 10
+  },
+  logoutText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'red'
+  },
     container: {
       flex: 1,     
       position: 'relative',
