@@ -16,12 +16,12 @@ const PinEntryScreen = ({ navigation }) => {
   };
 
   const handlePinSubmit = () => {
-    const userEmail = auth.currentUser.email;// keeps track of which user is logged in so the back end can retreive the in from the database
+    const userEmail = auth.currentUser.email;
 
     axios.get('http://localhost:3000/checkpin', {
       params: {
         email: userEmail,
-        pin: pin,
+        pin: pin, // Use the state variable pin
       },
     })
     .then((response) => {
@@ -45,13 +45,14 @@ const PinEntryScreen = ({ navigation }) => {
       <Image source={phyDoodleShapes} style={styles.backgroundImage} />
       <Text style={styles.errorText}>{error}</Text>
       <Text style={styles.prompt}>Switching to parents mode</Text>
-      <Text style={styles.prompt}>Please enter your PIN</Text>
+      <Text style={styles.promptPrint}>Please enter your PIN</Text>
       <TextInput
         style={styles.input}
         value={pin}
         onChangeText={handlePinChange}
         keyboardType="numeric"
         maxLength={4}
+        secureTextEntry
       />
       <TouchableOpacity style={styles.submitButtonContainer} onPress={handlePinSubmit}>
         <Text style={styles.submitButtonText}>Enter</Text>
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
     color: '#3F3CB4',
     bottom: 350,
   },
+  
   input: {
     width: '80%',
     padding: 10,
