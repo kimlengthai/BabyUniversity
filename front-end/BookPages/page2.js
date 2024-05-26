@@ -45,7 +45,7 @@ const Page2 = () => {
       </View>
       <View style={styles.bodyText}>
         <Text style={{ color: 'white', fontSize: 70 }}>
-          <Text>This ball</Text> have <Text style={{ color: 'yellow' }}>energy.</Text>
+          <Text>This ball</Text> has <Text style={{ color: 'yellow' }}>energy.</Text>
         </Text>
       </View>
     </View>
