@@ -11,6 +11,7 @@ import SignupScreen from './SignUp/signup';
 import SwipeBook from './screens/SwipeBook';
 import LogoutSuccessful from './Logout Page';
 import UsernameDisplay from './UserName'
+import SettingsScreen from './SettingsScreen/settings'
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,14 +19,15 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-      <Stack.Screen options= {{headerShown: false}} name="Login" component={LoginScreen} />
-      <Stack.Screen options= {{headerShown: false}} name="Logout" component={LogoutSuccessful} />
-      <Stack.Screen options= {{headerShown: false}} name="SignUp" component={SignupScreen} />
-      <Stack.Screen options= {{headerShown: false}} name="Bedroom" component={BedRoomScreen} />
-      <Stack.Screen options={{headerShown: false}} name='SwipeBook' component={SwipeBook} />
-      <Stack.Screen options={{headerShown: false}} name="PinEntry" component={PinEntryScreen} />
-      <Stack.Screen options={{headerShown: false}} name="ParentUI" component={ParentUI} />
-      <Stack.Screen options={{headerShown: false}} name="UserName" component={UsernameDisplay} />
+        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="Logout" component={LogoutSuccessful} />
+        <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignupScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="Bedroom" component={BedRoomScreen} />
+        <Stack.Screen options={{ headerShown: false }} name='SwipeBook' component={SwipeBook} />
+        <Stack.Screen options={{ headerShown: false }} name="PinEntry" component={PinEntryScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="ParentUI" component={ParentUI} />
+        <Stack.Screen options={{ headerShown: false }} name="UserName" component={UsernameDisplay} />
+        <Stack.Screen options={{ headerShown: false }} name="Settings" component={SettingsScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>

@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { View, Text, Button, Switch, Image, ImageBackground, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }) => {
     const [isMuted, setIsMuted] = useState(false);
     const toggleMute = () => setIsMuted(previousState => !previousState);
 
@@ -16,8 +16,8 @@ const SettingsScreen = () => {
 
     return (
         <ImageBackground source={require('../assets/BgImage/doodle.png')} style={styles.background}>
-            <TouchableOpacity /*onPress={toggleMenu}*/>
-                <Image source={require('../assets/back_button.png')} style={styles.back} />
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Image source={require('../assets/settingsImages/back_button.png')} style={styles.back} />
             </TouchableOpacity>
             <Text style={styles.title}>Book Settings</Text>
             <View style={[styles.container, { alignItems: 'center' }]} >
@@ -34,15 +34,15 @@ const SettingsScreen = () => {
             />
             <View style={styles.container} >
                 <Image
-                    source={require('../assets/read_aloud_icon.png')}
+                    source={require('../assets/settingsImages/read_aloud_icon.png')}
                     style={styles.icon}
                 />
                 <Image
-                    source={require('../assets/quiz_icon.png')}
+                    source={require('../assets/settingsImages/quiz_icon.png')}
                     style={styles.icon}
                 />
                 <Image
-                    source={require('../assets/text_size_icon.png')}
+                    source={require('../assets/settingsImages/text_size_icon.png')}
                     style={styles.icon}
                 />
             </View>

@@ -26,6 +26,7 @@ const MenuButton = ({ userMode, onOptionPress }) => {
         navigation.navigate('PinEntry');
       } else if (option === 'Settings') {
         console.log(option);
+        navigation.navigate('Settings');
         // navigate to the settings view page
       }
     } else {
@@ -35,6 +36,7 @@ const MenuButton = ({ userMode, onOptionPress }) => {
         // switch to kids bedroom view page
       } else if (option === 'Settings') {
         console.log(option);
+        navigation.navigate('Settings');
         // switch to settings view page
       } else if (option === 'Logout') {
         console.log(option);
