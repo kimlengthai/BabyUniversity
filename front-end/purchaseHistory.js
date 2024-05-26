@@ -29,7 +29,7 @@ const PurchaseHistoryBook = () => {
       <Image source={AiBook} style={[styles.AiBookImg]} />
 
       <View style={styles.detailContainer}>
-      <Text style={styles.purchaseDate}>Purchase Date: <Text style={styles.date}> 29 May 2024</Text></Text>
+      <Text style={styles.purchaseDate}>Purchase Date: <Text style={styles.date}> 27 May 2024</Text></Text>
       <Text style={styles.cardNumber}>Card Number: <Text style={styles.number}> **** **** *** 2453</Text></Text>
       <Text style={styles.transactionID}>Transaction ID: <Text style={styles.id}> 5566 2453</Text></Text>
       </View>
