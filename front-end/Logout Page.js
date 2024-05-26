@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import phyDoodleShapes from './assets/BgImage/doodle.png';
+
 
 
 const LogoutSuccessful = () => {
@@ -12,8 +14,9 @@ const LogoutSuccessful = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Logout Successful</Text>
-      <Text style={styles.message}>You have successfully logged out.</Text>
+       <Image source={phyDoodleShapes} style={styles.backgroundImage} />
+      <Text style={styles.prompt}>Logout Successful</Text>
+      <Text style={styles.message}>You have successfully logged out. Please click the button below to return to login page</Text>
       <TouchableOpacity onPress={handleLoginRedirect} style={styles.button}>
         <Text style={styles.buttonText}>Go to Login</Text>
       </TouchableOpacity>
@@ -22,28 +25,42 @@ const LogoutSuccessful = () => {
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    height: '100%',
+    marginTop: 0,
+    marginBottom: -320,
+  },
+  prompt: {
+    fontSize: 40,
+    marginBottom: 20,
+    fontFamily: 'Itim_400Regular',
+    color: '#3F3CB4',
+    bottom: 350,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#D8EEF7', // Background color
+    backgroundColor: '#D8EEF7',
     padding: 20,
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#3F3CB4', // Custom color
+    color: '#3F3CB4',
   },
   message: {
     fontSize: 18,
     marginBottom: 40,
-    color: '#333', // Darker text color
+    color: '#333', 
     textAlign: 'center',
     paddingHorizontal: 20,
   },
   button: {
-    backgroundColor: '#3F3CB4', // Matching button color
+    backgroundColor: '#3F3CB4',
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 5,

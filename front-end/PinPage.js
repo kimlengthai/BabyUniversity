@@ -16,12 +16,12 @@ const PinEntryScreen = ({ navigation }) => {
   };
 
   const handlePinSubmit = () => {
-    const userEmail = auth.currentUser.email;
+    const userEmail = auth.currentUser.email;// keeps track of which user is logged in so the back end can retreive the in from the database
 
     axios.get('http://localhost:3000/checkpin', {
       params: {
         email: userEmail,
-        pin: pin, // Use the state variable pin
+        pin: pin,
       },
     })
     .then((response) => {

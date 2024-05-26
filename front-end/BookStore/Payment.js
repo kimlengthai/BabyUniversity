@@ -8,6 +8,7 @@ import ParentUI from '../ParentUI/ParentUI';
 import AiBook from '../assets/booksImages/AIBook.png';
 import ConfirmPurchaseButton from '../assets/buyButtons/ConfirmPurchaseButton.png';
 import PurchaseSuccessful from '../purchaseSuccessful';
+import axios from 'axios';
 
 const Payment = () => {
   const [showParentUI, setShowParentUI] = useState(false);
@@ -36,19 +37,17 @@ const Payment = () => {
   const handleConfirmPurchase = async () => {
     let isValid = true;
 
-    // Clear previous error messages
+   // used tio clear any previous error messages
     setCardNumberError('');
     setExpiryDateError('');
     setCvvError('');
     setNameError('');
 
-    // Validate card number
     if (!/^\d{10}$/.test(cardNumber)) {
       setCardNumberError('Card number must be 10 digits');
       isValid = false;
     }
 
-    // Validate expiry date
     const expiryDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
     if (!expiryDate) {
       setExpiryDateError('Expiry date is required');
@@ -58,20 +57,18 @@ const Payment = () => {
       isValid = false;
     }
 
-    // Validate CVV
     if (!/^\d{3,4}$/.test(cvv)) {
       setCvvError('CVV must be 3 or 4 digits');
       isValid = false;
     }
 
-    // Validate name
     if (!/^[A-Za-z\s]+$/.test(name)) {
       setNameError('Name is required and cannot contain numbers');
       isValid = false;
     }
 
     if (!isValid) {
-      // Clear errors after 5 seconds
+    
       setTimeout(() => {
         setCardNumberError('');
         setExpiryDateError('');
@@ -81,24 +78,19 @@ const Payment = () => {
       return;
     }
 
-    try {
-      const response = await fetch('http://localhost:3000/saveDetails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cardNumber, expiryDate, cvv, name }),
-      });
-      const data = await response.json();
-      if (response.status === 200) {
-        setPurchaseComplete(true);
-      } else {
-        Alert.alert('Error', data.message);
-      }
-    } catch (error) {
-      Alert.alert('Error', 'Failed to process payment');
-    }
-  };
+
+  try {
+    const requestUrl = 'http://localhost:3000/saveDetails';
+    const requestBody = {cardNumber, expiryDate, cvv, name  };
+
+    const response = await axios.post(requestUrl, requestBody);
+    console.log(response.data.message); 
+    setPurchaseComplete(true);
+  } catch (error) {
+    Alert.alert('Error', 'Failed to process payment');
+  }
+}
+
 
   if (showParentUI) {
     return <ParentUI handleGoBack={() => setShowParentUI(false)} />;

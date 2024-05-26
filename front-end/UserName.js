@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from './firebase'; // Adjust the path based on your firebase setup
-
+import { auth } from './firebase'; 
+import phyDoodleShapes from '../front-end/assets/BgImage/doodle.png';
 const UsernameDisplay = () => {
   const navigation = useNavigation();
   const userEmail = auth.currentUser ? auth.currentUser.email : 'User';
@@ -10,7 +10,7 @@ const UsernameDisplay = () => {
   const handleLogout = () => {
     auth.signOut()
       .then(() => {
-        navigation.replace('Login'); // Navigate to the login screen after logout
+        navigation.replace('Login');
       })
       .catch((error) => {
         console.error("Logout failed: ", error);
@@ -18,8 +18,10 @@ const UsernameDisplay = () => {
   };
 
   return (
+    
     <View style={styles.container}>
-      <Text style={styles.username}>Hello, {userEmail}</Text>
+      <Image source={phyDoodleShapes} style={styles.backgroundImage} />
+      <Text style={styles.prompt}>Hello, {userEmail}</Text>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
@@ -31,21 +33,35 @@ const UsernameDisplay = () => {
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+    height: '100%',
+    marginTop: 0,
+    marginBottom: -320,
+  },
+  prompt: {
+    fontSize: 40,
+    marginBottom: 20,
+    fontFamily: 'Itim_400Regular',
+    color: '#3F3CB4',
+    bottom: 350,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#D8EEF7', // Light blue background
+    backgroundColor: '#D8EEF7',
     padding: 20,
   },
   username: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#3F3CB4', // Custom color
+    color: '#3F3CB4', 
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#3F3CB4', // Matching button color
+    backgroundColor: '#3F3CB4', 
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 5,
