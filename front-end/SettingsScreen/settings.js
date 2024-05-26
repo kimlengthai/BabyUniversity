@@ -26,7 +26,7 @@ const SettingsScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Image source={require('../assets/settingsImages/back_button.png')} style={styles.back} />
             </TouchableOpacity>
-            <Text style={styles.title}>Book Settings</Text>
+            <Text style={styles.title}>Books Settings</Text>
             <View style={[styles.container, { alignItems: 'center' }]} >
                 <Text style={styles.heading}>Read Aloud</Text>
                 <Text style={styles.heading}>Quizzes</Text>
@@ -138,12 +138,14 @@ const styles = StyleSheet.create({
         height: 40,
         marginLeft: 180,
         resizeMode: 'contain',
+        left: 15,
     },
     back: {
         width: 40,
         height: 40,
         marginLeft: 15,
-        marginTop: 15
+        marginTop: 10,
+        top: 20,
     },
     setting: {
         marginLeft: 300,
