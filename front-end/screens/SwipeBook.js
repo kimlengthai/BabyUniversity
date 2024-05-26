@@ -88,7 +88,7 @@ const SwipeBook = () => {
 
   async function playBookSound() {
     const { sound } = await Audio.Sound.createAsync(
-      audioPaths['paths'][carouselRef.current.currentIndex + 1]//this.refs.carouselRef.currentIndex]
+      audioPaths['paths'][carouselRef.current.currentIndex]//this.refs.carouselRef.currentIndex]
     );
     setSound(sound);
     await sound.playAsync();
@@ -115,8 +115,8 @@ const SwipeBook = () => {
         sliderWidth={screenWidth}
         itemWidth={screenWidth}
         layout={'default'}
-        onBeforeSnapToItem={playBookSound}
-        onSnaptoItem={playBookSound}
+        onBeforeSnapToItem={playSwipeSound}
+        onSnapToItem={playBookSound}
       />
     </View>
   );
