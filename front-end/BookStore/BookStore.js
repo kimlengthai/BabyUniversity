@@ -146,11 +146,11 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top: -135,
+    left: 10,
     width: '100%',
-    height: '100%',
     zIndex: -1,
+    marginTop: 140,
   },
 });
 

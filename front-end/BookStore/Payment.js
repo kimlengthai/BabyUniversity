@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
   bookContainer: {
     width: '35%',
     alignItems: 'center',
+    top: 50,
   },
   inputGroup: {
     marginVertical: 10,
@@ -240,10 +241,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 20,
   },
-  AiBookImg: {
-    width: 200,
-    height: 200,
-  },
   pricetag: {
     fontSize: 30,
     fontFamily: 'Itim_400Regular',
@@ -251,20 +248,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   ConfirmPurchaseButton: {
-    width: 400,
-    height: 80,
-    marginVertical:30,
-    marginHorizontal:146,
-    position:'absolute'
+    position:'absolute',
+    left: 820,
+    bottom: -250,
   },
-  
-  
   backgroundImage: {
     position: 'absolute',
     top: 0,
-    left: 0,
+    left: 25,
     width: '100%',
-    height: '100%',
     zIndex: -1,
   },
   goBackIcon: {
