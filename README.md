@@ -3,7 +3,7 @@
 ## Client: Christopher Ferrie
 
 ## Project Description
-The Baby University is an interactive bookshelf application that showcases in an interactive format with simple animations, sounds, and age-appropriate interactions.
+The Baby University is an interactive bookshelf application showcased in an interactive format with simple animations, sounds, and age-appropriate interactions.
 
 ## Team - Contributors
 - **Thomas Separovich** - 14273546
@@ -18,18 +18,19 @@ The Baby University is an interactive bookshelf application that showcases in an
 ## Getting Started
 1. Clone the repository: `git clone https://github.com/TomSeparovich/BabyUniversity.git`
 2. Navigate to the project directory: `cd BabyUniversity`
-- Directory: Frontend
-      - Built in React Native
-      - In your terminal access via `cd front-end`
-      - Install the necessary dependencies: `npm start`
-      - Download Xcode from the App Store and granted necessary permission that request
-      - In your terminal, press i to open iOS simulator
+- Directory: Frontend <br>
+      - Built in React Native <br>
+      - In your terminal access via `cd front-end` <br>
+      - Install the necessary dependencies: `npm i` <br>
+      - Run the Expo development server: `npx expo start` <br>
+      - Download Xcode from the App Store and grant the necessary permission <br>
+      - In your terminal, press i to open the iOS simulator <br>
   
-- Directory: Backend
-      - Built in React Native
-      - In your terminal access via `cd back-end`
-      - Install the necessary dependencies: `npm i`
-      - Run `npm start` in the back-end terminal
+- Directory: Backend <br>
+      - Built in React Native <br>
+      - In your terminal access via `cd back-end` <br>
+      - Install the necessary dependencies: `npm i` <br>
+      - Run `npm start` in the back-end terminal <br>
 
 ## Usage
 1. Use the Expo Go app in the iOS Simulator to interact with the front-end application.
