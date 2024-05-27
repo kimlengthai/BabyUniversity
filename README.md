@@ -7,7 +7,7 @@ The Baby University is an interactive bookshelf application showcased in an inte
 
 ## Team - Contributors
 - **Thomas Separovich** - 14273546
-- **Arpitha Thoagrapalli Dinesh ** - 24967174
+- **Arpitha Thoagrapalli Dinesh** - 24967174
 - **Joshua Tangendjaja** - 24442143
 - **Abhishek Chand** - 24555245
 - **Yazan El-Taha** - 14397448
