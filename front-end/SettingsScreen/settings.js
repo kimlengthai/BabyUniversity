@@ -6,10 +6,10 @@ import { useReadAloud } from './Storage';
 import { useFonts, Itim_400Regular } from '@expo-google-fonts/itim';
 
 const SettingsScreen = ({ navigation }) => {
-    const { readAloudVal, setReadAloudVal } = useReadAloud();
+    const { readAloudVal, setReadAloudVal } = useReadAloud(); // used to destrcutuer teh vaiable after use
   
-    const readAloud = () => setReadAloudVal(prevState => !prevState);
-    const [quizVal, setQuizVal] = useState(false);
+    const readAloud = () => setReadAloudVal(prevState => !prevState);// state used to keep track if the read aloud option is set to true or false
+    const [quizVal, setQuizVal] = useState(false);//use to keep track of the quiz option
     const quiz = () => setQuizVal(previousState => !previousState);
     const [range, setRange] = useState('50%');
     const [sliding, setSliding] = useState('inactive');

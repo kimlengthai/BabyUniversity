@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import axios from 'axios';
-import { auth } from './firebase'; // Adjust the path based on your firebase setup
+import { auth } from './firebase'; 
 import ParentUI from './ParentUI/ParentUI';
 import phyDoodleShapes from '../front-end/assets/BgImage/doodle.png';
 import { useFonts, Itim_400Regular } from '@expo-google-fonts/itim';
@@ -14,6 +14,7 @@ const PinEntryScreen = ({ navigation }) => {
   const handlePinChange = (enteredPin) => {
     setPin(enteredPin);
   };
+  // used to validate pin details
 
   const handlePinSubmit = () => {
     const userEmail = auth.currentUser.email;
@@ -21,7 +22,7 @@ const PinEntryScreen = ({ navigation }) => {
     axios.get('http://localhost:3000/checkpin', {
       params: {
         email: userEmail,
-        pin: pin, // Use the state variable pin
+        pin: pin, 
       },
     })
     .then((response) => {
@@ -45,7 +46,7 @@ const PinEntryScreen = ({ navigation }) => {
       <Image source={phyDoodleShapes} style={styles.backgroundImage} />
       <Text style={styles.errorText}>{error}</Text>
       <Text style={styles.prompt}>Switching to parents mode</Text>
-      <Text style={styles.promptPrint}>Please enter your PIN</Text>
+      <Text style={styles.promptText}>Please enter your PIN</Text>
       <TextInput
         style={styles.input}
         value={pin}
@@ -79,12 +80,21 @@ const styles = StyleSheet.create({
     marginBottom: -320,
   },
   errorText: {
+    fontSize: 20,
     color: 'red',
-    marginBottom: 10,
+    marginBottom: 20,
     bottom: 110,
   },
   prompt: {
     fontSize: 40,
+    marginBottom: 20,
+    fontFamily: 'Itim_400Regular',
+    color: '#3F3CB4',
+    bottom: 350,
+  },
+  
+  promptText: {
+    fontSize: 20,
     marginBottom: 20,
     fontFamily: 'Itim_400Regular',
     color: '#3F3CB4',

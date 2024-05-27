@@ -6,6 +6,7 @@ const ReadAloudContext = createContext();
 export const ReadAloudProvider = ({ children }) => {
   const [readAloudVal, setReadAloudVal] = useState(false);
 
+   // This useEffect is used to load the Read Aloud setting from AsyncStorage when the component opens
   useEffect(() => {
     const loadSetting = async () => {
       const savedSetting = await AsyncStorage.getItem('readAloudVal');
@@ -16,7 +17,7 @@ export const ReadAloudProvider = ({ children }) => {
 
     loadSetting();
   }, []);
-
+// This sueEffect is used to keep track of the state varibale for the readAloudVal everytime it changes
   useEffect(() => {
     AsyncStorage.setItem('readAloudVal', JSON.stringify(readAloudVal));
   }, [readAloudVal]);
@@ -27,5 +28,6 @@ export const ReadAloudProvider = ({ children }) => {
     </ReadAloudContext.Provider>
   );
 };
-
+// Hook that is used to read teh content and is the variable that is 
+//passed through each page to keep track of the state of the variable
 export const useReadAloud = () => useContext(ReadAloudContext);

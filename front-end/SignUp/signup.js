@@ -20,33 +20,32 @@ const validateParentalPin = (pin) => /^\d{4}$/.test(pin);
 const validatePassword = (password, confirmPassword) => {
   const errors = [];
 
-  // Ensure password is at least 6 characters long
   if (password.length < 6) {
-    errors.push('Password must be at least 6 characters long.');
+    errors.push('Password must contain atleast 6 characters. Please try again');
   }
 
   const capitalRegex = /[A-Z]/;
   if (!capitalRegex.test(password)) {
-    errors.push('Password must contain at least one uppercase letter.');
+    errors.push('Password should have atleast one or more uppercase letter. Please try again');
   }
 
   const specialRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   if (!specialRegex.test(password)) {
-    errors.push('Password must contain at least one special character.');
+    errors.push('Password should have atleast one or more lowercase letter. Please try again');
   }
 
   const numberRegex = /[0-9]/;
   if (!numberRegex.test(password)) {
-    errors.push('Password must contain at least one number.');
+    errors.push('Password should have atleast one number.Please try again');
   }
 
   if (password !== confirmPassword) {
-    errors.push('Passwords do not match.');
+    errors.push('Password and Confirm password do not match. Please try again');
   }
 
   return errors;
 }
-
+// used to define all vraiables used
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

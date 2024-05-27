@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions, Button } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { useNavigation } from '@react-navigation/native';
 import { Audio } from 'expo-av';
-import { useReadAloud } from '../SettingsScreen/Storage';
+import { useReadAloud } from '../SettingsScreen/Storage';// used to keep track to ensure slider option for read aloud is set to true or false
 
 import Page0 from '../BookPages/page0'
 import Page1 from '../BookPages/page1' 
