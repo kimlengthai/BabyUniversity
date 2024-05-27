@@ -7,7 +7,7 @@ The Baby University is an interactive bookshelf application showcased in an inte
 
 ## Team - Contributors
 - **Thomas Separovich** - 14273546
-- **Arpitha Thoagrapalli** - 24967174
+- **Arpitha Thoagrapalli Dinesh ** - 24967174
 - **Joshua Tangendjaja** - 24442143
 - **Abhishek Chand** - 24555245
 - **Yazan El-Taha** - 14397448
@@ -22,7 +22,7 @@ The Baby University is an interactive bookshelf application showcased in an inte
       - Built in React Native <br>
       - In your terminal access via `cd front-end` <br>
       - Install the necessary dependencies: `npm i` <br>
-      - Run the Expo development server: `npx expo start` <br>
+      - Run the Expo development server: `npx expo start or npm start` <br>
       - Download Xcode from the App Store and grant the necessary permission <br>
       - In your terminal, press i to open the iOS simulator <br>
   
