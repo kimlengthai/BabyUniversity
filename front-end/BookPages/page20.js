@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#BDC2C8',
     position: 'relative',
    
     width: '100%',
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     height: 550,
     borderRadius: 550,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   outerCircle: {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     zIndex: 6,
   },
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   redBall: {
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   {
     height: 280,
     width: 600,
-    backgroundColor: 'black',
+    backgroundColor: '#BDC2C8',
     zIndex: 5,
     position: 'absolute',
     top: 450,
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   {
     textAlign: 'center',
     position: 'absolute',
-    bottom: 20,
+    bottom: 160,
     fontWeight: '700',
     color: 'white',
     zIndex: 200,
@@ -212,8 +212,9 @@ const styles = StyleSheet.create({
   text:
   {
     fontSize: 70,
-    color: 'white',
+    color: 'black',
     zIndex: 6,
+    fontWeight: '700'
   },
 });
 export default Page20;

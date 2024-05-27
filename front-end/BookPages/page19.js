@@ -67,7 +67,7 @@ const Page19 = () => {
       </View>
 
       <View style={styles.bodyText}>
-      <Text style={styles.text}>An <Text style={styles.textElectron}>electron</Text> can take <Text style={styles.textEnergy}>energy</Text>.</Text>
+      <Text style={styles.text}>An <Text style={styles.textElectron}>electron</Text> can take <Text style={styles.textEnergy }>energy</Text>.</Text>
       </View>
       
     </View>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     position: 'relative',
     width: '100%',
     width: '100%',
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   secondBorderContainer: {
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     height: 450,
     borderRadius: 450,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     zIndex: 4,
   },
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   redBall: 
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   {
     height: 280,
     width: 550,
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     zIndex: 5,
     position: 'absolute',
     top: 420,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   {
     textAlign: 'center',
     position: 'absolute',
-    bottom: 20,
+    bottom: 160,
     fontWeight: '700',
     color: 'white',
     zIndex: 200,
@@ -191,8 +191,9 @@ const styles = StyleSheet.create({
   text:
   {
     fontSize: 70,
-    color: 'white',
+    color: 'black',
     zIndex: 6,
+    fontWeight: '700'
   },
   textElectron:
   {
@@ -201,6 +202,9 @@ const styles = StyleSheet.create({
   textEnergy:
   {
     color: 'yellow',
+    textShadowColor: '#585858', 
+    textShadowOffset:{width: 1, height: 1},
+    textShadowRadius:1
   },
 });
 

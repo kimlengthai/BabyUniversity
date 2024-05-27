@@ -120,7 +120,7 @@ const Page9 = () => {
 
       {/* Text */}
       <View style = {styles.bodyText}>
-        <Text style = {{color: 'white', fontSize: 70}}> <Text style = {{color:'green'}}>Electrons</Text> have  <Text style ={{color: 'yellow'}}>energy.</Text></Text>
+        <Text style = {{color: 'black', fontSize: 70, fontWeight: 700 }}> <Text style = {{color:'green'}}>Electrons</Text> have  <Text style ={{color: 'yellow', textShadowColor: '#585858', textShadowOffset:{width: 1, height: 1},textShadowRadius:1}}>energy.</Text></Text>
       </View>
       
     </View>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        backgroundColor: 'black',
+        backgroundColor: '#BDC2C8',
         width: '100%',
         height: 'auto'
     },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         height: 700,
         // backgroundColor: 'orange',
         borderRadius: 350,
-        borderColor: 'white', 
+        borderColor: 'black', 
         borderWidth: 2,
         position: 'absolute',
         bottom: -400,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         width: 550,
         height: 550,
         borderRadius: 275,
-        borderColor: 'white',
+        borderColor: 'black',
         borderWidth: 2,
         position: 'absolute',
         bottom: -330,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         width: 400,
         height: 400,
         borderRadius: 200,
-        borderColor: 'white',
+        borderColor: 'black',
         borderWidth: 2,
         position: 'absolute',
         bottom: -250,

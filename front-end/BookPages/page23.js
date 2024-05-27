@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#BDC2C8',
     position: 'relative',
     width: '100%',
     height: 'auto'
@@ -106,17 +106,22 @@ const styles = StyleSheet.create({
   bodyText: {
     textAlign: 'center',
     position: 'absolute',
-    bottom: 20,
+    bottom: 160,
     fontWeight: '700',
     zIndex: 200,
   },
   text: {
     fontSize: 70,
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
+    fontWeight: '700'
+
   },
   energy: {
     color: 'yellow',
+    textShadowColor: '#585858', 
+    textShadowOffset:{width: 1, height: 1},
+    textShadowRadius:1
   },
 });
 

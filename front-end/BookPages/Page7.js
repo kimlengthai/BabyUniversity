@@ -76,7 +76,7 @@ const Page7 = () => {
         </View>
       
         <View style = {styles.text}>
-            <Text style = {{color: 'white', fontSize: 50}}>And <Text style ={{color: 'red'}}>protons.</Text></Text>
+            <Text style = {{color: 'black', fontSize: 70, fontWeight: 700}}>And <Text style ={{color: 'red'}}>protons.</Text></Text>
       </View>
       
     </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     width: '100%',
     height: 'auto'
   },
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     height: 550,
     borderRadius: 550,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   outerCircle: {
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     height: 450,
     borderRadius: 450,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     zIndex: 99,
   },
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 350,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   thirdCircle: {
@@ -224,8 +224,8 @@ const styles = StyleSheet.create({
   text:{
     position: 'absolute',
     zIndex: 100,
-    bottom: 70,
-    fontWeight: '700',
+    bottom: 50,
+    
   
   }
   

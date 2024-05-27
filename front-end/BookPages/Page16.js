@@ -75,7 +75,7 @@ const Page16 = () => {
       </View>
 
       <View style={styles.bodyText}>
-        <Text style={{ color: 'white', fontSize: 70, textAlign: 'center' }}>
+        <Text style={{ color: 'black', fontSize: 70, textAlign: 'center' , fontWeight: 700}}>
           But not here.
         </Text>
       </View>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    backgroundColor: 'black',
+    backgroundColor: '#BDC2C8',
     width: '100%',
     height: 'auto'
   },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     width: 700,
     height: 700,
     borderRadius: 350,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 2,
     position: 'absolute',
     bottom: -400,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     width: 550,
     height: 550,
     borderRadius: 275,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 2,
     position: 'absolute',
     bottom: -330,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 400,
     borderRadius: 200,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 2,
     position: 'absolute',
     bottom: -250,

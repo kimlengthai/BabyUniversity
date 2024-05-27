@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image, ScrollView, Dimensions } from 'react-native';
 import { Itim_400Regular } from '@expo-google-fonts/itim'; // Import custom font
 import { useFonts } from 'expo-font';
 import phyDoodleShapes from '../assets/BgImage/doodle.png'; // Import background image
@@ -12,6 +12,8 @@ import nucPhyDesc from '../assets/booksDesc/NuclearPhysicsBookDesc.png'; // Impo
 import horiLine from '../assets/img/Line.png';
 import buyButton from '../assets/buyButtons/BuyButton.png';
 import Payment from './Payment';
+
+const { width } = Dimensions.get('window'); // Get the screen width
 
 const BookStore = () => {
   const [showParentUI, setShowParentUI] = useState(false); // State to toggle ParentUI
@@ -54,10 +56,15 @@ const BookStore = () => {
   ];
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.header}>The Book Store</Text>
       <Image source={phyDoodleShapes} style={styles.backgroundImage} resizeMode="contain" />
-      <View style={styles.booksContainer}>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={true} // Show the scroll indicator to hint that it's scrollable
+        contentContainerStyle={styles.scrollViewContainer}
+      >
         {books.map((book, index) => (
           <View key={index} style={styles.bookItem}>
             <Text style={styles.bookTitle}>{book.title}</Text>
@@ -70,20 +77,25 @@ const BookStore = () => {
             <Image source={horiLine} style={styles.horiLine} resizeMode="contain" />
           </View>
         ))}
+      </ScrollView>
+      <View style={styles.scrollHint}>
+        <Text style={styles.scrollHintText}>Scroll right</Text>
+        <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/right-squared.png' }} style={styles.rightArrow} />
       </View>
       <TouchableOpacity style={styles.goBackIcon} onPress={handleGoBack}>
         <Image source={goBackButton} style={styles.goBack} resizeMode="contain" />
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: '#E0F6FF',
     alignItems: 'center',
     padding: 10,
+    position: 'relative'
   },
   header: {
     fontSize: 50,
@@ -91,36 +103,37 @@ const styles = StyleSheet.create({
     color: '#3F3CB4',
     marginVertical: 20,
   },
-  booksContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
+  scrollViewContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    
   },
   bookItem: {
-    width: '30%',
+    width: width - 50, // Adjust width to fit the screen with some padding
     alignItems: 'center',
-    marginVertical: 20,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
   },
   bookTitle: {
-    fontSize: 20,
+    fontSize: 36, // Increased font size
     fontFamily: 'Itim_400Regular',
     color: '#ED5D5B',
     textAlign: 'center',
     marginVertical: 10,
   },
   bookImg: {
-    width: 100,
-    height: 150,
+    width: 250, // Increased size
+    height: 350, // Increased size
     marginVertical: 10,
   },
   bookDescImg: {
-    width: 200,
-    height: 80,
+    width: 370,
+    height: 100,
     marginVertical: 10,
   },
+
   pricetag: {
-    fontSize: 20,
+    fontSize: 34, // Increased font size
     fontFamily: 'Itim_400Regular',
     color: '#3D3AAF',
     marginVertical: 10,
@@ -129,8 +142,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buyButton: {
-    width: 100,
-    height: 40,
+    width: 140, // Increased size
+    height: 60, // Increased size
   },
   horiLine: {
     width: '80%',
@@ -139,10 +152,13 @@ const styles = StyleSheet.create({
   },
   goBackIcon: {
     marginVertical: 20,
+    position: 'absolute',
+    left: 70,
+    bottom: 20
   },
   goBack: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
   },
   backgroundImage: {
     position: 'absolute',
@@ -151,6 +167,21 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: -1,
     marginTop: 140,
+  },
+  scrollHint: {
+    position: 'absolute',
+    bottom: 50,
+    right: 70, // Adjusted the position to move it to the right
+    alignItems: 'center',
+  },
+  scrollHintText: {
+    fontSize: 24,
+    color: '#3F3CB4',
+    marginBottom: 5,
+  },
+  rightArrow: {
+    width: 28,
+    height: 28,
   },
 });
 

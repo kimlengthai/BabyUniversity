@@ -121,7 +121,7 @@ const Page5 = () => {
         
 
         <View style = {styles.bodyText}>
-            <Text style = {{color: 'white', fontSize: 70}}>All balls are made of atoms.</Text>
+            <Text style = {{color: 'black', fontSize: 70, fontWeight: 700}}>All balls are made of atoms.</Text>
         </View>
 
     </View>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     width: '100%',
     height: 'auto'
   },
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     borderRadius: 200,
     borderWidth: 10, // Increased thickness
-    borderColor: 'white', // White color
+    borderColor: 'black', // White color
   },
   ball: {
     backgroundColor: 'yellow', // Change to yellow color
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   {
     width: 200,
     height: 50, 
-    backgroundColor: "white",
+    backgroundColor: "black",
      borderRadius: 2,
      top: 120,
      left: 240,
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     height: 275, // Reduced size
     borderRadius: 275, // Adjusted to match new size
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   outerCircle: {
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     height: 225, // Reduced size
     borderRadius: 225, // Adjusted to match new size
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     zIndex: 99,
   },
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     height: 150, // Reduced size
     borderRadius: 150, // Adjusted to match new size
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   thirdCircle: {

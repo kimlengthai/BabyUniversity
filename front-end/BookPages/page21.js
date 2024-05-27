@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     position: 'relative',
     width: '100%',
     height: 'auto'
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     height: 550,
     borderRadius: 550,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   outerCircle: {
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     zIndex: 5,
   },
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   redBall: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   {
     height: 300,
     width: 600,
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     zIndex: 5,
     position: 'absolute',
     top: 425,
@@ -178,19 +178,23 @@ const styles = StyleSheet.create({
   {
     textAlign: 'center',
     position: 'absolute',
-    bottom: 20,
+    bottom: 160,
     fontWeight: '700',
     zIndex: 200,
   },
   text:
   {
     fontSize: 70,
-    color: 'white',
+    color: 'black',
     zIndex: 200,
+    fontWeight: '700'
   },
   energy:
   {
     color: 'yellow',
+    textShadowColor: '#585858', 
+    textShadowOffset:{width: 1, height: 1},
+    textShadowRadius:1
   },
 });
 export default Page21;

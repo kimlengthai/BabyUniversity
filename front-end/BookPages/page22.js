@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     position: 'relative',
     width: '100%',
     height: 'auto'
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   secondBorderContainer: {
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     height: 450,
     borderRadius: 450,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     zIndex: 5,
   },
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
   },
   redBall: {
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   {
     height: 280,
     width: 600,
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     zIndex: 5,
     position: 'absolute',
     top: 450,
@@ -176,15 +176,17 @@ const styles = StyleSheet.create({
   {
     textAlign: 'center',
     position: 'absolute',
-    bottom: 20,
+    bottom: 160,
     fontWeight: '700',
     zIndex: 200,
   },
   text:
   {
     fontSize: 70,
-    color: 'white',
+    color: 'black',
     zIndex: 6,
+    fontWeight: '700'
+
   },
 });
 
