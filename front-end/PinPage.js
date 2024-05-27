@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     bottom: 110,
   },
   prompt: {
-    fontSize: 40,
+    fontSize: 60,
     marginBottom: 20,
     fontFamily: 'Itim_400Regular',
     color: '#3F3CB4',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   
   promptText: {
-    fontSize: 20,
+    fontSize: 40,
     marginBottom: 20,
     fontFamily: 'Itim_400Regular',
     color: '#3F3CB4',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     backgroundColor: '#FFFFFF',
     borderRadius: 14,
-    bottom: 350,
+    bottom: 330,
   },
   submitButtonContainer: {
     bottom: 300,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: '#000000',
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'Itim_400Regular',
     textAlign: 'center',
   },
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   goBackText: {
     color: '#3F3CB4',
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: 'bold',
   },
 });

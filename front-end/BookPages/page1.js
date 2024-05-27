@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     position: 'relative',
     width : '100%',
     height: 'auto'
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
   },
   text: {
     position: 'absolute',
-    bottom: 0,
-    color: 'white',
+    bottom: 100,
+    color: 'black',
     fontSize: 50,
     fontWeight: '700',
     textAlign: 'center',

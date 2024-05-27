@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     height: 550,
     borderRadius: 550,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     top: -50, // Adjust this value to move it up
   },
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     height: 450,
     borderRadius: 450,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     zIndex: 99,
     top: -50, // Adjust this value to move it up
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 350,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: 'black',
     position: 'relative',
     top: -50, // Adjust this value to move it up
   },

@@ -12,7 +12,7 @@ export default function Page8() {
 
       {/* text */}
       <View style={styles.text}>
-        <Text style={{ color: 'white', fontSize: 50 }}>And <Text style={{ color: 'green' }}>electrons.</Text></Text>
+        <Text style={{ color: 'black', fontSize: 70, fontWeight: 700 }}>And <Text style={{ color: 'green' }}>electrons.</Text></Text>
       </View>
     </View>
   )
@@ -24,14 +24,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     width: '100%',
     height: 'auto'
   },
   text: {
     position: 'absolute',
     zIndex: 100,
-    bottom: 50,
+    bottom: 40,
     fontWeight: '700',
 
   }

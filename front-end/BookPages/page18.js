@@ -134,10 +134,9 @@ const page18 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     width: '100%',
     height: 'auto'
   },
@@ -212,17 +211,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     fontWeight: '700',
-    color: 'white',
+    color: 'black',
   },
   text:
   {
     fontSize: 70,
-    color: 'white',
-    textAlign: 'center'
+    color: 'black',
+    textAlign: 'center',
+    fontWeight: '700'
   },
   electronText: 
   {
     color: 'green',
+    fontWeight: '700'
   },
 });
 

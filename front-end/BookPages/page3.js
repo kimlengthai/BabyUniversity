@@ -107,19 +107,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     position: 'relative',
     width : '100%',
     height: 'auto'
   },
   text: {
     position: 'absolute',
-    bottom: 20, // Adjust as needed to position the text at the bottom
+    bottom: 160, // Adjust as needed to position the text at the bottom
     color: 'white',
     fontSize: 70,
     textAlign: 'center',
     fontWeight: '700',
     width: '100%',
+    color: 'black'
+
   },
 });
 

@@ -96,29 +96,37 @@ router.get('/checkpin', async (req, res) => {
     const { email, pin } = req.query;
     console.log(`Received email: ${email}`);
     console.log(`Received pin: ${pin}`);
+    
+    if (!email || !pin) {
+      return res.status(400).json({ message: 'Email and PIN are required' });
+    }
+
     const userDetails = await db.collection('user').get();
 
     let userFound = false;
     userDetails.forEach(doc => {
       const userData = doc.data();
-      console.log('User data retrieved:', userData);
 
-      if (userData.email === email) {
-        userFound = true;
-        const parentalPin = userData.parentalPin;
+      if (userData.email) {  // Check if the document has an email field
+        const emailReceived = email.toLowerCase();
+        const emailFromDatabase = userData.email.toLowerCase();
 
-        if (pin === parentalPin) {
-          res.status(200).json({ message: 'PIN validated' });
-          return;
-        } else {
-          res.status(400).json({ message: 'Incorrect PIN. Please try again' });
-          return;
+        if (emailReceived === emailFromDatabase) {
+          userFound = true;
+          const parentalPin = userData.parentalPin;
+
+          if (pin === parentalPin) {
+            res.status(200).json({ message: 'PIN validated' });
+            return;
+          } else {
+            res.status(400).json({ message: 'Incorrect PIN. Please try again' });
+            return;
+          }
         }
-
-    
       }
     });
-// Error handling for the case where user details are not found
+
+    // Error handling for the case where user details are not found
     if (!userFound) {
       console.log(`User not found in database for email: ${email}`);
       res.status(404).json({ message: 'User not found' });

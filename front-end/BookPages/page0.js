@@ -14,12 +14,12 @@ export default function Page0() {
       <BackButton />
       {/* text */}
       <Text style={{ color: 'red', fontSize: 70, marginTop: 5 }}>Quantum <Text style={{ color: 'blue' }}>Physics</Text></Text>
-      <Text style={{ color: 'white', fontSize: 70, marginTop: 5, marginBottom: 10, }}>for <Text style={{ color: 'yellow' }}>Babies.</Text></Text>
+      <Text style={{ color: 'black', fontSize: 70, marginTop: 5, marginBottom: 10, }}>for <Text style={{ color: 'red' }}>Babies.</Text></Text>
       <View style={{ flex: 1 }}>
         <CircleAnimation />
       </View>
       <View style={styles.text}>
-        <Text style={{ color: 'white', fontSize: 50 }}>By <Text style={{ color: 'white' }}>Chris Ferrie</Text></Text>
+        <Text style={{ color: 'black', fontSize: 50 }}>By <Text style={{ color: 'green' }}>Chris Ferrie</Text></Text>
       </View>
 
       <View style={styles.hammer}>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     width: '100%',
     height: '100%',
   },
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     fontWeight: '700',
     marginTop: 100,
+    color: 'black'
   },
   hammer: {
     position: 'absolute',

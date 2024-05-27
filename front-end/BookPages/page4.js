@@ -19,10 +19,9 @@ const Page4 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1e1919',
+    backgroundColor: '#f3f4f5',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
     width : '100%',
     height: 'auto'
   },
@@ -65,9 +64,9 @@ const styles = StyleSheet.create({
   text: {
     position: 'absolute',
     zIndex: 100,
-    bottom: 50,
+    bottom: 160,
     fontWeight: '700',
-    color: 'white',
+    color: 'black',
     fontSize: 70,
   },
   zeroEnergy: {

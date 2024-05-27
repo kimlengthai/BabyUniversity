@@ -4,8 +4,13 @@ import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button, Imag
 import { auth } from '../firebase';
 import MenuButton from '../MenuButton';
 import LogoutSuccessful from '../Logout Page';
+import { useFonts, Itim_400Regular } from '@expo-google-fonts/itim';
+
 
 const BedRoomScreen = ({navigation}) => {
+
+  let [fontsLoaded] = useFonts({ Itim_400Regular });
+
   const openBook = () => {
     navigation.navigate('SwipeBook');
   };
@@ -78,7 +83,7 @@ const BedRoomScreen = ({navigation}) => {
         source={require('../assets/bedRoomImages/booksCapinet.png')} 
         style={styles.booksCapinet} 
       />
- <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
 
@@ -91,14 +96,18 @@ export default BedRoomScreen;
 const styles = StyleSheet.create({
   logoutButton: {
     position: 'absolute',
-    top: 10,
-    right: 10,
-    padding: 10
+    top: 40,
+    right: 25,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    backgroundColor: 'rgba(255, 0, 0, 0.8)', // Red background with some transparency
+    borderRadius: 10, // Rounded corners
+    elevation: 5, // Add elevation for a raised effect on Android
   },
   logoutText: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
-    color: 'red'
+    color: '#fff', // White text color
   },
     container: {
       flex: 1,     
@@ -119,8 +128,9 @@ const styles = StyleSheet.create({
       
     },
     bedroomTitle: {
-     fontSize: 45,
-     fontWeight: '700'
+     fontSize: 50,
+     fontFamily: 'Itim_400Regular',
+     color: '#3F3CB4'
 
     },
     rectangle: {

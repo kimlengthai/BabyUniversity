@@ -44,9 +44,11 @@ const Page2 = () => {
         </Animated.View>
       </View>
       <View style={styles.bodyText}>
-        <Text style={{ color: 'white', fontSize: 70 }}>
-          <Text>This ball</Text> has <Text style={{ color: 'yellow' }}>energy.</Text>
+        <Text style={{ color: 'black', fontSize: 70 }}> 
+          <Text>This ball</Text> has <Text style={{ color: 'yellow', textShadowColor: '#585858', textShadowOffset:{width: 1, height: 1},textShadowRadius:1}}>energy.</Text>
         </Text>
+        
+        
       </View>
     </View>
   );
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    backgroundColor: 'black',
+    backgroundColor: '#f3f4f5',
     width : '100%',
     height: 'auto'
   },
@@ -74,6 +76,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 50,
     position: 'absolute',
+    left: -50,
+    top: -90,
     zIndex: 4,
   },
   glowing: {
@@ -86,6 +90,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
     shadowRadius: 20,
+    left: -50,
+    top: -90,
+   
   },
   glowing1: {
     transform: [{ rotate: '30deg' }],
@@ -99,8 +106,9 @@ const styles = StyleSheet.create({
   bodyText: {
     position: 'absolute',
     zIndex: 100,
-    bottom: 50,
+    bottom: 100,
     fontWeight: '700',
     color: 'white',
+    bottom: 160
   },
 });

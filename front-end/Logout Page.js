@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     marginBottom: -320,
   },
   prompt: {
-    fontSize: 40,
+    fontSize: 50,
     marginBottom: 20,
     fontFamily: 'Itim_400Regular',
     color: '#3F3CB4',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 36,
     fontWeight: 'bold',
     marginBottom: 20,
     color: '#3F3CB4',
@@ -58,16 +58,18 @@ const styles = StyleSheet.create({
     color: '#333', 
     textAlign: 'center',
     paddingHorizontal: 20,
+    bottom: 100
   },
   button: {
     backgroundColor: '#3F3CB4',
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 5,
+    bottom: 110
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: 'bold',
   },
 });

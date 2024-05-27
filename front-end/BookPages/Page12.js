@@ -52,8 +52,9 @@ const Page12 = () => {
   const rotate3 = animated3.interpolate({ inputRange, outputRange: ['0deg', '130deg'] });
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handlePress}>
+    <View style={styles.container}>
       <BackButton />
+      <TouchableOpacity onPress={handlePress}>
       <View style={styles.circleContainer}>
         <Animated.View style={[styles.circle, { transform: [{ rotate: rotate1 }] }]}>
           <View style={styles.innerCircle} />
@@ -81,13 +82,15 @@ const Page12 = () => {
           <View style={styles.neutron} />
         </View>
       </View>
+      </TouchableOpacity>
+      
 
       <View style={styles.bodyText}>
-        <Text style={{ color: 'white', fontSize: 70, textAlign: 'center' }}>
-          <Text style={{ color: 'yellow' }}>Energy</Text> is quantized.
+        <Text style={{ color: 'black', fontSize: 70, textAlign: 'center', fontWeight: 700 }}>
+          <Text style={{ color: 'yellow',textShadowColor: '#585858', textShadowOffset:{width: 1, height: 1},textShadowRadius:1 }}>Energy</Text> is quantized.
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    backgroundColor: 'black',
+    backgroundColor: '#BDC2C8',
     width: '100%',
     height: 'auto'
   },
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
     width: 700,
     height: 700,
     borderRadius: 350,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 2,
     position: 'absolute',
     bottom: -400,
@@ -186,7 +189,7 @@ const styles = StyleSheet.create({
     width: 550,
     height: 550,
     borderRadius: 275,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 2,
     position: 'absolute',
     bottom: -330,
@@ -206,7 +209,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 400,
     borderRadius: 200,
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 2,
     position: 'absolute',
     bottom: -250,
