@@ -3,7 +3,7 @@
 ## Client: Dr Christopher Ferrie
 
 ## Project Description
-This project, alongside Dr Christopher Ferrrie, aims to convert the book series 'Baby University' into an interactive IOS application with simple animations and sounds aimed am younger children.
+This project, alongside Dr Christopher Ferrrie, aims to convert the book series 'Baby University' into an interactive IOS application with simple animations and sounds aimed at younger children.
 ## Team - Contributors
 - **Thomas Separovich** - 14273546
 - **Arpitha Thoagrapalli Dinesh** - 24967174
