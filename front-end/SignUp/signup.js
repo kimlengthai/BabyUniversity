@@ -79,6 +79,7 @@ const handleSignup = async () => {
 
   if (!parentalPin) newErrors.parentalPin = 'Please enter a four-digit pin.';
   else if (!validateParentalPin(parentalPin)) newErrors.parentalPin = 'Please enter a valid four-digit pin.';
+  if(!password) newErrors.password = ' Please enter a password'
 
   setErrors(newErrors);
 
