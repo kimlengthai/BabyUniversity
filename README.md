@@ -1,10 +1,9 @@
 # Baby University
 
-## Client: Christopher Ferrie
+## Client: Dr Christopher Ferrie
 
 ## Project Description
-The Baby University is an interactive bookshelf application showcased in an interactive format with simple animations, sounds, and age-appropriate interactions.
-
+This project, alongside Dr Christopher Ferrrie, aims to convert the book series 'Baby University' into an interactive IOS application with simple animations and sounds aimed am younger children.
 ## Team - Contributors
 - **Thomas Separovich** - 14273546
 - **Arpitha Thoagrapalli Dinesh** - 24967174
@@ -15,6 +14,10 @@ The Baby University is an interactive bookshelf application showcased in an inte
 - **Kimleng Thai** - 24577494
 - **Ali Jafari** - 24419638
 
+## Requirements 
+- MacOS (required to run Xcode for iPad simulator)
+- NPM 
+
 ## Getting Started
 1. Clone the repository: `git clone https://github.com/TomSeparovich/BabyUniversity.git`
 2. Navigate to the project directory: `cd BabyUniversity`
@@ -22,9 +25,9 @@ The Baby University is an interactive bookshelf application showcased in an inte
       - Built in React Native <br>
       - In your terminal access via `cd front-end` <br>
       - Install the necessary dependencies: `npm i` <br>
-      - Run the Expo development server: `npx expo start or npm start` <br>
+      - Run the Expo development server: `npx expo start` or `npm start` <br>
       - Download Xcode from the App Store and grant the necessary permission <br>
-      - In your terminal, press i to open the iOS simulator <br>
+      - In your terminal, press `i` to open the iOS simulator <br>
   
 - Directory: Backend <br>
       - Built in React Native <br>
