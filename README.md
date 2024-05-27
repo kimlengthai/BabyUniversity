@@ -42,7 +42,7 @@ This project, alongside Dr Christopher Ferrrie, aims to convert the book series 
 ## Steps to overcome the below error at (front-end directory)
 Error : EMFILE: too many open files, watch at FSEvent.FSWatcher._handle.onchange (node:internal/fs/watchers:207:21)
 
-1- To install Homebrew, open your terminal and run the following command:
+1- To install Homebrew, run the following command in front-end directory:
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 2- After installing Homebrew, you need to add it to your system's PATH to use it from the terminal. Follow the instructions that the Homebrew installer outputs. Typically, you will need to add the following line to your .zshrc or .bash_profile file:
 
