@@ -77,7 +77,7 @@ const Page6V2 = () => {
         </View>
       
         <View style = {styles.text}>
-            <Text style = {{color: 'white', fontSize: 50}}>Here are <Text style ={{color: 'blue'}}>neutrons.</Text></Text>
+            <Text style = {{color: 'white', fontSize: 50}}>There are <Text style ={{color: 'blue'}}>neutrons.</Text></Text>
         </View>
       
     </View>

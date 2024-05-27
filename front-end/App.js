@@ -12,13 +12,14 @@ import SwipeBook from './screens/SwipeBook';
 import LogoutSuccessful from './Logout Page';
 import UsernameDisplay from './UserName'
 import SettingsScreen from './SettingsScreen/settings'
+import { ReadAloudProvider } from './SettingsScreen/Storage';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+    <ReadAloudProvider>
     <NavigationContainer>
       <Stack.Navigator>
-
         <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
         <Stack.Screen options={{ headerShown: false }} name="Logout" component={LogoutSuccessful} />
         <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignupScreen} />
@@ -30,7 +31,10 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Settings" component={SettingsScreen} />
 
       </Stack.Navigator>
+      
     </NavigationContainer>
+    </ReadAloudProvider>
+
   );
 }
 

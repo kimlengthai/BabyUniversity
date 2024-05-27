@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Dimensions, Button } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { useNavigation } from '@react-navigation/native';
 import { Audio } from 'expo-av';
+import { useReadAloud } from '../SettingsScreen/Storage';
 
 import Page0 from '../BookPages/page0'
 import Page1 from '../BookPages/page1' 
@@ -33,10 +34,11 @@ import Page24 from '../BookPages/page24'
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const SwipeBook = () => {
+const SwipeBook = (isMuted) => {
   const carouselRef = useRef(null);
   const [sound, setSound] = useState();
-
+  const { readAloudVal } = useReadAloud();
+  
   const pageNum = 0;
 
   const data = [
@@ -98,25 +100,31 @@ const SwipeBook = () => {
     ]
   }
 
-  async function playBookSound() {
-    const { sound } = await Audio.Sound.createAsync(
-      audioPaths['paths'][carouselRef.current.currentIndex]//this.refs.carouselRef.currentIndex]
-    );
-    setSound(sound);
-    await sound.playAsync();
+  async function playBookSound(index) {
+    if (readAloudVal) {
+      const { sound } = await Audio.Sound.createAsync(audioPaths['paths'][index]);
+      setSound(sound);
+      await sound.playAsync();
+    }
   }
 
-  async function playSwipeSound() {
-    const { sound } = await Audio.Sound.createAsync(require('../assets/booksSFX/PageSwipe_SoundEffect.mp3'));
-    setSound(sound);
-    await sound.playAsync();
-  }
+  useEffect(() => {
+    return sound ? () => {
+      sound.unloadAsync();
+    } : undefined;
+  }, [sound]);
 
   const renderItem = ({ item }) => (
     <View style={styles.pageContainer}>
       {item.component}
     </View>
   );
+  async function playSwipeSound() {
+    const { sound } = await Audio.Sound.createAsync(require('../assets/booksSFX/PageSwipe_SoundEffect.mp3'));
+    setSound(sound);
+    await sound.playAsync();
+  }
+
 
   return (
     <View style={styles.container}>
@@ -128,13 +136,13 @@ const SwipeBook = () => {
         itemWidth={screenWidth}
         layout={'default'}
         onBeforeSnapToItem={playSwipeSound}
-        onSnapToItem={playBookSound}
+        onSnapToItem={(index) => playBookSound(index)}
       />
     </View>
   );
 };
 
-export default SwipeBook;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -147,3 +155,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+export default SwipeBook;

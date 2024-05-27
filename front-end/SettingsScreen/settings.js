@@ -1,17 +1,16 @@
 import { React, useState, useEffect } from 'react';
 import { View, Text, Button, Switch, Image, ImageBackground, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
+import SwipeBook from '../screens/SwipeBook';
+import { useReadAloud } from './Storage';
 import { useFonts, Itim_400Regular } from '@expo-google-fonts/itim';
 
 const SettingsScreen = ({ navigation }) => {
-    const [isMuted, setIsMuted] = useState(false);
-    const toggleMute = () => setIsMuted(previousState => !previousState);
-
-    const [readAloudVal, setReadAloud] = useState(false);
+    const { readAloudVal, setReadAloudVal } = useReadAloud();
+  
+    const readAloud = () => setReadAloudVal(prevState => !prevState);
     const [quizVal, setQuizVal] = useState(false);
-    const readAloud = () => setReadAloud(previousState => !previousState);
     const quiz = () => setQuizVal(previousState => !previousState);
-
     const [range, setRange] = useState('50%');
     const [sliding, setSliding] = useState('inactive');
 
@@ -20,10 +19,9 @@ const SettingsScreen = ({ navigation }) => {
     if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
-
     return (
         <ImageBackground source={require('../assets/BgImage/doodle.png')} style={styles.background}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+           <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Image source={require('../assets/settingsImages/back_button.png')} style={styles.back} />
             </TouchableOpacity>
             <Text style={styles.title}>Books Settings</Text>
@@ -121,36 +119,28 @@ const styles = StyleSheet.create({
         color: '#3F3CB4',
         fontSize: 50,
         textAlign: 'center',
-        marginLeft: 150,
-        fontFamily: 'Itim_400Regular',
-        left: 280,
-        top: 15,
+        marginLeft: 250
+        //fontFamily: 'Itim-Regular',
     },
     heading: {
         color: 'black',
         fontSize: 30,
-        fontFamily: 'Itim_400Regular',
-        marginTop: 10,
-        top: -15,
+        //fontFamily: 'Itim-Regular',
     },
     icon: {
         width: 40,
         height: 40,
         marginLeft: 180,
         resizeMode: 'contain',
-        left: 15,
     },
     back: {
         width: 40,
         height: 40,
         marginLeft: 15,
-        marginTop: 10,
-        top: 20,
+        marginTop: 15
     },
     setting: {
         marginLeft: 300,
-        top: -5,
-        marginTop: 10,
     }
 });
 
