@@ -53,12 +53,13 @@ const styles = StyleSheet.create({
     color: '#3F3CB4',
   },
   message: {
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 40,
     color: '#333', 
     textAlign: 'center',
     paddingHorizontal: 20,
-    bottom: 100
+    bottom: 100,
+    fontFamily: 'Itim_400Regular',
   },
   button: {
     backgroundColor: '#3F3CB4',
@@ -69,8 +70,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
+    fontFamily: 'Itim_400Regular',
   },
 });
 

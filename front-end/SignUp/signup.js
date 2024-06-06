@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { auth } from '../firebase';
-import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Image, ScrollView } from 'react-native';
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, ImageBackground, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import phyDoodleShapes from '../assets/BgImage/doodle.png';
 
@@ -21,31 +21,31 @@ const validatePassword = (password, confirmPassword) => {
   const errors = [];
 
   if (password.length < 6) {
-    errors.push('Password must contain atleast 6 characters. Please try again');
+    errors.push('Password must contain at least 6 characters. Please try again.');
   }
 
   const capitalRegex = /[A-Z]/;
   if (!capitalRegex.test(password)) {
-    errors.push('Password should have atleast one or more uppercase letter. Please try again');
+    errors.push('Password should have at least one uppercase letter. Please try again.');
   }
 
   const specialRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   if (!specialRegex.test(password)) {
-    errors.push('Password should have atleast one or more lowercase letter. Please try again');
+    errors.push('Password should have at least one special character. Please try again.');
   }
 
   const numberRegex = /[0-9]/;
   if (!numberRegex.test(password)) {
-    errors.push('Password should have atleast one number.Please try again');
+    errors.push('Password should have at least one number. Please try again.');
   }
 
   if (password !== confirmPassword) {
-    errors.push('Password and Confirm password do not match. Please try again');
+    errors.push('Password and Confirm password do not match. Please try again.');
   }
 
   return errors;
-}
-// used to define all vraiables used
+};
+
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,168 +58,170 @@ const SignupScreen = () => {
 
   const navigation = useNavigation();
   
-// Ensures all details are validated prior to saving to the database
-const handleSignup = async () => {
-  const newErrors = {};
+  // Ensures all details are validated prior to saving to the database
+  const handleSignup = async () => {
+    const newErrors = {};
 
-  if (!email) newErrors.email = 'Please enter your email.';
-  else if (!validateEmail(email)) newErrors.email = 'Invalid email format.';
+    if (!email) newErrors.email = 'Please enter your email.';
+    else if (!validateEmail(email)) newErrors.email = 'Invalid email format.';
 
-  if (!firstName) newErrors.firstName = 'Please enter your first name.';
-  else if (!validateName(firstName)) newErrors.firstName = 'First name must only contain letters.';
+    if (!firstName) newErrors.firstName = 'Please enter your first name.';
+    else if (!validateName(firstName)) newErrors.firstName = 'First name must only contain letters.';
 
-  if (!lastName) newErrors.lastName = 'Please enter your last name.';
-  else if (!validateName(lastName)) newErrors.lastName = 'Last name must only contain letters.';
+    if (!lastName) newErrors.lastName = 'Please enter your last name.';
+    else if (!validateName(lastName)) newErrors.lastName = 'Last name must only contain letters.';
 
-  if (!DOB) newErrors.DOB = 'Please enter your date of birth.';
-  else {
-    const dobValidation = validateDOB(DOB);
-    if (!dobValidation.valid) newErrors.DOB = dobValidation.message;
-  }
+    if (!DOB) newErrors.DOB = 'Please enter your date of birth.';
+    else {
+      const dobValidation = validateDOB(DOB);
+      if (!dobValidation.valid) newErrors.DOB = dobValidation.message;
+    }
 
-  if (!parentalPin) newErrors.parentalPin = 'Please enter a four-digit pin.';
-  else if (!validateParentalPin(parentalPin)) newErrors.parentalPin = 'Please enter a valid four-digit pin.';
-  if(!password) newErrors.password = ' Please enter a password'
+    if (!parentalPin) newErrors.parentalPin = 'Please enter a four-digit pin.';
+    else if (!validateParentalPin(parentalPin)) newErrors.parentalPin = 'Please enter a valid four-digit pin.';
+    if (!password) newErrors.password = 'Please enter a password.';
 
-  setErrors(newErrors);
+    setErrors(newErrors);
 
-  if (Object.keys(newErrors).length === 0) {
-    try {
-      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-      const user = userCredential.user;
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
 
-      const requestUrl = 'http://localhost:3000/save';
-      const requestBody = { email, firstName, lastName, DOB, parentalPin };
+        const requestUrl = 'http://localhost:3000/save';
+        const requestBody = { email, firstName, lastName, DOB, parentalPin };
 
-      const response = await axios.post(requestUrl, requestBody);
-      console.log(response.data.message); 
-      navigation.replace('Bedroom'); 
-    } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        setErrors({ email: 'The email address is already in use by another account.' });
-      } else {
-        setErrors({ general: 'Signup failed: ' + error.message });
+        const response = await axios.post(requestUrl, requestBody);
+        console.log(response.data.message); 
+        navigation.replace('Bedroom'); 
+      } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+          setErrors({ email: 'The email address is already in use by another account.' });
+        } else {
+          setErrors({ general: 'Signup failed: ' + error.message });
+        }
       }
     }
-  }
+  };
+
+  return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ImageBackground source={phyDoodleShapes} style={styles.backgroundImage}>
+        <KeyboardAvoidingView style={styles.container} behavior='padding'>
+          <Text style={styles.header}>Baby University Sign Up</Text>
+          <View style={styles.inputContainer}>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Email:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your Email"
+                value={email}
+                onChangeText={text => setEmail(text)}
+              />
+              {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+            </View>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Password:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your password"
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="oneTimeCode" 
+                passwordRules=""
+                value={password}
+                onChangeText={text => setPassword(text)}
+              />
+              {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+            </View>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Confirm Password:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirm your password"
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="oneTimeCode"
+                passwordRules=""
+                value={confirmPassword}
+                onChangeText={text => setConfirmPassword(text)}
+              />
+              {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword}</Text>}
+            </View>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>First Name:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your first name"
+                value={firstName}
+                onChangeText={text => setFirstName(text)}
+              />
+              {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
+            </View>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Last Name:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your last name"
+                value={lastName}
+                onChangeText={text => setLastName(text)}
+              />
+              {errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
+            </View>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>DOB:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your date of birth"
+                value={DOB}
+                onChangeText={text => setDOB(text)}
+              />
+              {errors.DOB && <Text style={styles.errorText}>{errors.DOB}</Text>}
+            </View>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Parental Pin:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter a four digit pin"
+                secureTextEntry
+                value={parentalPin}
+                onChangeText={text => setParentalPin(text)}
+              />
+              {errors.parentalPin && <Text style={styles.errorText}>{errors.parentalPin}</Text>}
+            </View>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={handleSignup} style={styles.button}>
+              <Text style={styles.buttonText}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
+          {errors.general && <Text style={styles.errorText}>{errors.general}</Text>}
+          <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.goBackText}>Go Back</Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </ScrollView>
+  );
 };
 
-return (
-    
-  <ScrollView contentContainerStyle={styles.scrollContainer}>
-     <Image source={phyDoodleShapes} style={styles.backgroundImage} />
-    <KeyboardAvoidingView style={styles.container} behavior='padding'>
-    <Text style={styles.header}>Baby University Sign up page</Text>
-      <View style={styles.inputContainer}>
-        <View style={styles.inputRow}>
-          <Text style={styles.label}>Email:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your Email"
-            value={email}
-            onChangeText={text => setEmail(text)}
-          />
-          {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-        </View>
-        <View style={styles.inputRow}>
-          <Text style={styles.label}>Password:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your password"
-            secureTextEntry
-            autoCapitalize="none"
-            autoCorrect={false}
-            textContentType="oneTimeCode" 
-            passwordRules=""
-            value={password}
-            onChangeText={text => setPassword(text)}
-          />
-          {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
-        </View>
-        <View style={styles.inputRow}>
-          <Text style={styles.label}>Confirm Password:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Confirm your password"
-            secureTextEntry
-            autoCapitalize="none"
-            autoCorrect={false}
-            textContentType="oneTimeCode"
-            passwordRules=""
-            value={confirmPassword}
-            onChangeText={text => setConfirmPassword(text)}
-          />
-          {errors.confirmPassword && <Text style={styles.errorText}>{errors.confirmPassword}</Text>}
-        </View>
-        <View style={styles.inputRow}>
-          <Text style={styles.label}>First Name:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your first name"
-            value={firstName}
-            onChangeText={text => setFirstName(text)}
-          />
-          {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
-        </View>
-        <View style={styles.inputRow}>
-          <Text style={styles.label}>Last Name:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your last name"
-            value={lastName}
-            onChangeText={text => setLastName(text)}
-          />
-          {errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
-        </View>
-        <View style={styles.inputRow}>
-          <Text style={styles.label}>DOB:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your date of birth"
-            value={DOB}
-            onChangeText={text => setDOB(text)}
-          />
-          {errors.DOB && <Text style={styles.errorText}>{errors.DOB}</Text>}
-        </View>
-        <View style={styles.inputRow}>
-          <Text style={styles.label}>Parental Pin:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter a four digit pin"
-            secureTextEntry
-            value={parentalPin}
-            onChangeText={text => setParentalPin(text)}
-          />
-          {errors.parentalPin && <Text style={styles.errorText}>{errors.parentalPin}</Text>}
-        </View>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleSignup} style={styles.button}>
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
-      {errors.general && <Text style={styles.errorText}>{errors.general}</Text>}
-      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate('Login')}>
-<Text style={styles.goBackText}>Go Back</Text>
-</TouchableOpacity>
-
-    </KeyboardAvoidingView>
-  </ScrollView>
-);
-};
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',
+    width: '100%',
     height: '100%',
-    marginTop: 0,
-    marginBottom: -320,
+    marginBottom: -45,
+    top: -15,
   },
   header: {
-    fontSize: 50,
+    fontSize: 60,
     fontFamily: 'Itim_400Regular',
-    color: '#3F3CB4',
+    color: 'darkblue',
     marginVertical: 20,
+    textAlign: 'center',
   },
   scrollContainer: {
     flexGrow: 1,
@@ -227,6 +229,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     paddingHorizontal: 10,
+    backgroundColor: '#E0F6FF',
   },
   container: {
     flex: 1,
@@ -248,6 +251,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontWeight: 'bold',
     flex: 1,
+    fontFamily: 'Itim_400Regular',
+    fontSize: 16,
   },
   input: {
     flex: 2,
@@ -265,26 +270,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#3F3CB4',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 20,
     alignItems: 'center',
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+    fontFamily: 'Itim_400Regular',
+    fontSize: 20,
   },
   errorText: {
     color: 'red',
     marginTop: 5,
     marginLeft: 10,
     fontSize: 12,
+    fontFamily: 'Itim_400Regular',
   },
   goBackButton: {
     marginTop: 20,
   },
   goBackText: {
     color: '#3F3CB4',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Itim_400Regular',
   },
 });
+
 export default SignupScreen;

@@ -107,6 +107,8 @@ const styles = StyleSheet.create({
     },
     label: {
         marginRight: 20,
+        fontFamily: 'Itim_400Regular',
+        fontSize: 20,
     },
     input: {
         flex: 1,
