@@ -14,7 +14,7 @@
     "@react-native-firebase/firestore": "^20.0.0",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
-    "axios": "^1.7.2",
+    "axios": "^1.8.2",
     "esm": "^3.2.25",
     "expo": "^50.0.13",
     "expo-av": "~13.10.6",
